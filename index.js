@@ -34,12 +34,12 @@ const productos = [
     function agregarAlCarrito(producto) {
       const yaEnCarrito = carrito.some(item => item.id === producto.id);
       if (yaEnCarrito) {
-        mostrarToast(`${producto.nombre} ya está en el carrito`);
+        mostrarNotificacion(`${producto.nombre} ya está en el carrito`);
         return;
       }
       carrito.push(producto);
       actualizarCarrito();
-      mostrarToast(`${producto.nombre} agregado al carrito`);
+      mostrarNotificacion(`${producto.nombre} agregado al carrito`);
     }
 
 
