@@ -1,12 +1,12 @@
 const productos = [
-      { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "https://camerinojip.netlify.app/images/majinboo.jpeg" },
-      { id: 2, nombre: "Cell", precio: 360000, imagen: "https://camerinojip.netlify.app/images/cell.jpeg" },
-      { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "https://camerinojip.netlify.app/images/deadpool.jpeg" },
-      { id: 4, nombre: "Mario Tortuga", precio: 260000, imagen: "https://camerinojip.netlify.app/images/tortuga.jpeg" },
-      { id: 5, nombre: "Pokebola", precio: 260000, imagen: "https://camerinojip.netlify.app/images/pokebola.jpeg" },
-      { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "https://camerinojip.netlify.app/images/sunny.jpeg" },
-      { id: 7, nombre: "One Piece", precio: 260000, imagen: "https://camerinojip.netlify.app/images/onepiece.jpeg" },
-      { id: 8, nombre: "Playstation", precio: 260000, imagen: "https://camerinojip.netlify.app/images/play.jpeg" }
+      { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "https://camerinojip.com/images/majinboo.jpeg" },
+      { id: 2, nombre: "Cell", precio: 360000, imagen: "https://camerinojip.com/images/cell.jpeg" },
+      { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "https://camerinojip.com/images/deadpool.jpeg" },
+      { id: 4, nombre: "Mario Tortuga", precio: 260000, imagen: "https://camerinojip.com/images/tortuga.jpeg" },
+      { id: 5, nombre: "Pokebola", precio: 260000, imagen: "https://camerinojip.com/images/pokebola.jpeg" },
+      { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "https://camerinojip.com/images/sunny.jpeg" },
+      { id: 7, nombre: "One Piece", precio: 260000, imagen: "https://camerinojip.com/images/onepiece.jpeg" },
+      { id: 8, nombre: "Playstation", precio: 260000, imagen: "https://camerinojip.com/images/play.jpeg" }
     ];
 
     const catalogo = document.getElementById("catalogo");
