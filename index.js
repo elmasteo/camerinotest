@@ -105,7 +105,7 @@ function pagarConBold() {
 }
 
 function realizarAbono() {
-  const descripcion = "Abono para compra de tapetes personalizados";
+  const descripcion = "Abono para curso tufting o tapete personalizado";
   const imagenUrl = obtenerUrlAbsoluta("./images/camerino.jpeg"); // también usa ruta relativa
 
   obtenerCotizacion(descripcion, imagenUrl);
