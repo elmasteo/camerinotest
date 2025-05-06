@@ -117,25 +117,32 @@ body::before {
     }
     .notification {
       position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #4CAF50;
-      color: white;
-      padding: 10px 20px;
+      top: 1rem;
+      right: 1rem;
+      background-color: #2ecc71;
+      color: #fff;
+      padding: 0.75rem 1.2rem;
       border-radius: 8px;
-      font-size: 1rem;
-      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transform: translateY(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      font-size: 0.95rem;
+      max-width: 90%;
+      width: auto;
+      word-break: break-word;
     }
+
     .notification.show {
-      display: block;
       opacity: 1;
+      transform: translateY(0);
     }
+
     .notification.remove {
-      background: crimson;
+      background-color: #e74c3c;
     }
+
     .botones-pago {
       display: flex;
       justify-content: space-between;
@@ -144,3 +151,38 @@ body::before {
     .botones-pago .btn {
       width: 48%;
     }
+
+      .boton-volver {
+    display: inline-block;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 0.8rem 1.6rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .boton-volver::before {
+    content: "⬅️";
+    position: absolute;
+    left: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateX(-10px);
+  }
+
+  .boton-volver:hover {
+    background-color: #1abc9c;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+  }
+
+  .boton-volver:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }

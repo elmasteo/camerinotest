@@ -100,7 +100,7 @@ const productos = [
 
    function realizarAbono() {
     const descripcion = "Abono para compra de tapetes personalizados"; // Descripción general
-    const imagenUrl = "https://camerinojip.netlify.app/images/abono.jpeg"; // Imagen genérica o la que prefieras
+    const imagenUrl = "https://camerinojip.com/images/camerino.jpeg"; // Imagen genérica o la que prefieras
 
     obtenerCotizacion(descripcion, imagenUrl); // Llamamos a la función para obtener el enlace con monto abierto
 }
@@ -144,4 +144,6 @@ function obtenerCotizacion(descripcion, imagenUrl) {
       }, 3000);
     }
 
-    renderCatalogo();
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCatalogo();
+    });
