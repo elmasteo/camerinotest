@@ -1,33 +1,109 @@
-function obtenerDatos(monto, descripcion, imagenUrl) {
-    const mensaje = `Hola! Realicé el pago exitoso del producto "${descripcion}" por ${monto.toLocaleString('es-CO')} COP.`;
-    const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+const productos = [
+      { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "https://camerinojip.netlify.app/images/majinboo.jpeg" },
+      { id: 2, nombre: "Cell", precio: 360000, imagen: "https://camerinojip.netlify.app/images/cell.jpeg" },
+      { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "https://camerinojip.netlify.app/images/deadpool.jpeg" },
+      { id: 4, nombre: "Mario Tortuga", precio: 260000, imagen: "https://camerinojip.netlify.app/images/tortuga.jpeg" },
+      { id: 5, nombre: "Pokebola", precio: 260000, imagen: "https://camerinojip.netlify.app/images/pokebola.jpeg" },
+      { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "https://camerinojip.netlify.app/images/sunny.jpeg" },
+      { id: 7, nombre: "One Piece", precio: 260000, imagen: "https://camerinojip.netlify.app/images/onepiece.jpeg" },
+      { id: 8, nombre: "Playstation", precio: 260000, imagen: "https://camerinojip.netlify.app/images/play.jpeg" }
+    ];
 
-    const raw = JSON.stringify({
-        monto: monto,
-        descripcion: descripcion,
+    const catalogo = document.getElementById("catalogo");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalPrecio = document.getElementById("total-precio");
+    const notification = document.getElementById("notification");
+    let carrito = [];
+
+    function renderCatalogo() {
+      productos.forEach(producto => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <div class="card-content">
+            <h2>${producto.nombre}</h2>
+            <p>$${producto.precio.toLocaleString()}</p>
+            <button class="btn" onclick='agregarAlCarrito(${JSON.stringify(producto)})'>Agregar al carrito</button>
+          </div>
+        `;
+        catalogo.appendChild(card);
+      });
+    }
+
+    function agregarAlCarrito(producto) {
+      const yaEnCarrito = carrito.some(item => item.id === producto.id);
+      if (yaEnCarrito) {
+        mostrarToast(`${producto.nombre} ya está en el carrito`);
+        return;
+      }
+      carrito.push(producto);
+      actualizarCarrito();
+      mostrarToast(`${producto.nombre} agregado al carrito`);
+    }
+
+
+    function eliminarDelCarrito(index) {
+      const productoEliminado = carrito[index];
+      carrito.splice(index, 1);
+      actualizarCarrito();
+      mostrarNotificacion(`Producto "${productoEliminado.nombre}" eliminado del carrito.`, true);
+    }
+
+    function actualizarCarrito() {
+      listaCarrito.innerHTML = "";
+      let total = 0;
+      carrito.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${item.nombre}</span>
+          <span>$${item.precio.toLocaleString()}</span>
+          <button onclick="eliminarDelCarrito(${index})" style="margin-left: 1rem; background: crimson; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer;">✕</button>
+        `;
+        listaCarrito.appendChild(li);
+        total += item.precio;
+      });
+      totalPrecio.textContent = "$" + total.toLocaleString();
+    }
+
+    function pagarConBold() {
+      if (carrito.length === 0) return alert("Tu carrito está vacío.");
+      const descripcion = carrito.map(item => item.nombre).join(", ");
+      const monto = carrito.reduce((sum, item) => sum + item.precio, 0);
+      const imagenUrl = carrito[0].imagen;
+      const mensaje = `Hola! Realicé el pago exitoso de: ${descripcion} por $${monto.toLocaleString('es-CO')} COP.`;
+      const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+
+      const raw = JSON.stringify({
+        monto,
+        descripcion,
         tipo: "CLOSE",
         image_url: imagenUrl,
-        callback_url: callback_url
-    });
+        callback_url
+      });
 
-    fetch("/.netlify/functions/crearLinkPago", {
+      fetch("/.netlify/functions/crearLinkPago", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: raw
-    })
-    .then(response => response.json())
-    .then(result => {
+      })
+      .then(response => response.json())
+      .then(result => {
         if (result.payload && result.payload.url) {
-            window.location.href = result.payload.url;
+          window.location.href = result.payload.url;
         } else {
-            console.error('Error: No se recibió un enlace de pago válido.', result);
+          console.error('No se recibió un enlace de pago válido.', result);
         }
-    })
-    .catch(error => console.log('error', error));
-}
+      })
+      .catch(error => console.error('Error al generar enlace:', error));
+    }
 
+   function realizarAbono() {
+    const descripcion = "Abono para compra de tapetes personalizados"; // Descripción general
+    const imagenUrl = "https://camerinojip.netlify.app/images/abono.jpeg"; // Imagen genérica o la que prefieras
+
+    obtenerCotizacion(descripcion, imagenUrl); // Llamamos a la función para obtener el enlace con monto abierto
+}
 
 function obtenerCotizacion(descripcion, imagenUrl) {
     const mensaje = `Hola! Realicé el pago exitoso del abono: ${descripcion}`;
@@ -42,9 +118,7 @@ function obtenerCotizacion(descripcion, imagenUrl) {
 
     fetch("/.netlify/functions/crearLinkPago", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: raw
     })
     .then(response => response.json())
@@ -58,3 +132,16 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     .catch(error => console.log('error', error));
 }
 
+
+    function mostrarNotificacion(mensaje, esEliminacion = false) {
+      notification.textContent = mensaje;
+      notification.classList.add('show');
+      if (esEliminacion) {
+        notification.classList.add('remove');
+      }
+      setTimeout(() => {
+        notification.classList.remove('show', 'remove');
+      }, 3000);
+    }
+
+    renderCatalogo();
