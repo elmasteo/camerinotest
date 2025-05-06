@@ -1,4 +1,4 @@
-const productos = [
+/*const productos = [
   { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "./images/majinboo.jpeg" },
   { id: 2, nombre: "Cell", precio: 360000, imagen: "./images/cell.jpeg" },
   { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "./images/deadpool.jpeg" },
@@ -7,7 +7,22 @@ const productos = [
   { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "./images/sunny.jpeg" },
   { id: 7, nombre: "One Piece", precio: 260000, imagen: "./images/onepiece.jpeg" },
   { id: 8, nombre: "Playstation", precio: 260000, imagen: "./images/play.jpeg" }
-];
+];*/
+
+let productos = [];
+
+async function cargarProductos() {
+  try {
+    const response = await fetch('/productos.json');
+    productos = await response.json();
+    renderCatalogo();
+  } catch (error) {
+    console.error("Error cargando productos:", error);
+  }
+}
+
+cargarProductos();
+
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
     const totalPrecio = document.getElementById("total-precio");
@@ -162,4 +177,4 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     .catch(error => console.log('error', error));
 }
 
-    renderCatalogo();
+    //renderCatalogo();
