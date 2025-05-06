@@ -42,6 +42,15 @@
             </div>
         </div>
     </main>
+    <script>
+      const hash = window.location.hash;
+      const tokenKeys = ['invite_token', 'recovery_token', 'confirmation_token'];
+      const hasToken = tokenKeys.some(key => hash.includes(key));
+      if (hasToken) {
+        window.location.href = '/admin/' + hash;
+      }
+    </script>
+
 
     <footer class="footer">
         <h1>¡Crea tus tapetes personalizados con el arte del tufting! 🎨✨</h1>
