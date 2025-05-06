@@ -9,7 +9,7 @@ collections:
   - name: "productos"
     label: "Productos"
     label_singular: "Producto"
-    folder: "data"
+    folder: "productos.json"
     create: true
     slug: "{{slug}}"
     extension: "json"
