@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main  # o la rama que uses
+  branch: main
 
 media_folder: "images"
 public_folder: "/images"
@@ -9,13 +9,19 @@ collections:
   - name: "productos"
     label: "Productos"
     label_singular: "Producto"
-    folder: "productos.json"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    format: "json"
-    fields:
-      - { label: "ID", name: "id", widget: "number" }
-      - { label: "Nombre", name: "nombre", widget: "string" }
-      - { label: "Precio", name: "precio", widget: "number" }
-      - { label: "Imagen", name: "imagen", widget: "image" }
+    delete: false
+    files:
+      - label: "Listado de Productos"
+        name: "listado_productos"
+        file: "productos.json"
+        format: "json"
+        fields:
+          - label: "Productos"
+            name: "productos"
+            widget: "list"
+            allow_add: true
+            fields:
+              - { label: "ID", name: "id", widget: "number" }
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Precio", name: "precio", widget: "number" }
+              - { label: "Imagen", name: "imagen", widget: "image" }
