@@ -5,10 +5,12 @@
     <title>Administrador CamerinoJIP</title>
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
   </head>
-  <body>
-    <!-- Netlify CMS montará su interfaz aquí automáticamente -->
-    <script>
-      // No necesitas llamar a CMS.init(), se ejecuta solo al detectar config.yml
-    </script>
-  </body>
+<body>
+  <!-- Contenedor obligatorio para que Netlify CMS funcione -->
+  <div id="cms"></div>
+
+  <!-- Incluye el script CMS al final -->
+  <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+</body>
+
 </html>
