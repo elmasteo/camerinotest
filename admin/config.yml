@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: elmasteo/camerino
+  repo: elmasteo/camerinotest
   branch: main
 
 media_folder: "images"
