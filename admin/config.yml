@@ -1,7 +1,6 @@
 backend:
-  name: github
-  repo: elmasteo/camerinotest
-  branch: master
+  name: git-gateway
+  branch: main
 
 media_folder: "images"
 public_folder: "/images"
