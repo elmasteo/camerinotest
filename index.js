@@ -1,18 +1,25 @@
-   const productos = [
-      { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "https://camerinojip.netlify.app/images/majinboo.jpeg" },
-      { id: 2, nombre: "Cell", precio: 360000, imagen: "https://camerinojip.netlify.app/images/cell.jpeg" },
-      { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "https://camerinojip.netlify.app/images/deadpool.jpeg" },
-      { id: 4, nombre: "Mario Tortuga", precio: 260000, imagen: "https://camerinojip.netlify.app/images/tortuga.jpeg" },
-      { id: 5, nombre: "Pokebola", precio: 260000, imagen: "https://camerinojip.netlify.app/images/pokebola.jpeg" },
-      { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "https://camerinojip.netlify.app/images/sunny.jpeg" },
-      { id: 7, nombre: "One Piece", precio: 260000, imagen: "https://camerinojip.netlify.app/images/onepiece.jpeg" },
-      { id: 8, nombre: "Playstation", precio: 260000, imagen: "https://camerinojip.netlify.app/images/play.jpeg" }
-    ];
+const productos = [
+  { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "./images/majinboo.jpeg" },
+  { id: 2, nombre: "Cell", precio: 360000, imagen: "./images/cell.jpeg" },
+  { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "./images/deadpool.jpeg" },
+  { id: 4, nombre: "Mario Tortuga", precio: 260000, imagen: "./images/tortuga.jpeg" },
+  { id: 5, nombre: "Pokebola", precio: 260000, imagen: "./images/pokebola.jpeg" },
+  { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "./images/sunny.jpeg" },
+  { id: 7, nombre: "One Piece", precio: 260000, imagen: "./images/onepiece.jpeg" },
+  { id: 8, nombre: "Playstation", precio: 260000, imagen: "./images/play.jpeg" }
+];
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
     const totalPrecio = document.getElementById("total-precio");
     const notification = document.getElementById("notification");
     let carrito = [];
+
+    // Función reutilizable para generar la URL absoluta de una imagen
+function obtenerUrlAbsoluta(ruta) {
+  if (ruta.startsWith("http")) return ruta;
+  const baseUrl = "https://camerinojip.com";
+  return ruta.replace(/^\.?\//, `${baseUrl}/`);
+}
 
     function renderCatalogo() {
       productos.forEach(producto => {
@@ -93,7 +100,7 @@
       if (carrito.length === 0) return alert("Tu carrito está vacío.");
       const descripcion = carrito.map(item => item.nombre).join(", ");
       const monto = carrito.reduce((sum, item) => sum + item.precio, 0);
-      const imagenUrl = carrito[0].imagen;
+      const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
       const mensaje = `Hola! Realicé el pago exitoso de: ${descripcion} por $${monto.toLocaleString('es-CO')} COP.`;
       const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
 
@@ -123,7 +130,7 @@
 
    function realizarAbono() {
     const descripcion = "Abono para compra de tapetes personalizados"; // Descripción general
-    const imagenUrl = "https://camerinojip.netlify.app/images/abono.jpeg"; // Imagen genérica o la que prefieras
+    const imagenUrl = obtenerUrlAbsoluta("./images/camerino.jpeg"); // Imagen genérica o la que prefieras
 
     obtenerCotizacion(descripcion, imagenUrl); // Llamamos a la función para obtener el enlace con monto abierto
 }
