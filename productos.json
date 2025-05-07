@@ -47,6 +47,12 @@
       "nombre": "Aurora",
       "precio": 10000000,
       "imagen": "/images/aurora.jpeg"
+    },
+    {
+      "id": 10,
+      "nombre": "Goku",
+      "precio": 850000,
+      "imagen": "/images/goku.jpg"
     }
   ]
 }
