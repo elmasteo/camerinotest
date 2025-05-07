@@ -1,14 +1,11 @@
-import { Octokit } from "@octokit/rest";
+// boldWebhook.js
 
-export async function handler(event) {
+exports.handler = async (event) => {
   try {
     const data = JSON.parse(event.body);
 
     if (data.type !== 'SALE_APPROVED') {
-      return {
-        statusCode: 200,
-        body: 'Evento ignorado (no es SALE_APPROVED).',
-      };
+      return { statusCode: 200, body: 'Not a SALE_APPROVED event.' };
     }
 
     const pedido = {
@@ -20,38 +17,59 @@ export async function handler(event) {
       created_at: data.data.created_at,
     };
 
-    const content = JSON.stringify(pedido, null, 2);
-    const now = new Date();
-    const fileName = `pedidos/${now.toISOString().replace(/[:.]/g, "-")}.json`;
+    // Información del repositorio y el archivo donde se guardará el pedido
+    const repoOwner = 'elmasteo'; // Cambia esto con tu nombre de usuario de GitHub
+    const repoName = 'camerinotest'; // Nombre de tu repositorio
+    const filePath = 'pedidos/' + `${new Date().toISOString().replace(/[:.]/g, '-')}.json`; // El archivo JSON a guardar
 
-    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+    // Aquí hacemos la solicitud para crear/actualizar el archivo en GitHub
+    const commitMessage = 'Nuevo pedido creado';
 
-    const response = await octokit.repos.createOrUpdateFileContents({
-      owner: "elmasteo", // reemplaza con tu usuario
-      repo: "camerinotest",     // reemplaza con el nombre del repo
-      path: fileName,
-      message: `Nuevo pedido: ${pedido.reference}`,
-      content: Buffer.from(content).toString('base64'),
-      committer: {
-        name: "Netlify Bot",
-        email: "bot@netlify.com"
-      },
-      author: {
-        name: "Netlify Bot",
-        email: "bot@netlify.com"
+    const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+    const headers = {
+      'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
+      'Content-Type': 'application/json',
+    };
+
+    // Primero obtenemos el archivo si ya existe para obtener su SHA (si ya existía antes)
+    let sha = '';
+    try {
+      const response = await fetch(githubApiUrl, { headers });
+      if (response.ok) {
+        const fileData = await response.json();
+        sha = fileData.sha;
       }
+    } catch (error) {
+      console.log('Archivo no encontrado, se creará uno nuevo');
+    }
+
+    // Crear o actualizar el archivo en GitHub
+    const body = JSON.stringify({
+      message: commitMessage,
+      content: Buffer.from(JSON.stringify(pedido, null, 2)).toString('base64'),
+      sha: sha, // Si el archivo existe, se actualiza
     });
+
+    const githubResponse = await fetch(githubApiUrl, {
+      method: 'PUT',
+      headers: headers,
+      body: body,
+    });
+
+    if (!githubResponse.ok) {
+      throw new Error('Error al crear/actualizar archivo en GitHub');
+    }
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: "Pedido guardado", github: response.data }),
+      body: JSON.stringify({ message: 'Pedido recibido y commit realizado', pedido }),
     };
-
   } catch (error) {
-    console.error("❌ Error al procesar webhook:", error);
+    console.error('Error procesando webhook:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: 'Error interno',
     };
   }
-}
+};
