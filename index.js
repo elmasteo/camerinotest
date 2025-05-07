@@ -64,6 +64,16 @@ function filtrarPorCategoria(categoria) {
 
 document.addEventListener('DOMContentLoaded', cargarCatalogo);
 
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggle-categorias");
+  const lista = document.getElementById("lista-categorias");
+
+  toggleBtn.addEventListener("click", () => {
+    lista.classList.toggle("mostrar");
+  });
+});
+
+
 
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
