@@ -124,6 +124,15 @@ function obtenerUrlAbsoluta(ruta) {
 function agregarAlCarrito(producto) {
   mostrarCarrito(); // Para mostrar el panel
 
+   const cantidadInput = document.getElementById(`cantidad-${idProducto}`);
+  const cantidad = parseInt(cantidadInput.value);
+
+  const producto = productosGlobal.find(p => p.id === idProducto);
+  if (cantidad > producto.stock) {
+    document.getElementById(`mensaje-stock-${idProducto}`).style.display = 'block';
+    return;
+  }
+
   // Verificar si el producto ya está en el carrito
   const productoEnCarrito = carrito.find(item => item.id === producto.id);
 
