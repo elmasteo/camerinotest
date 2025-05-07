@@ -8,7 +8,7 @@
   { id: 7, nombre: "One Piece", precio: 260000, imagen: "./images/onepiece.jpeg" },
   { id: 8, nombre: "Playstation", precio: 260000, imagen: "./images/play.jpeg" }
 ];*/
-
+/*
 let productos = [];
 
 async function cargarProductos() {
@@ -23,6 +23,47 @@ async function cargarProductos() {
 }
 
 cargarProductos();
+*/
+let productosGlobal = [];
+
+function cargarCatalogo() {
+  fetch('/productos.json')
+    .then(response => response.json())
+    .then(data => {
+      productosGlobal = data.productos;
+      mostrarProductos(productosGlobal);
+    });
+}
+
+function mostrarProductos(productos) {
+  const contenedor = document.getElementById('catalogo');
+  contenedor.innerHTML = '';
+  productos.forEach(producto => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${obtenerUrlAbsoluta(producto.imagen)}" alt="${producto.nombre}">
+      <div class="card-content">
+        <h2>${producto.nombre}</h2>
+        <p>$${producto.precio.toLocaleString()}</p>
+        <button class="btn" onclick='agregarAlCarrito(${JSON.stringify(producto)})'>Agregar</button>
+      </div>
+    `;
+    contenedor.appendChild(card);
+  });
+}
+
+function filtrarPorCategoria(categoria) {
+  if (categoria === 'todos') {
+    mostrarProductos(productosGlobal);
+  } else {
+    const filtrados = productosGlobal.filter(p => p.categoria === categoria);
+    mostrarProductos(filtrados);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', cargarCatalogo);
+
 
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
@@ -42,7 +83,7 @@ function obtenerUrlAbsoluta(ruta) {
   return `${baseUrl}/${ruta}`;
 }
 
-
+/*
     function renderCatalogo() {
       productos.forEach(producto => {
         const card = document.createElement("div");
@@ -58,7 +99,7 @@ function obtenerUrlAbsoluta(ruta) {
         catalogo.appendChild(card);
       });
     }
-
+*/
     function agregarAlCarrito(producto) {
       mostrarCarrito(); // para mostrar el panel
 

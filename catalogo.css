@@ -297,3 +297,59 @@ body::before {
     gap: 0.5rem;
   }
 }
+
+.menu-categorias-wrapper {
+  position: relative;
+  margin: 1rem 2rem;
+  z-index: 100;
+}
+
+/* Botón hamburguesa */
+.hamburguesa {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.hamburguesa span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Menú oculto */
+.categorias-ocultas {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  display: none;
+  min-width: 200px;
+}
+
+.categorias-ocultas li {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.categorias-ocultas li:hover {
+  background-color: #eee;
+}
+
+/* Menú visible cuando se activa */
+.categorias-ocultas.mostrar {
+  display: block;
+}
