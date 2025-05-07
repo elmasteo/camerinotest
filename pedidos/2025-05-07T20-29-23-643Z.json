@@ -1,0 +1,8 @@
+{
+  "payment_id": "XXXX",
+  "reference": "LNK_49ASZNPEU5",
+  "payer_email": "XXXX@XXX.XX",
+  "payment_method": "CARD_WEB",
+  "total": 0,
+  "created_at": "2025-05-07T15:29:23-05:00"
+}
