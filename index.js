@@ -33,9 +33,15 @@ cargarProductos();
     // Función reutilizable para generar la URL absoluta de una imagen
 function obtenerUrlAbsoluta(ruta) {
   if (ruta.startsWith("http")) return ruta;
+
   const baseUrl = "https://camerinojip.com";
-  return ruta.replace(/^\.?\//, `${baseUrl}/`);
+
+  // Quita cualquier "./", "/", o nada al inicio
+  ruta = ruta.replace(/^\.?\/?/, "");
+
+  return `${baseUrl}/${ruta}`;
 }
+
 
     function renderCatalogo() {
       productos.forEach(producto => {
