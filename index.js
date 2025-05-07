@@ -15,6 +15,7 @@ async function cargarProductos() {
   try {
     const response = await fetch('/productos.json');
     productos = await response.json();
+    productos = data.productos; 
     renderCatalogo();
   } catch (error) {
     console.error("Error cargando productos:", error);
