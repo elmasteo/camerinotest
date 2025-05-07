@@ -1,12 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+import { Octokit } from "@octokit/rest";
 
-exports.handler = async (event) => {
+export async function handler(event) {
   try {
     const data = JSON.parse(event.body);
 
     if (data.type !== 'SALE_APPROVED') {
-      return { statusCode: 200, body: 'Not a SALE_APPROVED event.' };
+      return {
+        statusCode: 200,
+        body: 'Evento ignorado (no es SALE_APPROVED).',
+      };
     }
 
     const pedido = {
@@ -18,21 +20,38 @@ exports.handler = async (event) => {
       created_at: data.data.created_at,
     };
 
-    const filename = `${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+    const content = JSON.stringify(pedido, null, 2);
+    const now = new Date();
+    const fileName = `pedidos/${now.toISOString().replace(/[:.]/g, "-")}.json`;
 
-    const filePath = path.join('/tmp', filename);
-    fs.writeFileSync(filePath, JSON.stringify(pedido, null, 2));
+    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+
+    const response = await octokit.repos.createOrUpdateFileContents({
+      owner: "elmasteo", // reemplaza con tu usuario
+      repo: "camerinotest",     // reemplaza con el nombre del repo
+      path: fileName,
+      message: `Nuevo pedido: ${pedido.reference}`,
+      content: Buffer.from(content).toString('base64'),
+      committer: {
+        name: "Netlify Bot",
+        email: "bot@netlify.com"
+      },
+      author: {
+        name: "Netlify Bot",
+        email: "bot@netlify.com"
+      }
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Pedido recibido', pedido }),
+      body: JSON.stringify({ message: "Pedido guardado", github: response.data }),
     };
 
   } catch (error) {
-    console.error('Error procesando webhook:', error);
+    console.error("❌ Error al procesar webhook:", error);
     return {
       statusCode: 500,
-      body: 'Error interno',
+      body: JSON.stringify({ error: error.message }),
     };
   }
-};
+}
