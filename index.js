@@ -34,7 +34,7 @@ cargarProductos();
 function obtenerUrlAbsoluta(ruta) {
   if (ruta.startsWith("http")) return ruta;
 
-  const baseUrl = "https://camerinojip.com";
+  const baseUrl = "https://camerinojipsandbox.netlify.app/";
 
   // Quita cualquier "./", "/", o nada al inicio
   ruta = ruta.replace(/^\.?\/?/, "");
