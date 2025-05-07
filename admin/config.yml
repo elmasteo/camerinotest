@@ -34,3 +34,19 @@ collections:
                   - { label: "Impresión 3D", value: "impresion3d" }
                   - { label: "Indumentaria Deportiva", value: "indumentaria" }
                   - { label: "Accesorios", value: "accesorios" }
+
+    - name: "pedidos"
+    label: "Pedidos"
+    label_singular: "Pedido"
+    folder: "pedidos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}{{second}}"
+    format: "json"
+    extension: "json"
+    fields:
+      - { label: "ID de Pago", name: "payment_id", widget: "string" }
+      - { label: "Referencia", name: "reference", widget: "string" }
+      - { label: "Correo del comprador", name: "payer_email", widget: "string" }
+      - { label: "Método de pago", name: "payment_method", widget: "string" }
+      - { label: "Monto total", name: "total", widget: "number" }
+      - { label: "Fecha de creación", name: "created_at", widget: "datetime" }

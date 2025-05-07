@@ -231,7 +231,8 @@ function modificarCantidad(idProducto, cambio) {
       const monto = carrito.reduce((sum, item) => sum + item.precio, 0);
       const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
       const mensaje = `Hola! Realicé el pago exitoso de: ${descripcion} por $${monto.toLocaleString('es-CO')} COP.`;
-      const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+      //const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+      const callback_url = "https://https://camerinojipsandbox.netlify.app/.netlify/functions/boldWebhook"
 
       const raw = JSON.stringify({
         monto,
