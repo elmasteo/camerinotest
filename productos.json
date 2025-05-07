@@ -3,77 +3,84 @@
     {
       "id": 1,
       "nombre": "Kid Boo",
-      "precio": 360000,
+      "precio": 359998,
       "imagen": "./images/majinboo.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 2,
       "nombre": "Cell",
       "precio": 360000,
       "imagen": "./images/cell.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 3,
       "nombre": "Deadpool - Wolverine",
       "precio": 260000,
       "imagen": "./images/deadpool.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 4,
       "nombre": "Mario Tortuga",
       "precio": 260000,
       "imagen": "./images/tortuga.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 5,
       "nombre": "Pokebola",
       "precio": 260000,
       "imagen": "./images/pokebola.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 6,
       "nombre": "Sunny - One Piece",
       "precio": 260000,
       "imagen": "./images/sunny.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 7,
       "nombre": "One Piece",
       "precio": 260000,
       "imagen": "./images/onepiece.jpeg",
-      "categoria": "tapetes"
-    },
-    {
-      "id": 8,
-      "nombre": "Playstation",
-      "precio": 260000,
-      "imagen": "./images/play.jpeg",
-      "categoria": "tapetes"
+      "categoria":"tapetes"
     },
     {
       "id": 9,
       "nombre": "Aurora",
       "precio": 10000000,
       "imagen": "/images/aurora.jpeg",
-      "categoria": "accesorios"
-    },{
+      "categoria":"tapetes"
+    },
+    {
       "id": 10,
-      "nombre": "camiseta",
-      "precio": 10000,
-      "imagen": "/images/aurora.jpeg",
-      "categoria": "indumentaria"
-    },{
+      "nombre": "Goku",
+      "precio": 850000,
+      "imagen": "/images/goku.jpg",
+      "categoria":"impresion3d"
+    },
+    {
       "id": 11,
-      "nombre": "modelo3d",
-      "precio": 20000,
-      "imagen": "/images/aurora.jpeg",
-      "categoria": "impresion3d"
+      "nombre": "Goku",
+      "precio": 10000,
+      "imagen": "/images/goku.jpg",
+      "categoria":"accesorios"
+
+    },
+    {
+      "id": 12,
+      "nombre": "indumentaria",
+      "precio": 10000,
+      "imagen": "/images/goku.jpg",
+      "categoria":"indumentaria"
+
     }
   ]
 }
+
+
+
