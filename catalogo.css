@@ -359,3 +359,44 @@ body::before {
 .categorias-ocultas.mostrar {
   display: block;
 }
+
+.controles-cantidad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.boton-cantidad {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.boton-cantidad:hover {
+  background-color: #16a085;
+}
+
+.input-cantidad {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 1rem;
+}
+
+.mensaje-stock {
+  color: #f1c40f;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  display: none;
+}

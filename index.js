@@ -38,20 +38,30 @@ function cargarCatalogo() {
 function mostrarProductos(productos) {
   const contenedor = document.getElementById('catalogo');
   contenedor.innerHTML = '';
+
   productos.forEach(producto => {
     const card = document.createElement('div');
     card.className = 'card';
+
     card.innerHTML = `
       <img src="${obtenerUrlAbsoluta(producto.imagen)}" alt="${producto.nombre}">
       <div class="card-content">
         <h2>${producto.nombre}</h2>
         <p>$${producto.precio.toLocaleString()}</p>
-        <button class="btn" onclick='agregarAlCarrito(${JSON.stringify(producto)})'>Agregar</button>
+        <div class="controles-cantidad">
+          <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, -1)">-</button>
+          <input type="text" id="cantidad-${producto.id}" class="input-cantidad" value="1" readonly>
+          <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, 1)">+</button>
+        </div>
+        <div class="mensaje-stock" id="mensaje-stock-${producto.id}">No hay suficiente stock</div>
+        <button class="btn" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
       </div>
     `;
+
     contenedor.appendChild(card);
   });
 }
+
 
 function filtrarPorCategoria(categoria) {
   if (categoria === 'todos') {
@@ -162,17 +172,24 @@ function agregarAlCarrito(producto) {
   totalPrecio.textContent = "$" + total.toLocaleString();
 }
 
-function modificarCantidad(index, operacion) {
-  const producto = carrito[index];
+function modificarCantidad(idProducto, cambio) {
+  const input = document.getElementById(`cantidad-${idProducto}`);
+  const mensaje = document.getElementById(`mensaje-stock-${idProducto}`);
+  const producto = productosGlobal.find(p => p.id === idProducto);
 
-  if (operacion === 'incrementar' && producto.cantidad < producto.stock) {
-    producto.cantidad++;
-  } else if (operacion === 'decrementar' && producto.cantidad > 1) {
-    producto.cantidad--;
+  let cantidad = parseInt(input.value) + cambio;
+
+  if (cantidad < 1) cantidad = 1;
+
+  if (cantidad > producto.stock) {
+    mensaje.style.display = 'block';
+    setTimeout(() => mensaje.style.display = 'none', 3000);
+    return;
   }
 
-  actualizarCarrito();
+  input.value = cantidad;
 }
+
 
 
     function toggleCarrito() {
