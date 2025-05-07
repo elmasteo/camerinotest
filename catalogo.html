@@ -25,7 +25,7 @@
     <li onclick="filtrarPorCategoria('tapetes')">Tapetes Personalizados</li>
     <li onclick="filtrarPorCategoria('impresion3d')">Impresión 3D</li>
     <li onclick="filtrarPorCategoria('indumentaria')">Indumentaria Deportiva</li>
-    <li onclick="filtrarPorCategoria('accesorios')">Accesorios Fútbol</li>
+    <li onclick="filtrarPorCategoria('accesorios')">Accesorios</li>
   </ul>
 </div>
 
@@ -33,22 +33,23 @@
     <h1>Catálogo de productos</h1>
     <div class="grid" id="catalogo"></div>
   </div>
+<!-- Botón flotante del carrito (reutilizado para abrir/cerrar) -->
+<button class="boton-flotante" id="boton-carrito">🛒</button>
 
-  <button class="boton-flotante" onclick="mostrarCarrito()">🛒</button>
-
-  <div class="carrito oculto" id="carrito-lateral">
-    <button class="cerrar-carrito" onclick="cerrarCarrito()">✕</button>
-    <h2>🛒 Carrito de Compras</h2>
-    <ul id="lista-carrito"></ul>
-    <div class="total">
-      <span>Total:</span>
-      <span id="total-precio">$0</span>
-    </div>
-    <div class="botones-pago">
-      <button class="btn" onclick="pagarConBold()">Finalizar compra</button>
-      <button class="btn" onclick="realizarAbono()">Abonar</button>
-    </div>
+<!-- Panel lateral del carrito -->
+<div class="carrito oculto" id="carrito-lateral">
+  <h2>🛒 Carrito de Compras</h2>
+  <ul id="lista-carrito"></ul>
+  <div class="total">
+    <span>Total:</span>
+    <span id="total-precio">$0</span>
   </div>
+  <div class="botones-pago">
+    <button class="btn" onclick="pagarConBold()">Finalizar compra</button>
+    <button class="btn" onclick="realizarAbono()">Abonar</button>
+  </div>
+</div>
+
 
   <div id="notification" class="notification"></div>
 

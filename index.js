@@ -249,4 +249,25 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     .catch(error => console.log('error', error));
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const botonCarrito = document.getElementById("boton-carrito");
+  const carritoLateral = document.getElementById("carrito-lateral");
+
+  botonCarrito.addEventListener("click", () => {
+    const estaActivo = carritoLateral.classList.toggle("activo");
+    carritoLateral.classList.toggle("oculto", !estaActivo);
+    botonCarrito.textContent = estaActivo ? "❌" : "🛒";
+  });
+
+  // Evita duplicar este bloque
+  const toggleBtn = document.getElementById("toggle-categorias");
+  const lista = document.getElementById("lista-categorias");
+
+  toggleBtn.addEventListener("click", () => {
+    lista.classList.toggle("mostrar");
+  });
+});
+
+
+
     //renderCatalogo();
