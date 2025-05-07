@@ -33,4 +33,4 @@ collections:
                   - { label: "Tapetes Personalizados", value: "tapetes" }
                   - { label: "Impresión 3D", value: "impresion3d" }
                   - { label: "Indumentaria Deportiva", value: "indumentaria" }
-                  - { label: "Accesorios Futbol", value: "accesorios" }
+                  - { label: "Accesorios", value: "accesorios" }
