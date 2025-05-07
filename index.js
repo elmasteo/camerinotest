@@ -171,8 +171,8 @@ function agregarAlCarrito(idProducto) {
     li.innerHTML = `
       <span>${item.nombre}</span>
       <span>$${item.precio.toLocaleString()} x ${item.cantidad}</span>
-      <button onclick="modificarCantidad(${index}, 'incrementar')" style="margin-left: 1rem;">+</button>
-      <button onclick="modificarCantidad(${index}, 'decrementar')" style="margin-left: 1rem;">-</button>
+      <button onclick="modificarCantidadCarrito(${index}, 'incrementar')">+</button>
+      <button onclick="modificarCantidadCarrito(${index}, 'decrementar')">-</button>
       <button onclick="eliminarDelCarrito(${index})" style="margin-left: 1rem; background: crimson; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer;">✕</button>
     `;
     listaCarrito.appendChild(li);
@@ -314,6 +314,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function modificarCantidadCarrito(index, accion) {
+  const item = carrito[index];
+  const productoOriginal = productosGlobal.find(p => p.id === item.id);
+
+  if (accion === 'incrementar') {
+    if (item.cantidad < productoOriginal.stock) {
+      item.cantidad++;
+    } else {
+      mostrarNotificacion(`No hay suficiente stock de ${item.nombre}`);
+    }
+  } else if (accion === 'decrementar') {
+    if (item.cantidad > 1) {
+      item.cantidad--;
+    }
+  }
+
+  actualizarCarrito();
+}
+
 
 
 
