@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nombre": "Kid Boo",
-      "precio": 360000,
+      "precio": 359998,
       "imagen": "./images/majinboo.jpeg"
     },
     {
@@ -41,12 +41,6 @@
       "nombre": "One Piece",
       "precio": 260000,
       "imagen": "./images/onepiece.jpeg"
-    },
-    {
-      "id": 8,
-      "nombre": "Playstation",
-      "precio": 260000,
-      "imagen": "./images/play.jpeg"
     },
     {
       "id": 9,
