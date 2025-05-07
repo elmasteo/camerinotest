@@ -121,36 +121,37 @@ function obtenerUrlAbsoluta(ruta) {
       });
     }
 */
-function agregarAlCarrito(producto) {
-  mostrarCarrito(); // Para mostrar el panel
+function agregarAlCarrito(idProducto) {
+  mostrarCarrito();
 
-   const cantidadInput = document.getElementById(`cantidad-${idProducto}`);
+  const cantidadInput = document.getElementById(`cantidad-${idProducto}`);
   const cantidad = parseInt(cantidadInput.value);
 
   const producto = productosGlobal.find(p => p.id === idProducto);
+  if (!producto) return;
+
   if (cantidad > producto.stock) {
     document.getElementById(`mensaje-stock-${idProducto}`).style.display = 'block';
     return;
   }
 
-  // Verificar si el producto ya está en el carrito
   const productoEnCarrito = carrito.find(item => item.id === producto.id);
 
   if (productoEnCarrito) {
-    // Si el producto ya está en el carrito, sumar la cantidad, respetando el stock
-    if (productoEnCarrito.cantidad < producto.stock) {
-      productoEnCarrito.cantidad++;
+    if (productoEnCarrito.cantidad + cantidad <= producto.stock) {
+      productoEnCarrito.cantidad += cantidad;
       mostrarNotificacion(`Cantidad de ${producto.nombre} aumentada a ${productoEnCarrito.cantidad}`);
     } else {
       mostrarNotificacion(`No hay suficiente stock de ${producto.nombre}`);
     }
   } else {
-    // Si el producto no está en el carrito, agregarlo con cantidad 1
-    carrito.push({ ...producto, cantidad: 1 });
+    carrito.push({ ...producto, cantidad });
     mostrarNotificacion(`${producto.nombre} agregado al carrito`);
   }
+
   actualizarCarrito();
 }
+
 
 
 
