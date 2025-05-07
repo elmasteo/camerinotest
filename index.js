@@ -62,6 +62,20 @@ function filtrarPorCategoria(categoria) {
   }
 }
 
+function ocultarMenuCategorias() {
+  document.getElementById('lista-categorias').classList.remove('mostrar');
+}
+
+function filtrarPorCategoria(categoria) {
+  if (categoria === 'todos') {
+    mostrarProductos(productosGlobal);
+  } else {
+    const filtrados = productosGlobal.filter(p => p.categoria === categoria);
+    mostrarProductos(filtrados);
+  }
+  ocultarMenuCategorias(); // Ocultar menú al seleccionar
+}
+
 document.addEventListener('DOMContentLoaded', cargarCatalogo);
 
 document.addEventListener("DOMContentLoaded", () => {
