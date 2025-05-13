@@ -315,6 +315,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Mostrar imagen ampliada al hacer clic
+function abrirModalImagen(src) {
+  const modal = document.getElementById("modal-imagen");
+  const imagen = document.getElementById("imagen-modal");
+  imagen.src = src;
+  modal.classList.remove("oculto");
+}
+
+// Cerrar modal
+function cerrarModalImagen() {
+  const modal = document.getElementById("modal-imagen");
+  modal.classList.add("oculto");
+}
+
 // Escucha clic en cualquier imagen del catálogo
 document.addEventListener("click", (e) => {
   if (e.target.tagName === "IMG" && e.target.closest(".card")) {
