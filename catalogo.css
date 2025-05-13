@@ -450,3 +450,25 @@ body::before {
 .subcategorias.oculto {
   display: none;
 }
+
+.submenu {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  list-style: none;
+  padding-left: 0.5rem;
+  border-left: 2px solid #ccc;
+}
+
+.submenu li {
+  padding: 0.3rem 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.submenu li:hover {
+  color: #ffc107;
+}
+
+.con-subcategorias > span {
+  cursor: pointer;
+}

@@ -41,9 +41,7 @@ function filtrarPorCategoria(categoria) {
   ocultarMenuCategorias();
 
   if (categoria === 'indumentaria') {
-    mostrarSubcategorias(categoria);
-  } else {
-    ocultarSubcategorias();
+    mostrarSubcategoriasEnMenu(categoria);
   }
 
   const productosFiltrados = categoria === 'todos'
@@ -52,6 +50,7 @@ function filtrarPorCategoria(categoria) {
 
   mostrarProductos(productosFiltrados);
 }
+
 
 function mostrarSubcategorias(categoriaPadre) {
   const contenedor = document.getElementById('subcategorias-container');
@@ -80,27 +79,41 @@ function ocultarSubcategorias() {
   contenedor.classList.add('oculto');
 }
 
-function filtrarPorSubcategoria(categoria, subcategoria) {
-  const filtrados = productosGlobal.filter(p => p.categoria === categoria && p.subcategoria === subcategoria);
-  mostrarProductos(filtrados);
+function filtrarPorSubcategoria(subcategoria) {
+  ocultarMenuCategorias();
+  const productosFiltrados = productosGlobal.filter(
+    p => p.subcategoria === subcategoria
+  );
+  mostrarProductos(productosFiltrados);
 }
+
 
 
 function ocultarMenuCategorias() {
   document.getElementById('lista-categorias').classList.remove('mostrar');
 }
 
-/*
-function filtrarPorCategoria(categoria) {
-  if (categoria === 'todos') {
-    mostrarProductos(productosGlobal);
-  } else {
-    const filtrados = productosGlobal.filter(p => p.categoria === categoria);
-    mostrarProductos(filtrados);
-  }
-  ocultarMenuCategorias(); // Ocultar menú al seleccionar
+function mostrarSubcategoriasEnMenu(categoria) {
+  const submenu = document.getElementById(`submenu-${categoria}`);
+  if (!submenu) return;
+
+  const subcategoriasSet = new Set(
+    productosGlobal
+      .filter(p => p.categoria === categoria && p.subcategoria)
+      .map(p => p.subcategoria)
+  );
+
+  submenu.innerHTML = '';
+  subcategoriasSet.forEach(subcat => {
+    const li = document.createElement('li');
+    li.textContent = subcat;
+    li.onclick = () => filtrarPorSubcategoria(subcat);
+    submenu.appendChild(li);
+  });
+
+  submenu.classList.remove('oculto');
 }
-*/
+
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
     const totalPrecio = document.getElementById("total-precio");

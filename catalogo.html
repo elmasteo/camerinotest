@@ -26,7 +26,11 @@
     <li onclick="filtrarPorCategoria('todos')">Todas las categorías</li>
     <li onclick="filtrarPorCategoria('tapetes')">Tapetes Personalizados</li>
     <li onclick="filtrarPorCategoria('impresion3d')">Impresión 3D</li>
-    <li onclick="filtrarPorCategoria('indumentaria')">Indumentaria Deportiva</li>
+    <li class="con-subcategorias">
+    <span onclick="filtrarPorCategoria('indumentaria')">Indumentaria deportiva</span>
+    <ul id="submenu-indumentaria" class="submenu oculto"></ul>
+  </li>
+
     <li onclick="filtrarPorCategoria('accesorios')">Accesorios</li>
   </ul>
 </div>
