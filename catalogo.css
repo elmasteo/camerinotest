@@ -424,11 +424,3 @@ body::before {
   color: white;
   cursor: pointer;
 }
-
-.subcategorias {
-  padding-left: 1rem;
-  list-style: disc;
-}
-.subcategorias.oculto {
-  display: none;
-}

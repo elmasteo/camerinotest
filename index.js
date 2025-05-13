@@ -1,29 +1,3 @@
-/*const productos = [
-  { id: 1, nombre: "Kid Boo", precio: 360000, imagen: "./images/majinboo.jpeg" },
-  { id: 2, nombre: "Cell", precio: 360000, imagen: "./images/cell.jpeg" },
-  { id: 3, nombre: "Deadpool - Wolverine", precio: 260000, imagen: "./images/deadpool.jpeg" },
-  { id: 4, nombre: "Mario Tortuga", precio: 260000, imagen: "./images/tortuga.jpeg" },
-  { id: 5, nombre: "Pokebola", precio: 260000, imagen: "./images/pokebola.jpeg" },
-  { id: 6, nombre: "Sunny - One Piece", precio: 260000, imagen: "./images/sunny.jpeg" },
-  { id: 7, nombre: "One Piece", precio: 260000, imagen: "./images/onepiece.jpeg" },
-  { id: 8, nombre: "Playstation", precio: 260000, imagen: "./images/play.jpeg" }
-];*/
-/*
-let productos = [];
-
-async function cargarProductos() {
-  try {
-    const response = await fetch('/productos.json');
-    const data = await response.json();
-    productos = data.productos;  // Ajuste aquí
-    renderCatalogo();
-  } catch (error) {
-    console.error("Error cargando productos:", error);
-  }
-}
-
-cargarProductos();
-*/
 let productosGlobal = [];
 
 function cargarCatalogo() {
@@ -32,7 +6,6 @@ function cargarCatalogo() {
     .then(data => {
       productosGlobal = data.productos;
       mostrarProductos(productosGlobal);
-      generarSubcategorias(productosGlobal);
     });
 }
 
@@ -105,23 +78,7 @@ function obtenerUrlAbsoluta(ruta) {
   return `${baseUrl}/${ruta}`;
 }
 
-/*
-    function renderCatalogo() {
-      productos.forEach(producto => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="${producto.imagen}" alt="${producto.nombre}">
-          <div class="card-content">
-            <h2>${producto.nombre}</h2>
-            <p>$${producto.precio.toLocaleString()}</p>
-            <button class="btn" onclick='agregarAlCarrito(${JSON.stringify(producto)})'>Agregar al carrito</button>
-          </div>
-        `;
-        catalogo.appendChild(card);
-      });
-    }
-*/
+
 function agregarAlCarrito(idProducto) {
   mostrarCarrito();
 
@@ -152,9 +109,6 @@ function agregarAlCarrito(idProducto) {
 
   actualizarCarrito();
 }
-
-
-
 
     function eliminarDelCarrito(index) {
       const productoEliminado = carrito[index];
@@ -200,8 +154,6 @@ function modificarCantidad(idProducto, cambio) {
 
   input.value = cantidad;
 }
-
-
 
     function toggleCarrito() {
       mostrarCarrito();
@@ -259,7 +211,7 @@ function modificarCantidad(idProducto, cambio) {
     }
 
    function realizarAbono() {
-    const descripcion = "Abono para compra de tapetes personalizados"; // Descripción general
+    const descripcion = "Abono para curso tufting o compra de tapetes personalizados"; // Descripción general
     const imagenUrl = obtenerUrlAbsoluta("./images/camerino.jpeg"); // Imagen genérica o la que prefieras
 
     obtenerCotizacion(descripcion, imagenUrl); // Llamamos a la función para obtener el enlace con monto abierto
@@ -338,8 +290,6 @@ document.getElementById("modal-imagen").addEventListener("click", (e) => {
 });
 
 
-
-
 function modificarCantidadCarrito(index, accion) {
   const item = carrito[index];
   const productoOriginal = productosGlobal.find(p => p.id === item.id);
@@ -353,80 +303,12 @@ function modificarCantidadCarrito(index, accion) {
   } else if (accion === 'decrementar') {
     if (item.cantidad > 1) {
       item.cantidad--;
+    } else {
+      eliminarDelCarrito(index);
+      return; 
     }
-  }
+}
 
   actualizarCarrito();
 }
 
-function generarSubcategorias(productos) {
-  const categoriasMap = {};
-
-  // Generar un mapa de categorías con sus subcategorías
-  productos.forEach(producto => {
-    const { categoria, subcategoria } = producto;
-    if (!subcategoria) return;
-
-    if (!categoriasMap[categoria]) {
-      categoriasMap[categoria] = new Set();
-    }
-    categoriasMap[categoria].add(subcategoria);
-  });
-
-  // Generar las subcategorías para cada categoría
-// Generar las subcategorías para cada categoría
-for (const [categoria, subcats] of Object.entries(categoriasMap)) {
-  const ul = document.getElementById(`subcat-${categoria}`);
-  if (!ul) continue;
-
-  ul.innerHTML = ""; // Limpiar subcategorías anteriores
-
-  // Antes de agregar subcategorías
-  const todosLi = document.createElement("li");
-  todosLi.textContent = "Todos";
-  todosLi.style.fontStyle = "italic";
-  todosLi.onclick = () => filtrarPorSubcategoria(categoria, null);
-  ul.appendChild(todosLi);
-
-
-  subcats.forEach(sub => {
-    const li = document.createElement("li");
-    li.textContent = sub;
-    li.onclick = () => filtrarPorSubcategoria(categoria, sub);
-    ul.appendChild(li);
-  });
-}
-
-
-  // Actualizar las categorías del menú (asegurarse de que se muestre el indicador ▾ solo si hay subcategorías)
-  const categorias = document.querySelectorAll('.menu-categorias-wrapper li > span');
-  categorias.forEach(span => {
-    const categoria = span.textContent.split(" ▾")[0]; // Obtener el nombre de la categoría
-    const ul = document.getElementById(`subcat-${categoria}`);
-  });
-}
-
-
-function toggleSubcategorias(categoria) {
-  const ul = document.getElementById(`subcat-${categoria}`);
-  if (ul) ul.classList.toggle("oculto");
-}
-
-function filtrarPorSubcategoria(categoria, subcategoria) {
-  let filtrados = productosGlobal.filter(p => p.categoria === categoria);
-
-  if (subcategoria) {
-    filtrados = filtrados.filter(p => p.subcategoria === subcategoria);
-  }
-
-  mostrarProductos(filtrados);
-  ocultarMenuCategorias(); // Oculta el menú si está abierto
-}
-
-
-
-
-
-
-
-    //renderCatalogo();

@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo | Camerino JIP</title>
+  <meta name="description" content="Explora el arte del tufting con Camerino JIP. Diseñamos tapetes personalizados únicos y llenos de estilo. ¡Revisa nuestro catálogo o contáctanos por WhatsApp!">
+    <title>Catálogo | Camerino JIP | Tapetes Personalizados con Arte Tufting</title>
+    <link href="./images/camerinoicon.ico" rel="icon" type="image/svg">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
   <script src="https://checkout.bold.co/library/boldPaymentButton.js"></script>
   <link rel="stylesheet" href="catalogo.css" />
@@ -21,25 +23,12 @@
   
   <!-- Menú de categorías oculto -->
   <ul id="lista-categorias" class="categorias-ocultas">
-  <li>
-    <span onclick="toggleSubcategorias('Indumentaria Deportiva')">Indumentaria Deportiva ▾</span>
-    <ul id="subcat-Indumentaria Deportiva" class="subcategorias oculto"></ul>
-  </li>
-  <li>
-    <span onclick="toggleSubcategorias('Accesorios')">Accesorios ▾</span>
-    <ul id="subcat-Accesorios" class="subcategorias oculto"></ul>
-  </li>
-  <li>
-    <span onclick="toggleSubcategorias('Tapetes Personalizados')">Tapetes Personalizados ▾</span>
-    <ul id="subcat-Tapetes Personalizados" class="subcategorias oculto"></ul>
-  </li>
-  <li>
-    <span onclick="toggleSubcategorias('Impresión 3D')">Impresión 3D ▾</span>
-    <ul id="subcat-Impresión 3D" class="subcategorias oculto"></ul>
-  </li>
-  <li onclick="mostrarProductos(productosGlobal)">Todas las categorías</li>
-</ul>
-
+    <li onclick="filtrarPorCategoria('todos')">Todas las categorías</li>
+    <li onclick="filtrarPorCategoria('tapetes')">Tapetes Personalizados</li>
+    <li onclick="filtrarPorCategoria('impresion3d')">Impresión 3D</li>
+    <li onclick="filtrarPorCategoria('indumentaria')">Indumentaria Deportiva</li>
+    <li onclick="filtrarPorCategoria('accesorios')">Accesorios</li>
+  </ul>
 </div>
 
 
@@ -77,7 +66,6 @@
   <span id="cerrar-modal" class="cerrar">✕</span>
   <img id="imagen-modal" class="imagen-modal" src="" alt="Ampliada">
 </div>
-
 
 
 <script type="text/javascript" src="index.js"></script>
