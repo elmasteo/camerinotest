@@ -5,7 +5,7 @@
       "nombre": "Kid Boo",
       "precio": 359998,
       "imagen": "./images/majinboo.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -13,7 +13,7 @@
       "nombre": "Cell",
       "precio": 360000,
       "imagen": "./images/cell.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -21,7 +21,7 @@
       "nombre": "Deadpool - Wolverine",
       "precio": 260000,
       "imagen": "./images/deadpool.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -29,7 +29,7 @@
       "nombre": "Mario Tortuga",
       "precio": 260000,
       "imagen": "./images/tortuga.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -37,7 +37,7 @@
       "nombre": "Pokebola",
       "precio": 260000,
       "imagen": "./images/pokebola.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -45,7 +45,7 @@
       "nombre": "Sunny - One Piece",
       "precio": 260000,
       "imagen": "./images/sunny.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -53,7 +53,7 @@
       "nombre": "One Piece",
       "precio": 260000,
       "imagen": "./images/onepiece.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -61,7 +61,7 @@
       "nombre": "Aurora",
       "precio": 10000000,
       "imagen": "/images/aurora.jpeg",
-      "categoria":"tapetes",
+      "categoria": "tapetes",
       "stock": 2
     },
     {
@@ -69,7 +69,7 @@
       "nombre": "Goku",
       "precio": 850000,
       "imagen": "/images/goku.jpg",
-      "categoria":"impresion3d",
+      "categoria": "impresion3d",
       "stock": 2
     },
     {
@@ -77,21 +77,26 @@
       "nombre": "Goku",
       "precio": 10000,
       "imagen": "/images/goku.jpg",
-      "categoria":"accesorios",
+      "categoria": "accesorios",
       "stock": 2
-
     },
     {
       "id": 12,
       "nombre": "indumentaria",
       "precio": 10000,
       "imagen": "/images/goku.jpg",
-      "categoria":"indumentaria",
-      "stock": 2
-
+      "categoria": "indumentaria",
+      "stock": 2,
+      "subcategoria": "Millonarios"
+    },
+    {
+      "id": 13,
+      "nombre": "Camiseta",
+      "precio": 30000,
+      "stock": 2,
+      "imagen": "/images/sunny.jpeg",
+      "subcategoria": "Millonarios",
+      "categoria": "indumentaria"
     }
   ]
 }
-
-
-
