@@ -362,6 +362,7 @@ function modificarCantidadCarrito(index, accion) {
 function generarSubcategorias(productos) {
   const categoriasMap = {};
 
+  // Generar un mapa de categorías con sus subcategorías
   productos.forEach(producto => {
     const { categoria, subcategoria } = producto;
     if (!subcategoria) return;
@@ -372,20 +373,42 @@ function generarSubcategorias(productos) {
     categoriasMap[categoria].add(subcategoria);
   });
 
+  // Generar las subcategorías para cada categoría
   for (const [categoria, subcats] of Object.entries(categoriasMap)) {
     const ul = document.getElementById(`subcat-${categoria}`);
     if (!ul) continue;
 
-    ul.innerHTML = ""; // limpiar subcategorías anteriores
+    ul.innerHTML = ""; // Limpiar subcategorías anteriores
 
-    subcats.forEach(sub => {
+    // Si la categoría tiene subcategorías, agregarlas
+    if (subcats.size > 0) {
+      subcats.forEach(sub => {
+        const li = document.createElement("li");
+        li.textContent = sub;
+        li.onclick = () => filtrarPorSubcategoria(categoria, sub);
+        ul.appendChild(li);
+      });
+    } else {
+      // Si no tiene subcategorías, agregar un mensaje informativo
       const li = document.createElement("li");
-      li.textContent = sub;
-      li.onclick = () => filtrarPorSubcategoria(categoria, sub);
+      li.textContent = "Sin subcategorías";
       ul.appendChild(li);
-    });
+    }
   }
+
+  // Actualizar las categorías del menú (asegurarse de que se muestre el indicador ▾ solo si hay subcategorías)
+  const categorias = document.querySelectorAll('.menu-categorias-wrapper li > span');
+  categorias.forEach(span => {
+    const categoria = span.textContent.split(" ▾")[0]; // Obtener el nombre de la categoría
+    const ul = document.getElementById(`subcat-${categoria}`);
+    if (ul && ul.innerHTML === "") {
+      span.innerHTML = `${categoria} (Sin subcategorías)`; // Mostrar el texto de sin subcategorías
+    } else if (ul) {
+      span.innerHTML = `${categoria} ▾`; // Mostrar el indicador ▾ si tiene subcategorías
+    }
+  });
 }
+
 
 function toggleSubcategorias(categoria) {
   const ul = document.getElementById(`subcat-${categoria}`);
