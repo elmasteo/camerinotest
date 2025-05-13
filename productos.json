@@ -97,6 +97,15 @@
       "imagen": "/images/sunny.jpeg",
       "subcategoria": "Millonarios",
       "categoria": "indumentaria"
+    },
+    {
+      "id": 14,
+      "nombre": "chaqueta",
+      "precio": 50000,
+      "stock": 0,
+      "imagen": "/images/pokebola.jpeg",
+      "subcategoria": "santa fe",
+      "categoria": "indumentaria"
     }
   ]
 }
