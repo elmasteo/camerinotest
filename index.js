@@ -38,7 +38,7 @@ function mostrarProductos(productos) {
 
 
 function filtrarPorCategoria(categoria) {
-  const tieneSubcategorias = categoria === 'indumentaria'; // Puedes adaptar esto si hay más con subcategorías
+  const tieneSubcategorias = productosGlobal.some(p => p.categoria === categoria && p.subcategoria);
 
   if (!tieneSubcategorias) {
     ocultarMenuCategorias();
@@ -93,7 +93,7 @@ function filtrarPorSubcategoria(subcategoria) {
 }
 
 function volverAlMenuCategorias() {
-  const submenu = document.getElementById('submenu-indumentaria');
+  const submenu = document.getElementById(`submenu-${categoria}`);
   submenu.classList.add('oculto');
 }
 
