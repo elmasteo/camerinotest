@@ -374,27 +374,29 @@ function generarSubcategorias(productos) {
   });
 
   // Generar las subcategorías para cada categoría
-  for (const [categoria, subcats] of Object.entries(categoriasMap)) {
-    const ul = document.getElementById(`subcat-${categoria}`);
-    if (!ul) continue;
+// Generar las subcategorías para cada categoría
+for (const [categoria, subcats] of Object.entries(categoriasMap)) {
+  const ul = document.getElementById(`subcat-${categoria}`);
+  if (!ul) continue;
 
-    ul.innerHTML = ""; // Limpiar subcategorías anteriores
+  ul.innerHTML = ""; // Limpiar subcategorías anteriores
 
-    // Si la categoría tiene subcategorías, agregarlas
-    if (subcats.size > 0) {
-      subcats.forEach(sub => {
-        const li = document.createElement("li");
-        li.textContent = sub;
-        li.onclick = () => filtrarPorSubcategoria(categoria, sub);
-        ul.appendChild(li);
-      });
-    } else {
-      // Si no tiene subcategorías, agregar un mensaje informativo
-      const li = document.createElement("li");
-      li.textContent = "Sin subcategorías";
-      ul.appendChild(li);
-    }
-  }
+  // Antes de agregar subcategorías
+  const todosLi = document.createElement("li");
+  todosLi.textContent = "Todos";
+  todosLi.style.fontStyle = "italic";
+  todosLi.onclick = () => filtrarPorSubcategoria(categoria, null);
+  ul.appendChild(todosLi);
+
+
+  subcats.forEach(sub => {
+    const li = document.createElement("li");
+    li.textContent = sub;
+    li.onclick = () => filtrarPorSubcategoria(categoria, sub);
+    ul.appendChild(li);
+  });
+}
+
 
   // Actualizar las categorías del menú (asegurarse de que se muestre el indicador ▾ solo si hay subcategorías)
   const categorias = document.querySelectorAll('.menu-categorias-wrapper li > span');
@@ -415,13 +417,19 @@ function toggleSubcategorias(categoria) {
   if (ul) ul.classList.toggle("oculto");
 }
 
-function filtrarPorSubcategoria(categoria, subcat) {
-  const filtrados = productosGlobal.filter(p =>
-    p.categoria === categoria && p.subcategoria === subcat
-  );
+function filtrarPorSubcategoria(categoria, subcategoria) {
+  let filtrados;
+
+  if (subcategoria && subcategoria !== 'todos') {
+    filtrados = productosGlobal.filter(p => p.categoria === categoria && p.subcategoria === subcategoria);
+  } else {
+    filtrados = productosGlobal.filter(p => p.categoria === categoria);
+  }
+
   mostrarProductos(filtrados);
   ocultarMenuCategorias();
 }
+
 
 
 
