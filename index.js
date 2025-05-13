@@ -90,6 +90,7 @@ function ocultarMenuCategorias() {
   document.getElementById('lista-categorias').classList.remove('mostrar');
 }
 
+/*
 function filtrarPorCategoria(categoria) {
   if (categoria === 'todos') {
     mostrarProductos(productosGlobal);
@@ -99,7 +100,7 @@ function filtrarPorCategoria(categoria) {
   }
   ocultarMenuCategorias(); // Ocultar menú al seleccionar
 }
-
+*/
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
     const totalPrecio = document.getElementById("total-precio");
