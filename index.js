@@ -38,9 +38,13 @@ function mostrarProductos(productos) {
 
 
 function filtrarPorCategoria(categoria) {
-  ocultarMenuCategorias();
+  const tieneSubcategorias = categoria === 'indumentaria'; // Puedes adaptar esto si hay más con subcategorías
 
-  if (categoria === 'indumentaria') {
+  if (!tieneSubcategorias) {
+    ocultarMenuCategorias();
+  }
+
+  if (tieneSubcategorias) {
     mostrarSubcategoriasEnMenu(categoria);
   }
 
@@ -50,6 +54,7 @@ function filtrarPorCategoria(categoria) {
 
   mostrarProductos(productosFiltrados);
 }
+
 
 
 function mostrarSubcategorias(categoriaPadre) {
@@ -87,7 +92,10 @@ function filtrarPorSubcategoria(subcategoria) {
   mostrarProductos(productosFiltrados);
 }
 
-
+function volverAlMenuCategorias() {
+  const submenu = document.getElementById('submenu-indumentaria');
+  submenu.classList.add('oculto');
+}
 
 function ocultarMenuCategorias() {
   document.getElementById('lista-categorias').classList.remove('mostrar');
