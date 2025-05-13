@@ -32,6 +32,7 @@ function cargarCatalogo() {
     .then(data => {
       productosGlobal = data.productos;
       mostrarProductos(productosGlobal);
+      generarSubcategorias(productosGlobal);
     });
 }
 
@@ -356,6 +357,47 @@ function modificarCantidadCarrito(index, accion) {
   }
 
   actualizarCarrito();
+}
+
+function generarSubcategorias(productos) {
+  const categoriasMap = {};
+
+  productos.forEach(producto => {
+    const { categoria, subcategoria } = producto;
+    if (!subcategoria) return;
+
+    if (!categoriasMap[categoria]) {
+      categoriasMap[categoria] = new Set();
+    }
+    categoriasMap[categoria].add(subcategoria);
+  });
+
+  for (const [categoria, subcats] of Object.entries(categoriasMap)) {
+    const ul = document.getElementById(`subcat-${categoria}`);
+    if (!ul) continue;
+
+    ul.innerHTML = ""; // limpiar subcategorías anteriores
+
+    subcats.forEach(sub => {
+      const li = document.createElement("li");
+      li.textContent = sub;
+      li.onclick = () => filtrarPorSubcategoria(categoria, sub);
+      ul.appendChild(li);
+    });
+  }
+}
+
+function toggleSubcategorias(categoria) {
+  const ul = document.getElementById(`subcat-${categoria}`);
+  if (ul) ul.classList.toggle("oculto");
+}
+
+function filtrarPorSubcategoria(categoria, subcat) {
+  const filtrados = productosGlobal.filter(p =>
+    p.categoria === categoria && p.subcategoria === subcat
+  );
+  mostrarProductos(filtrados);
+  ocultarMenuCategorias();
 }
 
 

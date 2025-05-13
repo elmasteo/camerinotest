@@ -21,12 +21,25 @@
   
   <!-- Menú de categorías oculto -->
   <ul id="lista-categorias" class="categorias-ocultas">
-    <li onclick="filtrarPorCategoria('todos')">Todas las categorías</li>
-    <li onclick="filtrarPorCategoria('tapetes')">Tapetes Personalizados</li>
-    <li onclick="filtrarPorCategoria('impresion3d')">Impresión 3D</li>
-    <li onclick="filtrarPorCategoria('indumentaria')">Indumentaria Deportiva</li>
-    <li onclick="filtrarPorCategoria('accesorios')">Accesorios</li>
-  </ul>
+  <li>
+    <span onclick="toggleSubcategorias('Indumentaria Deportiva')">Indumentaria Deportiva ▾</span>
+    <ul id="subcat-Indumentaria Deportiva" class="subcategorias oculto"></ul>
+  </li>
+  <li>
+    <span onclick="toggleSubcategorias('Accesorios')">Accesorios ▾</span>
+    <ul id="subcat-Accesorios" class="subcategorias oculto"></ul>
+  </li>
+  <li>
+    <span onclick="toggleSubcategorias('Tapetes Personalizados')">Tapetes Personalizados ▾</span>
+    <ul id="subcat-Tapetes Personalizados" class="subcategorias oculto"></ul>
+  </li>
+  <li>
+    <span onclick="toggleSubcategorias('Impresión 3D')">Impresión 3D ▾</span>
+    <ul id="subcat-Impresión 3D" class="subcategorias oculto"></ul>
+  </li>
+  <li onclick="mostrarProductos(productosGlobal)">Todas las categorías</li>
+</ul>
+
 </div>
 
 

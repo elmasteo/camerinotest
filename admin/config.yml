@@ -34,6 +34,10 @@ collections:
                   - { label: "Impresión 3D", value: "impresion3d" }
                   - { label: "Indumentaria Deportiva", value: "indumentaria" }
                   - { label: "Accesorios", value: "accesorios" }
+              - label: "Subcategoría"
+                name: "subcategoria"
+                widget: "string"
+                required: false
 
   - name: "pedidos"
     label: "Pedidos"

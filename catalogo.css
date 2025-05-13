@@ -425,3 +425,10 @@ body::before {
   cursor: pointer;
 }
 
+.subcategorias {
+  padding-left: 1rem;
+  list-style: disc;
+}
+.subcategorias.oculto {
+  display: none;
+}
