@@ -315,19 +315,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Mostrar imagen ampliada al hacer clic
-function abrirModalImagen(src) {
-  const modal = document.getElementById("modal-imagen");
-  const imagen = document.getElementById("imagen-modal");
-  imagen.src = src;
-  modal.classList.remove("oculto");
-}
+// Escucha clic en cualquier imagen del catálogo
+document.addEventListener("click", (e) => {
+  if (e.target.tagName === "IMG" && e.target.closest(".card")) {
+    const src = e.target.getAttribute("src");
+    const modal = document.getElementById("modal-imagen");
+    const imagenAmpliada = document.getElementById("imagen-ampliada");
 
-// Cerrar modal
-function cerrarModalImagen() {
-  const modal = document.getElementById("modal-imagen");
-  modal.classList.add("oculto");
-}
+    imagenAmpliada.src = src;
+    modal.style.display = "flex";
+  }
+});
+
+// Cerrar al hacer clic en la X
+document.getElementById("cerrar-modal").addEventListener("click", () => {
+  document.getElementById("modal-imagen").style.display = "none";
+});
+
+// Cerrar al hacer clic fuera de la imagen
+document.getElementById("modal-imagen").addEventListener("click", (e) => {
+  // Solo cerrar si el clic fue directamente sobre el fondo (no sobre la imagen o la X)
+  if (e.target.id === "modal-imagen") {
+    e.currentTarget.style.display = "none";
+  }
+});
+
 
 
 function modificarCantidadCarrito(index, accion) {
