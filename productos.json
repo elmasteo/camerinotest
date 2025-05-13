@@ -102,10 +102,19 @@
       "id": 14,
       "nombre": "chaqueta",
       "precio": 50000,
-      "stock": 0,
+      "stock": 1,
       "imagen": "/images/pokebola.jpeg",
       "subcategoria": "santa fe",
       "categoria": "indumentaria"
+    },
+    {
+      "categoria": "tapetes",
+      "id": 15,
+      "nombre": "tapete prueba",
+      "precio": 3000,
+      "stock": 1,
+      "imagen": "/images/deadpool.jpeg",
+      "subcategoria": "wolverine"
     }
   ]
 }
