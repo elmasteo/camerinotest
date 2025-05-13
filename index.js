@@ -403,11 +403,6 @@ for (const [categoria, subcats] of Object.entries(categoriasMap)) {
   categorias.forEach(span => {
     const categoria = span.textContent.split(" ▾")[0]; // Obtener el nombre de la categoría
     const ul = document.getElementById(`subcat-${categoria}`);
-    if (ul && ul.innerHTML === "") {
-      span.innerHTML = `${categoria} (Sin subcategorías)`; // Mostrar el texto de sin subcategorías
-    } else if (ul) {
-      span.innerHTML = `${categoria} ▾`; // Mostrar el indicador ▾ si tiene subcategorías
-    }
   });
 }
 
@@ -418,17 +413,16 @@ function toggleSubcategorias(categoria) {
 }
 
 function filtrarPorSubcategoria(categoria, subcategoria) {
-  let filtrados;
+  let filtrados = productosGlobal.filter(p => p.categoria === categoria);
 
-  if (subcategoria && subcategoria !== 'todos') {
-    filtrados = productosGlobal.filter(p => p.categoria === categoria && p.subcategoria === subcategoria);
-  } else {
-    filtrados = productosGlobal.filter(p => p.categoria === categoria);
+  if (subcategoria) {
+    filtrados = filtrados.filter(p => p.subcategoria === subcategoria);
   }
 
   mostrarProductos(filtrados);
-  ocultarMenuCategorias();
+  ocultarMenuCategorias(); // Oculta el menú si está abierto
 }
+
 
 
 
