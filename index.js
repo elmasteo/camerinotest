@@ -44,7 +44,7 @@ function mostrarProductos(productos) {
     card.className = 'card';
 
     card.innerHTML = `
-      <img src="${obtenerUrlAbsoluta(producto.imagen)}" alt="${producto.nombre}">
+      <img src="${obtenerUrlAbsoluta(producto.imagen)}" alt="${producto.nombre}" onclick="abrirModalImagen('${obtenerUrlAbsoluta(producto.imagen)}')">
       <div class="card-content">
         <h2>${producto.nombre}</h2>
         <p>$${producto.precio.toLocaleString()}</p>
@@ -314,6 +314,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Mostrar imagen ampliada al hacer clic
+function abrirModalImagen(src) {
+  const modal = document.getElementById("modal-imagen");
+  const imagen = document.getElementById("imagen-modal");
+  imagen.src = src;
+  modal.classList.remove("oculto");
+}
+
+// Cerrar modal
+function cerrarModalImagen() {
+  const modal = document.getElementById("modal-imagen");
+  modal.classList.add("oculto");
+}
+
 
 function modificarCantidadCarrito(index, accion) {
   const item = carrito[index];
