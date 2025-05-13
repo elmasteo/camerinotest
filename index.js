@@ -38,13 +38,53 @@ function mostrarProductos(productos) {
 
 
 function filtrarPorCategoria(categoria) {
-  if (categoria === 'todos') {
-    mostrarProductos(productosGlobal);
+  ocultarMenuCategorias();
+
+  if (categoria === 'indumentaria') {
+    mostrarSubcategorias(categoria);
   } else {
-    const filtrados = productosGlobal.filter(p => p.categoria === categoria);
-    mostrarProductos(filtrados);
+    ocultarSubcategorias();
   }
+
+  const productosFiltrados = categoria === 'todos'
+    ? productosGlobal
+    : productosGlobal.filter(p => p.categoria === categoria);
+
+  mostrarProductos(productosFiltrados);
 }
+
+function mostrarSubcategorias(categoriaPadre) {
+  const contenedor = document.getElementById('subcategorias-container');
+  contenedor.innerHTML = ''; // Limpiar antes
+
+  // Filtrar productos solo de la categoría principal
+  const productosCategoria = productosGlobal.filter(p => p.categoria === categoriaPadre && p.subcategoria);
+  
+  // Obtener subcategorías únicas
+  const subcategorias = [...new Set(productosCategoria.map(p => p.subcategoria))];
+
+  // Crear botones
+  subcategorias.forEach(sub => {
+    const boton = document.createElement('button');
+    boton.textContent = sub;
+    boton.onclick = () => filtrarPorSubcategoria(categoriaPadre, sub);
+    contenedor.appendChild(boton);
+  });
+
+  contenedor.classList.remove('oculto');
+}
+
+function ocultarSubcategorias() {
+  const contenedor = document.getElementById('subcategorias-container');
+  contenedor.innerHTML = '';
+  contenedor.classList.add('oculto');
+}
+
+function filtrarPorSubcategoria(categoria, subcategoria) {
+  const filtrados = productosGlobal.filter(p => p.categoria === categoria && p.subcategoria === subcategoria);
+  mostrarProductos(filtrados);
+}
+
 
 function ocultarMenuCategorias() {
   document.getElementById('lista-categorias').classList.remove('mostrar');

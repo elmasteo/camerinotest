@@ -424,3 +424,23 @@ body::before {
   color: white;
   cursor: pointer;
 }
+
+.subcategorias {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.subcategorias button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: #222;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.subcategorias button:hover {
+  background: #444;
+}
