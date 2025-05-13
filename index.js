@@ -315,44 +315,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Mostrar imagen ampliada al hacer clic
+// Mostrar imagen en modal
 function abrirModalImagen(src) {
   const modal = document.getElementById("modal-imagen");
   const imagen = document.getElementById("imagen-modal");
   imagen.src = src;
-  modal.classList.remove("oculto");
+  modal.style.display = "flex";
 }
 
-// Cerrar modal
-function cerrarModalImagen() {
-  const modal = document.getElementById("modal-imagen");
-  modal.classList.add("oculto");
-}
-
-// Escucha clic en cualquier imagen del catálogo
-document.addEventListener("click", (e) => {
-  if (e.target.tagName === "IMG" && e.target.closest(".card")) {
-    const src = e.target.getAttribute("src");
-    const modal = document.getElementById("modal-imagen");
-    const imagenAmpliada = document.getElementById("imagen-ampliada");
-
-    imagenAmpliada.src = src;
-    modal.style.display = "flex";
-  }
-});
-
-// Cerrar al hacer clic en la X
+// Cerrar modal desde el botón ✕
 document.getElementById("cerrar-modal").addEventListener("click", () => {
   document.getElementById("modal-imagen").style.display = "none";
 });
 
-// Cerrar al hacer clic fuera de la imagen
+// Cerrar modal haciendo clic en el fondo (no en la imagen)
 document.getElementById("modal-imagen").addEventListener("click", (e) => {
-  // Solo cerrar si el clic fue directamente sobre el fondo (no sobre la imagen o la X)
+  // Solo cerrar si se hace clic en el fondo del modal, no en la imagen
   if (e.target.id === "modal-imagen") {
     e.currentTarget.style.display = "none";
   }
 });
+
 
 
 
