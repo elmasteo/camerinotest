@@ -38,12 +38,13 @@ function mostrarProductos(productos) {
 
 
 function filtrarPorCategoria(categoria) {
-  contraerTodosLosSubmenus(); // <- Añadido para asegurarse de cerrar todo antes
+  ocultarSubcategorias();           // ✅ Asegura que desaparezcan todas
+  contraerTodosLosSubmenus();       // ✅ Cierra cualquier submenú abierto
 
   const tieneSubcategorias = productosGlobal.some(p => p.categoria === categoria && p.subcategoria);
 
   if (!tieneSubcategorias) {
-    ocultarMenuCategorias();
+    ocultarMenuCategorias();        // ✅ Oculta menú si no hay subcategorías
   }
 
   if (tieneSubcategorias) {
@@ -56,6 +57,7 @@ function filtrarPorCategoria(categoria) {
 
   mostrarProductos(productosFiltrados);
 }
+
 
 
 
@@ -88,9 +90,9 @@ function ocultarSubcategorias() {
 }
 
 function filtrarPorSubcategoria(subcategoria) {
+  ocultarSubcategorias();
   ocultarMenuCategorias();
   contraerTodosLosSubmenus();
-  ocultarSubcategorias(); // ✅ Oculta visualmente el contenedor de subcategorías
   const productosFiltrados = productosGlobal.filter(
     p => p.subcategoria === subcategoria
   );
