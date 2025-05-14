@@ -38,6 +38,8 @@ function mostrarProductos(productos) {
 
 
 function filtrarPorCategoria(categoria) {
+  contraerTodosLosSubmenus(); // <- Añadido para asegurarse de cerrar todo antes
+
   const tieneSubcategorias = productosGlobal.some(p => p.categoria === categoria && p.subcategoria);
 
   if (!tieneSubcategorias) {
@@ -54,6 +56,7 @@ function filtrarPorCategoria(categoria) {
 
   mostrarProductos(productosFiltrados);
 }
+
 
 
 
@@ -105,6 +108,15 @@ function mostrarSubcategoriasEnMenu(categoria) {
   const submenu = document.getElementById(`submenu-${categoria}`);
   if (!submenu) return;
 
+  // Si ya está visible, ocultarlo
+  if (!submenu.classList.contains('oculto')) {
+    submenu.classList.add('oculto');
+    return;
+  }
+
+  // Contrae todos los submenús antes de mostrar uno
+  contraerTodosLosSubmenus();
+
   const subcategoriasSet = new Set(
     productosGlobal
       .filter(p => p.categoria === categoria && p.subcategoria)
@@ -121,6 +133,7 @@ function mostrarSubcategoriasEnMenu(categoria) {
 
   submenu.classList.remove('oculto');
 }
+
 
     const catalogo = document.getElementById("catalogo");
     const listaCarrito = document.getElementById("lista-carrito");
