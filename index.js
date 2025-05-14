@@ -58,6 +58,25 @@ function filtrarPorCategoria(categoria) {
   mostrarProductos(productosFiltrados);
 }
 
+// Suponiendo que ya tienes este fragmento para el filtrado
+document.querySelectorAll('.subcategoria').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const subcategoriaSeleccionada = e.target.dataset.subcategoria;
+
+    // 1. Filtrar productos (esto ya lo haces)
+    filtrarProductosPorSubcategoria(subcategoriaSeleccionada);
+
+    // 2. Contraer todas las subcategorías abiertas
+    cerrarSubcategorias();
+  });
+});
+
+// Función que colapsa todas las subcategorías
+function cerrarSubcategorias() {
+  document.querySelectorAll('.subcategorias-container').forEach(container => {
+    container.style.display = 'none';
+  });
+}
 
 
 
