@@ -329,13 +329,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const lista = document.getElementById("lista-categorias");
 
   if (toggleBtn && lista) {
-    toggleBtn.addEventListener("click", () => {
-      lista.classList.toggle("mostrar");
+   toggleBtn.addEventListener("click", () => {
+  lista.classList.toggle("mostrar");
 
-      if (lista.classList.contains("mostrar")) {
+  if (lista.classList.contains("mostrar")) {
     contraerTodosLosSubmenus();
+    ocultarSubcategorias(); // <-- Esta línea es clave
   }
-    });
+});
+
   }
 
   const botonCarrito = document.getElementById("boton-carrito");
