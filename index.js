@@ -383,6 +383,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Cierra el menú hamburguesa si el clic es fuera del menú
+document.addEventListener('click', function (event) {
+  const menu = document.getElementById('lista-categorias');
+  const toggle = document.getElementById('toggle-categorias');
+
+  if (!menu || !toggle) return;
+
+  const hizoClickDentroDelMenu = menu.contains(event.target);
+  const hizoClickEnElBoton = toggle.contains(event.target);
+
+  if (!hizoClickDentroDelMenu && !hizoClickEnElBoton) {
+    menu.classList.remove('mostrar');
+    toggle.classList.remove('activo');
+  }
+});
+
+
 // Mostrar imagen en modal
 function abrirModalImagen(src) {
   const modal = document.getElementById("modal-imagen");
