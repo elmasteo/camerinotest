@@ -315,6 +315,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (toggleBtn && lista) {
     toggleBtn.addEventListener("click", () => {
       lista.classList.toggle("mostrar");
+      
+      if (lista.classList.contains("mostrar")) {
+    contraerTodosLosSubmenus();
+  }
     });
   }
 
@@ -337,6 +341,12 @@ function abrirModalImagen(src) {
   imagen.src = src;
   modal.style.display = "flex";
 }
+
+function contraerTodosLosSubmenus() {
+  const submenus = document.querySelectorAll("[id^='submenu-']");
+  submenus.forEach(submenu => submenu.classList.add("oculto"));
+}
+
 
 // Cerrar modal desde el botón ✕
 document.getElementById("cerrar-modal").addEventListener("click", () => {
