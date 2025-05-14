@@ -89,6 +89,7 @@ function ocultarSubcategorias() {
 
 function filtrarPorSubcategoria(subcategoria) {
   ocultarMenuCategorias();
+  contraerTodosLosSubmenus();
   const productosFiltrados = productosGlobal.filter(
     p => p.subcategoria === subcategoria
   );
@@ -328,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (toggleBtn && lista) {
     toggleBtn.addEventListener("click", () => {
       lista.classList.toggle("mostrar");
-      
+
       if (lista.classList.contains("mostrar")) {
     contraerTodosLosSubmenus();
   }
