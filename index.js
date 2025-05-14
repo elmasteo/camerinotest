@@ -392,10 +392,11 @@ function abrirModalImagen(src) {
 }
 
 function contraerTodosLosSubmenus() {
-  document.querySelectorAll('[id^="submenu-"]').forEach(submenu => {
+  document.querySelectorAll('.submenu').forEach(submenu => {
     submenu.classList.add('oculto');
   });
 }
+
 
 
 

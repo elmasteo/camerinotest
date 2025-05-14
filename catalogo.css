@@ -480,3 +480,7 @@ body::before {
 #lista-categorias.mostrar {
   display: block;
 }
+
+.oculto {
+  display: none;
+}
