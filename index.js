@@ -90,11 +90,13 @@ function ocultarSubcategorias() {
 function filtrarPorSubcategoria(subcategoria) {
   ocultarMenuCategorias();
   contraerTodosLosSubmenus();
+  ocultarSubcategorias(); // ✅ Oculta visualmente el contenedor de subcategorías
   const productosFiltrados = productosGlobal.filter(
     p => p.subcategoria === subcategoria
   );
   mostrarProductos(productosFiltrados);
 }
+
 
 function volverAlMenuCategorias() {
   const submenu = document.getElementById(`submenu-${categoria}`);
