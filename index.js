@@ -78,7 +78,15 @@ function cerrarSubcategorias() {
   });
 }
 
+function cerrarMenuHamburguesa() {
+  // Oculta el menú completo
+  const menuCategorias = document.getElementById('lista-categorias');
+  menuCategorias.classList.remove('mostrar');
 
+  // Opcional: si tu botón hamburguesa cambia de estado visual (ej. animación)
+  const botonHamburguesa = document.getElementById('toggle-categorias');
+  botonHamburguesa.classList.remove('activo');
+}
 
 
 function mostrarSubcategorias(categoriaPadre) {
@@ -110,8 +118,9 @@ function ocultarSubcategorias() {
 
 function filtrarPorSubcategoria(subcategoria) {
   ocultarSubcategorias();
-  ocultarMenuCategorias();
   contraerTodosLosSubmenus();
+  cerrarMenuHamburguesa(); // <- cierra visual y lógicamente el menú completo
+
   const productosFiltrados = productosGlobal.filter(
     p => p.subcategoria === subcategoria
   );
