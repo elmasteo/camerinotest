@@ -117,15 +117,16 @@ function ocultarSubcategorias() {
 }
 
 function filtrarPorSubcategoria(subcategoria) {
-  ocultarSubcategorias();
-  contraerTodosLosSubmenus();
-  cerrarMenuHamburguesa(); // <- cierra visual y lógicamente el menú completo
+  ocultarSubcategorias();         // Oculta subcategorías externas
+  contraerTodosLosSubmenus();     // Oculta submenús internos personalizados
+  cerrarMenuHamburguesa();        // Cierra el menú hamburguesa completo
 
   const productosFiltrados = productosGlobal.filter(
     p => p.subcategoria === subcategoria
   );
   mostrarProductos(productosFiltrados);
 }
+
 
 
 function volverAlMenuCategorias() {
@@ -391,9 +392,11 @@ function abrirModalImagen(src) {
 }
 
 function contraerTodosLosSubmenus() {
-  const submenus = document.querySelectorAll("[id^='submenu-']");
-  submenus.forEach(submenu => submenu.classList.add("oculto"));
+  document.querySelectorAll('[id^="submenu-"]').forEach(submenu => {
+    submenu.classList.add('oculto');
+  });
 }
+
 
 
 // Cerrar modal desde el botón ✕
