@@ -467,7 +467,7 @@ function modificarCantidadCarrito(index, accion) {
 const categoriasDisponibles = [
   { id: 'tapetes', icon: '/icons/tapete.svg', label: 'Tapetes' },
   { id: 'impresion3d', icon: '/icons/impresion.svg', label: 'Impresión 3D' },
-  { id: 'indumentaria', icon: '/icons/camisa.svg', label: 'Indumentaria' },
+  { id: 'indumentaria', icon: '/icons/camisa.svg', label: 'Indumentaria Deportiva' },
   { id: 'accesorios', icon: '/icons/accesorios.svg', label: 'Accesorios' }
 ];
 
