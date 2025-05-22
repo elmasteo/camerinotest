@@ -298,7 +298,7 @@ function modificarCantidad(idProducto, cambio) {
       }));
 
       const resumenCodificado = encodeURIComponent(JSON.stringify(productosResumen));
-      const callbackUrl = `https://wa.me/+573177657335?text=${resumenCodificado}`;
+      const callback_url = `https://wa.me/+573177657335?text=${resumenCodificado}`;
       const descripcion = "Pedido Camerino JIP";
 
       //const descripcion = carrito.map(item => `${item.cantidad}x ${item.nombre}`).join(", ");
