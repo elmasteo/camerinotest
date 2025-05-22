@@ -517,14 +517,3 @@ function crearBotonesFlotantes() {
   });
 }
 
-function filtrarPorCategoria(categoria) {
-  const tarjetas = document.querySelectorAll('.producto-card');
-  tarjetas.forEach(card => {
-    const cat = card.dataset.categoria?.toLowerCase();
-    card.style.display = cat === categoria ? 'block' : 'none';
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  crearBotonesFlotantes();
-});
