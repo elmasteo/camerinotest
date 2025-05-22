@@ -300,6 +300,7 @@ function modificarCantidad(idProducto, cambio) {
 
       const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
 
+      const descripcion = "Pedido Camerino JIP";
 
       //const descripcion = carrito.map(item => `${item.cantidad}x ${item.nombre}`).join(", ");
       const monto = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
