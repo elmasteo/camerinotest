@@ -549,3 +549,10 @@ body::before {
   stroke: #fff;
   fill: none;
 }
+
+/* Ajuste específico solo para tapetes cuando está activo */
+.boton-categoria-wrapper.activo[data-categoria="tapetes"] svg * {
+  stroke: #fff !important;
+  fill: #fff !important;
+}
+
