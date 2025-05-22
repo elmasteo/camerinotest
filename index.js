@@ -226,6 +226,7 @@ function agregarAlCarrito(idProducto) {
       mostrarNotificacion(`Producto "${productoEliminado.nombre}" eliminado del carrito.`, true);
     }
 
+/*
   function actualizarCarrito() {
   listaCarrito.innerHTML = "";
   let total = 0;
@@ -245,6 +246,35 @@ function agregarAlCarrito(idProducto) {
 
   totalPrecio.textContent = "$" + total.toLocaleString();
 }
+*/
+function actualizarCarrito() {
+  listaCarrito.innerHTML = "";
+  let total = 0;
+
+  carrito.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.className = "item-carrito";
+
+    li.innerHTML = `
+      <div class="detalle-producto">
+        <p class="nombre">${item.nombre}</p>
+        <p class="precio">$${item.precio.toLocaleString()} x ${item.cantidad}</p>
+      </div>
+      <div class="acciones-producto">
+        <button onclick="modificarCantidadCarrito(${index}, 'decrementar')">-</button>
+        <span>${item.cantidad}</span>
+        <button onclick="modificarCantidadCarrito(${index}, 'incrementar')">+</button>
+        <button class="eliminar" onclick="eliminarDelCarrito(${index})">✕</button>
+      </div>
+    `;
+
+    listaCarrito.appendChild(li);
+    total += item.precio * item.cantidad;
+  });
+
+  totalPrecio.textContent = "$" + total.toLocaleString();
+}
+
 
 function modificarCantidad(idProducto, cambio) {
   const input = document.getElementById(`cantidad-${idProducto}`);
