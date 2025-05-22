@@ -471,6 +471,8 @@ const categoriasDisponibles = [
   { id: 'accesorios', icon: '/icons/accesorios.svg', label: 'Accesorios' }
 ];
 
+let categoriaActiva = null;
+
 async function crearBotonesFlotantes() {
   const contenedor = document.getElementById('botones-flotantes');
   if (!contenedor) return;
@@ -482,7 +484,11 @@ async function crearBotonesFlotantes() {
   categoriasDisponibles.forEach((cat, i) => {
     const wrapper = document.createElement('div');
     wrapper.className = 'boton-categoria-wrapper';
-    wrapper.onclick = () => filtrarPorCategoria(cat.id);
+    wrapper.dataset.categoria = cat.id;
+    wrapper.onclick = () => {
+      filtrarPorCategoria(cat.id);
+      marcarCategoriaActiva(cat.id);
+    };
 
     const boton = document.createElement('div');
     boton.className = 'boton-categoria';
@@ -497,6 +503,18 @@ async function crearBotonesFlotantes() {
     wrapper.appendChild(etiqueta);
     contenedor.appendChild(wrapper);
   });
+}
+
+function marcarCategoriaActiva(id) {
+  const botones = document.querySelectorAll('.boton-categoria-wrapper');
+  botones.forEach(btn => {
+    if (btn.dataset.categoria === id) {
+      btn.classList.add('activo');
+    } else {
+      btn.classList.remove('activo');
+    }
+  });
+  categoriaActiva = id;
 }
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);

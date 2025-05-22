@@ -488,19 +488,6 @@ body::before {
 
 /*probando ando*/
 
-/*
-.botones-flotantes {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  z-index: 500;
-}
-*/
-
 .contenedor-botones {
   display: flex;
   flex-wrap: wrap;
@@ -516,6 +503,7 @@ body::before {
   width: 80px;
   text-align: center;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
 }
 
 .boton-categoria {
@@ -528,10 +516,10 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.boton-categoria:hover {
+.boton-categoria-wrapper:hover .boton-categoria {
   transform: scale(1.1);
 }
 
@@ -539,10 +527,24 @@ body::before {
   width: 24px;
   height: 24px;
   stroke: #000;
+  transition: stroke 0.2s ease, fill 0.2s ease;
 }
 
+/* Texto debajo del ícono */
 .boton-etiqueta {
   margin-top: 0.3rem;
   font-size: 0.75rem;
-  color: #333;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo activo */
+.boton-categoria-wrapper.activo .boton-categoria {
+  background-color: #4f46e5; /* Indigo 600 */
+}
+
+.boton-categoria-wrapper.activo svg {
+  stroke: white;
+  fill: white;
 }
