@@ -463,3 +463,68 @@ function modificarCantidadCarrito(index, accion) {
   actualizarCarrito();
 }
 
+/*probando ando*/
+
+const categoriasDisponibles = [
+  {
+    id: 'tapetes',
+    svg: `
+      <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+      </svg>`
+  },
+  {
+    id: 'impresion3d',
+    svg: `
+      <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 3h18v4H3z" />
+        <path d="M7 7v14h10V7" />
+        <path d="M10 11h4v4h-4z" />
+      </svg>`
+  },
+  {
+    id: 'indumentaria',
+    svg: `
+      <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4l4 2 4-2 4 2 4-2v4l-2 2v10H6V10L4 8z" />
+      </svg>`
+  },
+  {
+    id: 'accesorios',
+    svg: `
+      <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>`
+  }
+];
+
+
+function crearBotonesFlotantes() {
+  const contenedor = document.getElementById('botones-flotantes');
+
+  categoriasDisponibles.forEach(cat => {
+    const boton = document.createElement('div');
+    boton.className = 'boton-categoria';
+    boton.title = cat.id;
+
+    // Usa emoji o icono personalizado
+    boton.innerHTML = cat.svg;
+
+    boton.onclick = () => filtrarPorCategoria(cat.id);
+    contenedor.appendChild(boton);
+  });
+}
+
+function filtrarPorCategoria(categoria) {
+  const tarjetas = document.querySelectorAll('.producto-card');
+  tarjetas.forEach(card => {
+    const cat = card.dataset.categoria?.toLowerCase();
+    card.style.display = cat === categoria ? 'block' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  crearBotonesFlotantes();
+});
