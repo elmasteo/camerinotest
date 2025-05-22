@@ -489,15 +489,35 @@ body::before {
 
 .botones-flotantes {
   position: fixed;
-  top: 10px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
   gap: 10px;
-  z-index: 1000;
+  z-index: 500;
 }
 
+/*
+.boton-flotante {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #111;
+  display: flex;
+  transform: translateX(-50%);
+  flex-direction: row;
+  gap: 10px;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 500; /* ANTES: 1000
+}
+
+ */
 
 .boton-categoria {
   width: 50px;
