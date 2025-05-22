@@ -209,7 +209,7 @@ function agregarAlCarrito(idProducto) {
       productoEnCarrito.cantidad += cantidad;
       mostrarNotificacion(`Cantidad de ${producto.nombre} aumentada a ${productoEnCarrito.cantidad}`);
     } else {
-      mostrarNotificacion(`No hay suficiente stock de ${producto.nombre}`);
+      mostrarNotificacion(`No hay suficiente stock de ${producto.nombre}`,false,true);
     }
   } else {
     carrito.push({ ...producto, cantidad });
@@ -278,12 +278,13 @@ function modificarCantidad(idProducto, cambio) {
       document.getElementById('carrito-lateral').classList.add('oculto');
     }
 
-    function mostrarNotificacion(mensaje, esEliminacion = false) {
+    function mostrarNotificacion(mensaje, esEliminacion = false, stock = false) {
       notification.textContent = mensaje;
       notification.classList.add('show');
       if (esEliminacion) notification.classList.add('remove');
+      if (stock) notification.classList.add('stock');
       setTimeout(() => {
-        notification.classList.remove('show', 'remove');
+        notification.classList.remove('show', 'remove','stock');
       }, 3000);
     }
 
@@ -452,7 +453,7 @@ function modificarCantidadCarrito(index, accion) {
     if (item.cantidad < productoOriginal.stock) {
       item.cantidad++;
     } else {
-      mostrarNotificacion(`No hay suficiente stock de ${item.nombre}`);
+      mostrarNotificacion(`No hay suficiente stock de ${item.nombre}`, false, true);
     }
   } else if (accion === 'decrementar') {
     if (item.cantidad > 1) {
