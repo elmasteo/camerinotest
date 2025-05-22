@@ -503,17 +503,18 @@ const categoriasDisponibles = [
 
 function crearBotonesFlotantes() {
   const contenedor = document.getElementById('botones-flotantes');
-
   categoriasDisponibles.forEach(cat => {
     const boton = document.createElement('div');
     boton.className = 'boton-categoria';
     boton.title = cat.id;
-
-    // Usa emoji o icono personalizado
     boton.innerHTML = cat.svg;
-
-    boton.onclick = () => filtrarPorCategoria(cat.id);
+    boton.onclick = () => filtrarPorCategoria(cat.id);  // llama la función real
     contenedor.appendChild(boton);
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  crearBotonesFlotantes();
+});
+
 
