@@ -290,16 +290,16 @@ function modificarCantidad(idProducto, cambio) {
     function pagarConBold() {
       if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
-      const productosResumen = carrito.map(p => ({
-        id: p.id,
-        nombre: p.nombre,
-        cantidad: p.cantidad,
-        precio: p.precio
-      }));
+      const productosResumen = carrito.map(p => (
+        `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
+      )).join('\n');
 
-      const resumenCodificado = encodeURIComponent(JSON.stringify(productosResumen));
-      const callback_url = `https://wa.me/+573177657335?text=${resumenCodificado}`;
-      const descripcion = "Pedido Camerino JIP";
+      const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+
+      const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
+
+      const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+
 
       //const descripcion = carrito.map(item => `${item.cantidad}x ${item.nombre}`).join(", ");
       const monto = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
