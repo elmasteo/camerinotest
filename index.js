@@ -281,8 +281,11 @@ function modificarCantidad(idProducto, cambio) {
     function mostrarNotificacion(mensaje, esEliminacion = false, stock = false) {
       notification.textContent = mensaje;
       notification.classList.add('show');
-      if (esEliminacion) notification.classList.add('remove');
-      if (stock) notification.classList.add('stock');
+      if (esEliminacion) {
+        notification.classList.add('remove');
+      }else if (stock){
+        notification.classList.add('stock');
+      }
       setTimeout(() => {
         notification.classList.remove('show', 'remove','stock');
       }, 3000);
