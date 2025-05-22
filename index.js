@@ -464,7 +464,6 @@ function modificarCantidadCarrito(index, accion) {
 }
 
 /*probando ando*/
-
 const categoriasDisponibles = [
   { id: 'tapetes', icon: '/icons/tapete.svg' },
   { id: 'impresion3d', icon: '/icons/impresion.svg' },
@@ -474,25 +473,25 @@ const categoriasDisponibles = [
 
 async function crearBotonesFlotantes() {
   const contenedor = document.getElementById('botones-flotantes');
+  if (!contenedor) return;
 
-  for (const cat of categoriasDisponibles) {
+  // Carga paralela de todos los SVGs
+  const svgTexts = await Promise.all(
+    categoriasDisponibles.map(cat => fetch(cat.icon).then(res => res.text()))
+  );
+
+  // Crea todos los botones y los inserta de golpe
+  categoriasDisponibles.forEach((cat, i) => {
     const boton = document.createElement('div');
     boton.className = 'boton-categoria';
     boton.title = cat.id;
     boton.onclick = () => filtrarPorCategoria(cat.id);
-
-    // Carga del SVG con fetch y embebido inline
-    const res = await fetch(cat.icon);
-    const svgText = await res.text();
-    boton.innerHTML = svgText;
-
+    boton.insertAdjacentHTML('beforeend', svgTexts[i]);
     contenedor.appendChild(boton);
-  }
+  });
 }
 
+document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
-document.addEventListener('DOMContentLoaded', () => {
-  crearBotonesFlotantes();
-});
 
 
