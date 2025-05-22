@@ -209,7 +209,7 @@ function agregarAlCarrito(idProducto) {
       productoEnCarrito.cantidad += cantidad;
       mostrarNotificacion(`Cantidad de ${producto.nombre} aumentada a ${productoEnCarrito.cantidad}`);
     } else {
-      mostrarNotificacion(`No hay suficiente stock de ${producto.nombre}`,false,true);
+      mostrarNotificacion(`No hay suficiente stock de ${producto.nombre}`);
     }
   } else {
     carrito.push({ ...producto, cantidad });
@@ -278,16 +278,12 @@ function modificarCantidad(idProducto, cambio) {
       document.getElementById('carrito-lateral').classList.add('oculto');
     }
 
-    function mostrarNotificacion(mensaje, esEliminacion = false, stock = false) {
+    function mostrarNotificacion(mensaje, esEliminacion = false) {
       notification.textContent = mensaje;
       notification.classList.add('show');
-      if (esEliminacion) {
-        notification.classList.add('remove');
-      }else if (stock){
-        notification.classList.add('stock');
-      }
+      if (esEliminacion) notification.classList.add('remove');
       setTimeout(() => {
-        notification.classList.remove('show', 'remove','stock');
+        notification.classList.remove('show', 'remove');
       }, 3000);
     }
 
@@ -306,11 +302,8 @@ function modificarCantidad(idProducto, cambio) {
 
       const descripcion = "Pedido Camerino JIP";
 
-      //const descripcion = carrito.map(item => `${item.cantidad}x ${item.nombre}`).join(", ");
       const monto = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
       const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
-      //const mensaje = `Hola! Realicé el pago exitoso de: ${descripcion} por $${monto.toLocaleString('es-CO')} COP.`;
-      //const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
 
       const raw = JSON.stringify({
         monto,
@@ -456,7 +449,7 @@ function modificarCantidadCarrito(index, accion) {
     if (item.cantidad < productoOriginal.stock) {
       item.cantidad++;
     } else {
-      mostrarNotificacion(`No hay suficiente stock de ${item.nombre}`, false, true);
+      mostrarNotificacion(`No hay suficiente stock de ${item.nombre}`);
     }
   } else if (accion === 'decrementar') {
     if (item.cantidad > 1) {
