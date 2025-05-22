@@ -465,33 +465,40 @@ function modificarCantidadCarrito(index, accion) {
 
 /*probando ando*/
 const categoriasDisponibles = [
-  { id: 'tapetes', icon: '/icons/tapete.svg' },
-  { id: 'impresion3d', icon: '/icons/impresion.svg' },
-  { id: 'indumentaria', icon: '/icons/camisa.svg' },
-  { id: 'accesorios', icon: '/icons/accesorios.svg' }
+  { id: 'tapetes', icon: '/icons/tapete.svg', label: 'Tapetes' },
+  { id: 'impresion3d', icon: '/icons/impresion.svg', label: 'Impresión 3D' },
+  { id: 'indumentaria', icon: '/icons/camisa.svg', label: 'Indumentaria' },
+  { id: 'accesorios', icon: '/icons/accesorios.svg', label: 'Accesorios' }
 ];
 
 async function crearBotonesFlotantes() {
   const contenedor = document.getElementById('botones-flotantes');
   if (!contenedor) return;
 
-  // Carga paralela de todos los SVGs
   const svgTexts = await Promise.all(
     categoriasDisponibles.map(cat => fetch(cat.icon).then(res => res.text()))
   );
 
-  // Crea todos los botones y los inserta de golpe
   categoriasDisponibles.forEach((cat, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'boton-categoria-wrapper';
+    wrapper.onclick = () => filtrarPorCategoria(cat.id);
+
     const boton = document.createElement('div');
     boton.className = 'boton-categoria';
     boton.title = cat.id;
-    boton.onclick = () => filtrarPorCategoria(cat.id);
-    boton.insertAdjacentHTML('beforeend', svgTexts[i]);
-    contenedor.appendChild(boton);
+    boton.innerHTML = svgTexts[i];
+
+    const etiqueta = document.createElement('span');
+    etiqueta.className = 'boton-etiqueta';
+    etiqueta.textContent = cat.label;
+
+    wrapper.appendChild(boton);
+    wrapper.appendChild(etiqueta);
+    contenedor.appendChild(wrapper);
   });
 }
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
-
 
 
