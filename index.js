@@ -610,14 +610,13 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
-const carrito1 = document.getElementById('carrito-lateral');
 let startX = 0;
 
-carrito1.addEventListener('touchstart', (e) => {
+carritoLateral.addEventListener('touchstart', (e) => {
   startX = e.touches[0].clientX;
 });
 
-carrito1.addEventListener('touchend', (e) => {
+carritoLateral.addEventListener('touchend', (e) => {
   const endX = e.changedTouches[0].clientX;
   if (startX - endX > 100) { // deslizar hacia la izquierda
     cerrarCarrito();
@@ -625,6 +624,6 @@ carrito1.addEventListener('touchend', (e) => {
 });
 
 function cerrarCarrito() {
-  carrito1.classList.remove('activo');
-  carrito1.classList.add('oculto');
+  carritoLateral.classList.remove('activo');
+  carritoLateral.classList.add('oculto');
 }
