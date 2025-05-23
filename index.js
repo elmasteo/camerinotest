@@ -610,20 +610,3 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
-let startX = 0;
-
-carritoLateral.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-});
-
-carritoLateral.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX - endX > 100) { // deslizar hacia la izquierda
-    cerrarCarrito();
-  }
-});
-
-function cerrarCarrito() {
-  carritoLateral.classList.remove('activo');
-  carritoLateral.classList.add('oculto');
-}
