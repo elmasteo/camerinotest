@@ -229,7 +229,7 @@ function agregarAlCarrito(idProducto) {
   }
 
   actualizarCarrito();
-  actualizarVistaPrevia(producto);
+  mostrarVistaPrevia(producto);
 }
 
     function eliminarDelCarrito(index) {
