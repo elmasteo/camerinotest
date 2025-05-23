@@ -700,4 +700,25 @@ body::before {
   overflow: hidden;
 }
 
+/*probando ando*/
+#carrito-lateral {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px; /* ajusta según diseño */
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 9999;
+}
+
+#carrito-lateral.activo {
+  transform: translateX(0%);
+}
+
+#carrito-lateral.oculto {
+  pointer-events: none;
+}
 
