@@ -187,6 +187,11 @@ function obtenerUrlAbsoluta(ruta) {
   return `${baseUrl}/${ruta}`;
 }
 
+function actualizarVistaPrevia(producto) {
+  document.getElementById('preview-image').src = producto.imagen;
+  document.getElementById('preview-name').textContent = producto.nombre;
+  document.getElementById('preview-price').textContent = `$${producto.precio}`;
+}
 
 function agregarAlCarrito(idProducto) {
   mostrarCarrito();
@@ -217,6 +222,7 @@ function agregarAlCarrito(idProducto) {
   }
 
   actualizarCarrito();
+  actualizarVistaPrevia(producto);
 }
 
     function eliminarDelCarrito(index) {
