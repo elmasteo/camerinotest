@@ -610,3 +610,10 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
+document.getElementById("carrito-lateral").addEventListener("click", (e) => {
+  // Solo cerrar si se hace clic en el fondo del modal, no en la imagen
+  if (e.target.id === "carrito-lateral") {
+    e.currentTarget.classList.add('oculto');
+  }
+});
+
