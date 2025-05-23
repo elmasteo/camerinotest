@@ -698,3 +698,38 @@ body::before {
   overflow: hidden;
 }
 
+.cerrar-carrito-visual {
+  position: absolute;
+  top: 10px;
+  left: -40px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  width: 30px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.carrito {
+  transition: right 0.3s ease;
+  touch-action: pan-y;
+}
+
+/* Asegurar que el carrito esté encima de todo */
+.carrito, .cerrar-carrito-visual {
+  z-index: 1100 !important;
+}
+
+/* Elevar aún más la notificación */
+.notification {
+  z-index: 1200 !important;
+}
+
+/* Ajuste botón hamburguesa detrás del carrito si se superponen */
+.menu-categorias-wrapper {
+  z-index: 900;
+  position: relative;
+}
