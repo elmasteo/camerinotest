@@ -213,17 +213,6 @@ function agregarAlCarrito(idProducto) {
     document.getElementById(`mensaje-stock-${idProducto}`).style.display = 'block';
     return; // ⛔ Salida temprana, NO muestra vista previa
   }
-  /*probando ando again*/
-    const botonCarrito = document.getElementById("boton-carrito");
-  const carritoLateral = document.getElementById("carrito-lateral");
-
-  if (botonCarrito && carritoLateral) {
-    botonCarrito.addEventListener("click", () => {
-      const estaActivo = carritoLateral.classList.toggle("activo");
-      carritoLateral.classList.toggle("oculto", !estaActivo);
-      botonCarrito.textContent = estaActivo ? "❌" : "🛒";
-    });
-  }
 
   const productoEnCarrito = carrito.find(item => item.id === producto.id);
 
