@@ -610,25 +610,4 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
-const cerrarBtn = document.getElementById('cerrar-carrito');
 
-cerrarBtn.addEventListener('click', () => {
-  carrito.classList.remove('activo');
-  carrito.classList.add('oculto');
-});
-
-// Gestos táctiles para cerrar carrito
-let startX = 0;
-
-carrito.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-});
-
-carrito.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX;
-  const diffX = endX - startX;
-  if (diffX > 50) {
-    carrito.classList.remove('activo');
-    carrito.classList.add('oculto');
-  }
-});
