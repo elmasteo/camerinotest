@@ -610,7 +610,6 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
-const carrito = document.getElementById('carrito-lateral');
 const cerrarBtn = document.getElementById('cerrar-carrito');
 
 cerrarBtn.addEventListener('click', () => {
