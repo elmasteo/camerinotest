@@ -115,6 +115,14 @@
       "stock": 1,
       "imagen": "/images/deadpool.jpeg",
       "subcategoria": "wolverine"
+    },
+    {
+      "id": 16,
+      "nombre": "cellwebp",
+      "precio": 50000,
+      "stock": 12,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes"
     }
   ]
 }
