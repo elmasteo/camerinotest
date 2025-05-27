@@ -22,7 +22,7 @@ function mostrarProductos(productos) {
         src="https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(producto.imagen))}?w=400&auto=webp"
         alt="${producto.nombre}"
         loading="lazy"
-        onclick="abrirModalImagen('${obtenerUrlAbsoluta(producto.imagen)}')"
+        onclick="abrirModalImagen(${producto.id})"
       />
       <div class="card-content">
         <h2>${producto.nombre}</h2>
