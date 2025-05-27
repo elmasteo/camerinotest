@@ -87,14 +87,19 @@
   </a>
 </div>
 
-<!-- Modal de imagen -->
+<!-- Modal de imagen 
 <div id="modal-imagen" class="modal oculto">
   <span id="cerrar-modal" class="cerrar">✕</span>
   <img id="imagen-modal" class="imagen-modal" src="" alt="Ampliada">
 </div>
-
-
-
+-->
+<div id="modal-imagen" class="modal oculto">
+  <span id="cerrar-modal" class="cerrar">✕</span>
+  <span class="modal-arrow left" onclick="anteriorImagen()">&#10094;</span>
+  <img id="imagen-modal" src="" alt="Ampliada" />
+  <span class="modal-arrow right" onclick="siguienteImagen()">&#10095;</span>
+  <div id="dots-container" class="dots-container"></div>
+</div>
 
 <script type="text/javascript" src="index.js"></script>
 </body>
