@@ -25,7 +25,11 @@ collections:
               - { label: "Nombre", name: "nombre", widget: "string" }
               - { label: "Precio", name: "precio", widget: "number" }
               - { label: "Stock", name: "stock", widget: "number" }
-              - { label: "Imagen", name: "imagen", widget: "image" }
+              - label: "Imágenes"
+                name: "imagenes"
+                widget: "list"
+                allow_add: true
+                field: { label: "Imagen", name: "imagen", widget: "image" }
               - { label: "Subcategoría", name: "subcategoria", widget: "string", required: false }
               - label: "Categoría"
                 name: "categoria"

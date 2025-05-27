@@ -573,6 +573,8 @@ document.addEventListener('click', function (event) {
 
 
 // Mostrar imagen en modal
+
+/*
 function abrirModalImagen(src) {
   const modal = document.getElementById("modal-imagen");
   const imagen = document.getElementById("imagen-modal");
@@ -586,6 +588,75 @@ function abrirModalImagen(src) {
   };
   preload.src = cdnUrl;
 }
+*/
+let imagenesModal = [];
+let indiceImagen = 0;
+
+function abrirModalImagen(idProducto) {
+  const modal = document.getElementById("modal-imagen");
+  const imagen = document.getElementById("imagen-modal");
+
+  const producto = productosGlobal.find(p => p.id === idProducto);
+  if (!producto || !producto.imagenes || producto.imagenes.length === 0) return;
+
+  imagenesModal = producto.imagenes.map(img =>
+    `https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(img))}?w=800&auto=webp`
+  );
+  indiceImagen = 0;
+
+  imagen.src = imagenesModal[indiceImagen];
+  modal.style.display = "flex";
+}
+
+function siguienteImagen() {
+  if (imagenesModal.length <= 1) return;
+  indiceImagen = (indiceImagen + 1) % imagenesModal.length;
+  document.getElementById("imagen-modal").src = imagenesModal[indiceImagen];
+}
+
+function anteriorImagen() {
+  if (imagenesModal.length <= 1) return;
+  indiceImagen = (indiceImagen - 1 + imagenesModal.length) % imagenesModal.length;
+  document.getElementById("imagen-modal").src = imagenesModal[indiceImagen];
+}
+
+function cerrarModal() {
+  document.getElementById("modal-imagen").style.display = "none";
+  imagenesModal = [];
+  indiceImagen = 0;
+}
+
+// Soporte para teclado
+document.addEventListener("keydown", (e) => {
+  const modal = document.getElementById("modal-imagen");
+  if (modal.style.display !== "flex") return;
+
+  if (e.key === "ArrowRight") siguienteImagen();
+  if (e.key === "ArrowLeft") anteriorImagen();
+  if (e.key === "Escape") cerrarModal();
+});
+
+// Soporte para gestos táctiles
+let startX = 0;
+
+const modal = document.getElementById("modal-imagen");
+
+modal.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+}, { passive: true });
+
+modal.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  const deltaX = endX - startX;
+
+  if (Math.abs(deltaX) > 50) {
+    if (deltaX > 0) {
+      anteriorImagen();
+    } else {
+      siguienteImagen();
+    }
+  }
+});
 
 
 function contraerTodosLosSubmenus() {
