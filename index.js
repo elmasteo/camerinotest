@@ -17,26 +17,25 @@ function mostrarProductos(productos) {
     const card = document.createElement('div');
     card.className = 'card';
 
-card.innerHTML = `
-  <img
-    src="https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(producto.imagenes?.[0] || ''))}?w=400&auto=webp"
-    alt="${producto.nombre}"
-    loading="lazy"
-    onclick="abrirModalImagen(${producto.id})"
-  />
-  <div class="card-content">
-    <h2>${producto.nombre}</h2>
-    <p>$${producto.precio.toLocaleString()}</p>
-    <div class="controles-cantidad">
-      <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, -1)">-</button>
-      <input type="text" id="cantidad-${producto.id}" class="input-cantidad" value="1" readonly>
-      <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, 1)">+</button>
-    </div>
-    <div class="mensaje-stock" id="mensaje-stock-${producto.id}">No hay suficiente stock</div>
-    <button class="btn" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
-  </div>
-`;
-
+    card.innerHTML = `
+      <img
+        src="https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(producto.imagen))}?w=400&auto=webp"
+        alt="${producto.nombre}"
+        loading="lazy"
+        onclick="abrirModalImagen('${obtenerUrlAbsoluta(producto.imagen)}')"
+      />
+      <div class="card-content">
+        <h2>${producto.nombre}</h2>
+        <p>$${producto.precio.toLocaleString()}</p>
+        <div class="controles-cantidad">
+          <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, -1)">-</button>
+          <input type="text" id="cantidad-${producto.id}" class="input-cantidad" value="1" readonly>
+          <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, 1)">+</button>
+        </div>
+        <div class="mensaje-stock" id="mensaje-stock-${producto.id}">No hay suficiente stock</div>
+        <button class="btn" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
+      </div>
+    `;
 
     contenedor.appendChild(card);
   });
@@ -574,8 +573,6 @@ document.addEventListener('click', function (event) {
 
 
 // Mostrar imagen en modal
-
-/*
 function abrirModalImagen(src) {
   const modal = document.getElementById("modal-imagen");
   const imagen = document.getElementById("imagen-modal");
@@ -589,84 +586,6 @@ function abrirModalImagen(src) {
   };
   preload.src = cdnUrl;
 }
-*/
-let imagenesModal = [];
-let indiceImagen = 0;
-
-function abrirModalImagen(idProducto) {
-  const modal = document.getElementById("modal-imagen");
-  const imagen = document.getElementById("imagen-modal");
-
-  const producto = productosGlobal.find(p => p.id === idProducto);
-  if (!producto || !producto.imagenes || producto.imagenes.length === 0) return;
-
-    const imagenes = producto.imagenes && producto.imagenes.length > 0
-    ? producto.imagenes
-    : [producto.imagen];
-
-  imagenesModal = imagenes.map(img =>
-    `https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(img))}?w=400&auto=webp`
-  );
-
-  indiceImagen = 0;
-
-  imagen.src = imagenesModal[indiceImagen];
-  modal.style.display = "flex";
-  actualizarDots();
-}
-
-function siguienteImagen() {
-  if (imagenesModal.length <= 1) return;
-  indiceImagen = (indiceImagen + 1) % imagenesModal.length;
-  document.getElementById("imagen-modal").src = imagenesModal[indiceImagen];
-  actualizarDots();
-}
-
-function anteriorImagen() {
-  if (imagenesModal.length <= 1) return;
-  indiceImagen = (indiceImagen - 1 + imagenesModal.length) % imagenesModal.length;
-  document.getElementById("imagen-modal").src = imagenesModal[indiceImagen];
-  actualizarDots();
-}
-
-function cerrarModal() {
-  document.getElementById("modal-imagen").style.display = "none";
-  imagenesModal = [];
-  indiceImagen = 0;
-}
-
-// Soporte para teclado
-document.addEventListener("keydown", (e) => {
-  const modal = document.getElementById("modal-imagen");
-  if (modal.style.display !== "flex") return;
-
-  if (e.key === "ArrowRight") siguienteImagen();
-  if (e.key === "ArrowLeft") anteriorImagen();
-  if (e.key === "Escape") cerrarModal();
-});
-
-// Soporte para gestos táctiles
-let startX = 0;
-
-const modal = document.getElementById("modal-imagen");
-
-modal.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
-}, { passive: true });
-
-modal.addEventListener("touchend", (e) => {
-  const endX = e.changedTouches[0].clientX;
-  const deltaX = endX - startX;
-
-  if (Math.abs(deltaX) > 50) {
-    if (deltaX > 0) {
-      anteriorImagen();
-    } else {
-      siguienteImagen();
-    }
-  }
-});
-
 
 function contraerTodosLosSubmenus() {
   document.querySelectorAll('.submenu').forEach(submenu => {
@@ -768,28 +687,4 @@ function marcarCategoriaActiva(id) {
 }
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
-
-function actualizarDots() {
-  const container = document.getElementById("dots-container");
-
-  // Oculta los dots si hay 0 o 1 imagen
-  if (imagenesModal.length <= 1) {
-    container.style.display = "none";
-    return;
-  }
-
-  container.style.display = "flex";
-  container.innerHTML = "";
-
-  imagenesModal.forEach((_, index) => {
-    const dot = document.createElement("div");
-    dot.className = "dot" + (index === indiceImagen ? " active" : "");
-    dot.onclick = () => {
-      indiceImagen = index;
-      document.getElementById("imagen-modal").src = imagenesModal[indiceImagen];
-      actualizarDots();
-    };
-    container.appendChild(dot);
-  });
-}
 
