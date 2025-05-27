@@ -6,7 +6,11 @@
       "precio": 359998,
       "imagen": "/images/cpmajinboo.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ]
     },
     {
       "id": 2,
@@ -14,7 +18,10 @@
       "precio": 360000,
       "imagen": "/images/cpcell.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ]
     },
     {
       "id": 3,
@@ -22,7 +29,11 @@
       "precio": 260000,
       "imagen": "/images/cpdeadpool.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cpdeadpool.webp",
+        "/images/cponepiece.webp"
+      ]
     },
     {
       "id": 4,
@@ -30,7 +41,10 @@
       "precio": 260000,
       "imagen": "/images/cptortuga.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cptortuga.webp"
+      ]
     },
     {
       "id": 5,
@@ -38,7 +52,10 @@
       "precio": 260000,
       "imagen": "/images/cppokebola.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cppokebola.webp"
+      ]
     },
     {
       "id": 6,
@@ -46,7 +63,11 @@
       "precio": 260000,
       "imagen": "/images/cpsunny.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cpsunny.webp",
+        "/images/cpsunny.webp"
+      ]
     },
     {
       "id": 7,
@@ -54,7 +75,10 @@
       "precio": 260000,
       "imagen": "/images/cponepiece.webp",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/cponepiece.webp"
+      ]
     },
     {
       "id": 9,
@@ -62,7 +86,10 @@
       "precio": 10000000,
       "imagen": "/images/aurora.jpeg",
       "categoria": "tapetes",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/aurora.jpeg"
+      ]
     },
     {
       "id": 10,
@@ -70,15 +97,22 @@
       "precio": 850000,
       "imagen": "/images/goku.jpg",
       "categoria": "impresion3d",
-      "stock": 2
+      "stock": 2,
+      "imagenes": [
+        "/images/goku.jpg"
+      ]
     },
     {
       "id": 11,
-      "nombre": "Goku",
+      "nombre": "Camiseta nacional",
       "precio": 10000,
       "imagen": "/images/goku.jpg",
-      "categoria": "accesorios",
-      "stock": 2
+      "categoria": "indumentaria",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpnacionalhombreblanca.webp",
+        "/images/cpnacionaldamav2.webp"
+      ]
     },
     {
       "id": 12,
@@ -87,16 +121,24 @@
       "imagen": "/images/goku.jpg",
       "categoria": "indumentaria",
       "stock": 2,
-      "subcategoria": "Millonarios"
+      "subcategoria": "Millonarios",
+      "imagenes": [
+        "/images/cpmillonariosposterior.webp",
+        "/images/cpmillonariosblanca.webp"
+      ]
     },
     {
       "id": 13,
       "nombre": "Camiseta",
-      "precio": 30000,
+      "precio": 70000,
       "stock": 2,
       "imagen": "/images/cpblancaroja.webp",
       "subcategoria": "Millonarios",
-      "categoria": "indumentaria"
+      "categoria": "indumentaria",
+      "imagenes": [
+        "/images/cpmillonariosnegrahombre.webp",
+        "/images/cpmillonariosnegradama.webp"
+      ]
     },
     {
       "id": 14,
@@ -105,7 +147,10 @@
       "stock": 1,
       "imagen": "/images/cpmillonariosnegrahombre.webp",
       "subcategoria": "santa fe",
-      "categoria": "indumentaria"
+      "categoria": "indumentaria",
+      "imagenes": [
+        "/images/cpblancaroja.webp"
+      ]
     },
     {
       "categoria": "tapetes",
@@ -114,7 +159,10 @@
       "precio": 3000,
       "stock": 1,
       "imagen": "/images/cpsunny.webp",
-      "subcategoria": "wolverine"
+      "subcategoria": "wolverine",
+      "imagenes": [
+        "/images/cpdeadpool.webp"
+      ]
     },
     {
       "id": 16,
@@ -122,7 +170,10 @@
       "precio": 50000,
       "stock": 12,
       "imagen": "/images/cpcell.webp",
-      "categoria": "tapetes"
+      "categoria": "tapetes",
+      "imagenes": [
+        "/images/cpcell.webp"
+      ]
     }
   ]
 }
