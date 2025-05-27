@@ -4,7 +4,7 @@
       "id": 1,
       "nombre": "Kid Boo",
       "precio": 359998,
-      "imagen": "./images/majinboo.jpeg",
+      "imagen": "/images/cpmajinboo.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "nombre": "Cell",
       "precio": 360000,
-      "imagen": "./images/cell.jpeg",
+      "imagen": "/images/cpcell.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "nombre": "Deadpool - Wolverine",
       "precio": 260000,
-      "imagen": "./images/deadpool.jpeg",
+      "imagen": "/images/cpdeadpool.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -28,7 +28,7 @@
       "id": 4,
       "nombre": "Mario Tortuga",
       "precio": 260000,
-      "imagen": "./images/tortuga.jpeg",
+      "imagen": "/images/cptortuga.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -36,7 +36,7 @@
       "id": 5,
       "nombre": "Pokebola",
       "precio": 260000,
-      "imagen": "./images/pokebola.jpeg",
+      "imagen": "/images/cppokebola.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -44,7 +44,7 @@
       "id": 6,
       "nombre": "Sunny - One Piece",
       "precio": 260000,
-      "imagen": "./images/sunny.jpeg",
+      "imagen": "/images/cpsunny.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -52,7 +52,7 @@
       "id": 7,
       "nombre": "One Piece",
       "precio": 260000,
-      "imagen": "./images/onepiece.jpeg",
+      "imagen": "/images/cponepiece.webp",
       "categoria": "tapetes",
       "stock": 2
     },
@@ -94,7 +94,7 @@
       "nombre": "Camiseta",
       "precio": 30000,
       "stock": 2,
-      "imagen": "/images/sunny.jpeg",
+      "imagen": "/images/cpblancaroja.webp",
       "subcategoria": "Millonarios",
       "categoria": "indumentaria"
     },
@@ -103,7 +103,7 @@
       "nombre": "chaqueta",
       "precio": 50000,
       "stock": 1,
-      "imagen": "/images/pokebola.jpeg",
+      "imagen": "/images/cpmillonariosnegrahombre.webp",
       "subcategoria": "santa fe",
       "categoria": "indumentaria"
     },
@@ -113,7 +113,7 @@
       "nombre": "tapete prueba",
       "precio": 3000,
       "stock": 1,
-      "imagen": "/images/deadpool.jpeg",
+      "imagen": "/images/cpsunny.webp",
       "subcategoria": "wolverine"
     },
     {
