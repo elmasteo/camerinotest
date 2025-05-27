@@ -18,6 +18,34 @@ function mostrarProductos(productos) {
     card.className = 'card';
 
     card.innerHTML = `
+      <img
+        src="https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(producto.imagen))}?w=400&auto=webp"
+        alt="${producto.nombre}"
+        loading="lazy"
+        onclick="abrirModalImagen('${obtenerUrlAbsoluta(producto.imagen)}')"
+      />
+      <div class="card-content">
+        <h2>${producto.nombre}</h2>
+        <p>$${producto.precio.toLocaleString()}</p>
+        <div class="controles-cantidad">
+          <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, -1)">-</button>
+          <input type="text" id="cantidad-${producto.id}" class="input-cantidad" value="1" readonly>
+          <button class="boton-cantidad" onclick="modificarCantidad(${producto.id}, 1)">+</button>
+        </div>
+        <div class="mensaje-stock" id="mensaje-stock-${producto.id}">No hay suficiente stock</div>
+        <button class="btn" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
+      </div>
+    `;
+
+    contenedor.appendChild(card);
+  });
+
+/*
+  productos.forEach(producto => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
       <img loading="lazy" src="${obtenerUrlAbsoluta(producto.imagen)}" alt="${producto.nombre}" onclick="abrirModalImagen('${obtenerUrlAbsoluta(producto.imagen)}')">
       <div class="card-content">
         <h2>${producto.nombre}</h2>
@@ -34,6 +62,7 @@ function mostrarProductos(productos) {
 
     contenedor.appendChild(card);
   });
+  */
 }
 
 
@@ -179,7 +208,7 @@ function mostrarSubcategoriasEnMenu(categoria) {
 function obtenerUrlAbsoluta(ruta) {
   if (ruta.startsWith("http")) return ruta;
 
-  const baseUrl = "https://camerinojipsandbox.netlify.app/";
+  const baseUrl = "https://camerinojipsandbox.netlify.app";
 
   // Quita cualquier "./", "/", o nada al inicio
   ruta = ruta.replace(/^\.?\/?/, "");
