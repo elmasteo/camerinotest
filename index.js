@@ -216,6 +216,7 @@ function obtenerUrlAbsoluta(ruta) {
   return `${baseUrl}/${ruta}`;
 }
 
+/*
 function mostrarVistaPrevia(producto) {
   const preview = document.getElementById('preview-panel');
   document.getElementById('preview-image').src = producto.imagen;
@@ -227,6 +228,28 @@ function mostrarVistaPrevia(producto) {
   preview._timeout = setTimeout(() => {
     preview.classList.add('hidden');
   }, 3000);
+}
+*/
+
+function mostrarVistaPrevia(producto) {
+  const preview = document.getElementById('preview-panel');
+  const imgElement = document.getElementById('preview-image');
+  const nombreElement = document.getElementById('preview-name');
+
+  const cdnUrl = `https://imagecdn.app/v2/image/${encodeURIComponent(obtenerUrlAbsoluta(producto.imagen))}?w=200&auto=webp`;
+
+  const preload = new Image();
+  preload.onload = () => {
+    imgElement.src = cdnUrl;
+    nombreElement.textContent = producto.nombre;
+    preview.classList.remove('hidden');
+
+    clearTimeout(preview._timeout);
+    preview._timeout = setTimeout(() => {
+      preview.classList.add('hidden');
+    }, 3000);
+  };
+  preload.src = cdnUrl;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
