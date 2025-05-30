@@ -806,6 +806,10 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("pageshow", () => {
   ocultarLoader();
 });
+
+setTimeout(() => {
+  ocultarLoader();
+}, 5000); // fuerza ocultar después de 5 segundos
