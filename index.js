@@ -478,8 +478,53 @@ function mostrarLoader() {
 function ocultarLoader() {
   document.getElementById("loader").style.display = "none";
 }
+function pagarConBold() {
+  if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
+  mostrarLoader(); // <-- Se muestra aquí, antes del fetch
 
+  const productosResumen = carrito.map(p => (
+    `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
+  )).join('\n');
+
+  const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+
+  const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
+  const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+  const descripcion = "Pedido Camerino JIP";
+  const monto = total;
+  const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
+
+  const raw = JSON.stringify({
+    monto,
+    descripcion,
+    tipo: "CLOSE",
+    image_url: imagenUrl,
+    callback_url
+  });
+
+  fetch("/.netlify/functions/crearLinkPago", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: raw
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.payload && result.payload.url) {
+      // loader sigue visible antes de redirigir
+      window.location.href = result.payload.url;
+    } else {
+      console.error('No se recibió un enlace de pago válido.', result);
+      ocultarLoader(); // sólo si hubo error
+    }
+  })
+  .catch(error => {
+    console.error('Error al generar enlace:', error);
+    ocultarLoader(); // en caso de fallo
+  });
+}
+
+/*
     function pagarConBold() {
       if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
@@ -526,14 +571,14 @@ function ocultarLoader() {
       .catch(error => console.error('Error al generar enlace:', error));
       ocultarLoader();
     }
-
+*/
    function realizarAbono() {
     const descripcion = "Abono para curso tufting o compra de tapetes personalizados"; // Descripción general
     const imagenUrl = obtenerUrlAbsoluta("./images/camerino.jpeg"); // Imagen genérica o la que prefieras
 
     obtenerCotizacion(descripcion, imagenUrl); // Llamamos a la función para obtener el enlace con monto abierto
 }
-
+/*
 function obtenerCotizacion(descripcion, imagenUrl) {
     mostrarLoader();
     const mensaje = `Hola! Realicé el pago exitoso del abono: ${descripcion}`;
@@ -563,6 +608,39 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     })
     .catch(error => console.log('error', error));
     ocultarLoader();
+}
+*/
+function obtenerCotizacion(descripcion, imagenUrl) {
+  mostrarLoader();
+
+  const mensaje = `Hola! Realicé el pago exitoso del abono: ${descripcion}`;
+  const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+
+  const raw = JSON.stringify({
+    descripcion: descripcion,
+    tipo: "OPEN",
+    image_url: imagenUrl,
+    callback_url: callback_url
+  });
+
+  fetch("/.netlify/functions/crearLinkPago", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: raw
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.payload && result.payload.url) {
+      window.location.href = result.payload.url;
+    } else {
+      console.error('Error: No se recibió un enlace de pago válido.', result);
+      ocultarLoader();
+    }
+  })
+  .catch(error => {
+    console.log('error', error);
+    ocultarLoader();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
