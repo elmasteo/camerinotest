@@ -480,66 +480,73 @@ function ocultarLoader() {
 }
 
 function pagarConBold() {
-const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-if (carrito.length === 0) return alert("Tu carrito está vacío.");
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
-const nombre = document.getElementById('nombre').value;
-const telefono = document.getElementById('telefono').value;
-const ciudad = document.getElementById('ciudad').value;
-const direccion = document.getElementById('direccion').value;
-const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+  const nombre = document.getElementById("nombre").value;
+  const telefono = document.getElementById("telefono").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const direccion = document.getElementById("direccion").value;
+  const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
 
-const formData = new FormData();
-formData.append("form-name", "pedido");
-formData.append("nombre", nombre);
-formData.append("telefono", telefono);
-formData.append("ciudad", ciudad);
-formData.append("direccion", direccion);
-formData.append("carrito", JSON.stringify(carrito));
-formData.append("total", total);
+  // --- Enviar el formulario oculto a Netlify ---
+  const form = document.forms['pedido'];
+  form.nombre.value = nombre;
+  form.telefono.value = telefono;
+  form.ciudad.value = ciudad;
+  form.direccion.value = direccion;
+  form.carrito.value = JSON.stringify(carrito);
+  form.total.value = total;
 
-// Enviar a Netlify Forms (no a función personalizada)
-fetch("/", {
-  method: "POST",
-  body: formData
-});
+  const formData = new FormData(form);
+  formData.append("form-name", "pedido");
 
-// Continuar con flujo de pago Bold
-ocultarModalFormulario();
-mostrarLoader();
-sessionStorage.setItem('enProcesoDePago', '1');
+  fetch("/", {
+    method: "POST",
+    body: formData
+  });
 
-const mensaje = `🧾 *Resumen de tu pedido:*\n\n${carrito.map(p => (
-  `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
-)).join('\n')}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
+  // --- Mostrar loader y continuar con pago en Bold ---
+  mostrarLoader(); // muestra loader de tu UI
 
-const rawBold = JSON.stringify({
-  monto: total,
-  descripcion: "Pedido Camerino JIP",
-  tipo: "CLOSE",
-  image_url: obtenerUrlAbsoluta(carrito[0].imagen),
-  callback_url: `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`
-});
+  const productosResumen = carrito.map(p => (
+    `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
+  )).join('\n');
 
-fetch("/.netlify/functions/crearLinkPago", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: rawBold
-})
-.then(res => res.json())
-.then(result => {
-  if (result.payload?.url) {
-    window.location.href = result.payload.url;
-  } else {
-    console.error("Error con Bold:", result);
+  const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
+  const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+  const descripcion = "Pedido Camerino JIP";
+  const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
+
+  const raw = JSON.stringify({
+    monto: total,
+    descripcion,
+    tipo: "CLOSE",
+    image_url: imagenUrl,
+    callback_url
+  });
+
+  fetch("/.netlify/functions/crearLinkPago", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: raw
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.payload && result.payload.url) {
+      window.location.href = result.payload.url;
+    } else {
+      console.error('No se recibió un enlace de pago válido.', result);
+      ocultarLoader();
+    }
+  })
+  .catch(error => {
+    console.error('Error al generar enlace:', error);
     ocultarLoader();
-  }
-})
-.catch(err => {
-  console.error("Error fetch Bold:", err);
-  ocultarLoader();
-});
+  });
 }
+
+
 
 /*
 function pagarConBold() {
@@ -885,3 +892,8 @@ function mostrarModalFormulario() {
 function cerrarModalFormulario() {
   document.getElementById('modal-formulario').classList.add('oculto');
 }
+
+document.getElementById("checkout-form").addEventListener("submit", function(e) {
+  e.preventDefault(); // evita el envío tradicional
+  pagarConBold();     // ejecuta tu función personalizada
+});
