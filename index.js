@@ -471,9 +471,19 @@ function modificarCantidad(idProducto, cambio) {
   }, 3000);
 }
 
+function mostrarLoader() {
+  document.getElementById("loader").style.display = "flex";
+}
+
+function ocultarLoader() {
+  document.getElementById("loader").style.display = "none";
+}
+
 
     function pagarConBold() {
       if (carrito.length === 0) return alert("Tu carrito está vacío.");
+
+      mostrarLoader();
 
       const productosResumen = carrito.map(p => (
         `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
@@ -509,9 +519,11 @@ function modificarCantidad(idProducto, cambio) {
           window.location.href = result.payload.url;
         } else {
           console.error('No se recibió un enlace de pago válido.', result);
+          ocultarLoader();
         }
       })
       .catch(error => console.error('Error al generar enlace:', error));
+      ocultarLoader();
     }
 
    function realizarAbono() {
@@ -522,6 +534,7 @@ function modificarCantidad(idProducto, cambio) {
 }
 
 function obtenerCotizacion(descripcion, imagenUrl) {
+  mostrarLoader();
     const mensaje = `Hola! Realicé el pago exitoso del abono: ${descripcion}`;
     const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
 
@@ -542,10 +555,12 @@ function obtenerCotizacion(descripcion, imagenUrl) {
         if (result.payload && result.payload.url) {
             window.location.href = result.payload.url;
         } else {
+          ocultarLoader();
             console.error('Error: No se recibió un enlace de pago válido.', result);
         }
     })
     .catch(error => console.log('error', error));
+    ocultarLoader();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
