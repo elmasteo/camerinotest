@@ -806,3 +806,6 @@ function marcarCategoriaActiva(id) {
 
 document.addEventListener('DOMContentLoaded', crearBotonesFlotantes);
 
+window.addEventListener("DOMContentLoaded", () => {
+  ocultarLoader();
+});
