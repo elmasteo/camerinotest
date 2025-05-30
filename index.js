@@ -329,7 +329,6 @@ function agregarAlCarrito(idProducto) {
 }
 */
 function agregarAlCarrito(idProducto) {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
 
   const cantidadInput = document.getElementById(`cantidad-${idProducto}`);
   const cantidad = parseInt(cantidadInput.value);
