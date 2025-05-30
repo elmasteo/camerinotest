@@ -813,3 +813,18 @@ window.addEventListener("pageshow", () => {
 setTimeout(() => {
   ocultarLoader();
 }, 5000); // fuerza ocultar después de 5 segundos
+
+function mostrarModalFormulario() {
+  document.getElementById('modal-formulario').classList.remove('oculto');
+}
+
+function cerrarModalFormulario() {
+  document.getElementById('modal-formulario').classList.add('oculto');
+}
+
+function pagarConBold() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  if (carrito.length === 0) return alert('Tu carrito está vacío');
+  document.getElementById('productos-seleccionados').value = JSON.stringify(carrito);
+  mostrarModalFormulario();
+}
