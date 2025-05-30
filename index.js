@@ -329,6 +329,8 @@ function agregarAlCarrito(idProducto) {
 }
 */
 function agregarAlCarrito(idProducto) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+
   const cantidadInput = document.getElementById(`cantidad-${idProducto}`);
   const cantidad = parseInt(cantidadInput.value);
 
@@ -480,13 +482,18 @@ function ocultarLoader() {
 }
 
 function pagarConBold() {
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+ const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
-  const nombre = document.getElementById("nombre").value;
-  const telefono = document.getElementById("telefono").value;
-  const ciudad = document.getElementById("ciudad").value;
-  const direccion = document.getElementById("direccion").value;
+  const nombre = document.getElementById("nombre")?.value.trim();
+  const telefono = document.getElementById("telefono")?.value.trim();
+  const ciudad = document.getElementById("ciudad")?.value.trim();
+  const direccion = document.getElementById("direccion")?.value.trim();
+
+  if (!nombre || !telefono || !ciudad || !direccion) {
+    alert("Por favor completa todos los campos del formulario.");
+    return;
+  }
   const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
 
   // --- Enviar el formulario oculto a Netlify ---
