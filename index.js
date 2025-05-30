@@ -478,6 +478,70 @@ function mostrarLoader() {
 function ocultarLoader() {
   document.getElementById("loader").style.display = "none";
 }
+
+function pagarConBold() {
+const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+if (carrito.length === 0) return alert("Tu carrito está vacío.");
+
+const nombre = document.getElementById('nombre').value;
+const telefono = document.getElementById('telefono').value;
+const ciudad = document.getElementById('ciudad').value;
+const direccion = document.getElementById('direccion').value;
+const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+
+const formData = new FormData();
+formData.append("form-name", "pedido");
+formData.append("nombre", nombre);
+formData.append("telefono", telefono);
+formData.append("ciudad", ciudad);
+formData.append("direccion", direccion);
+formData.append("carrito", JSON.stringify(carrito));
+formData.append("total", total);
+
+// Enviar a Netlify Forms (no a función personalizada)
+fetch("/", {
+  method: "POST",
+  body: formData
+});
+
+// Continuar con flujo de pago Bold
+ocultarModalFormulario();
+mostrarLoader();
+sessionStorage.setItem('enProcesoDePago', '1');
+
+const mensaje = `🧾 *Resumen de tu pedido:*\n\n${carrito.map(p => (
+  `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
+)).join('\n')}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
+
+const rawBold = JSON.stringify({
+  monto: total,
+  descripcion: "Pedido Camerino JIP",
+  tipo: "CLOSE",
+  image_url: obtenerUrlAbsoluta(carrito[0].imagen),
+  callback_url: `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`
+});
+
+fetch("/.netlify/functions/crearLinkPago", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: rawBold
+})
+.then(res => res.json())
+.then(result => {
+  if (result.payload?.url) {
+    window.location.href = result.payload.url;
+  } else {
+    console.error("Error con Bold:", result);
+    ocultarLoader();
+  }
+})
+.catch(err => {
+  console.error("Error fetch Bold:", err);
+  ocultarLoader();
+});
+}
+
+/*
 function pagarConBold() {
   if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
@@ -523,7 +587,7 @@ function pagarConBold() {
     ocultarLoader(); // en caso de fallo
   });
 }
-
+*/
 /*
     function pagarConBold() {
       if (carrito.length === 0) return alert("Tu carrito está vacío.");
@@ -813,3 +877,11 @@ window.addEventListener("pageshow", () => {
 setTimeout(() => {
   ocultarLoader();
 }, 5000); // fuerza ocultar después de 5 segundos
+
+function mostrarModalFormulario() {
+  document.getElementById('modal-formulario').classList.remove('oculto');
+}
+
+function cerrarModalFormulario() {
+  document.getElementById('modal-formulario').classList.add('oculto');
+}
