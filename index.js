@@ -482,7 +482,6 @@ function ocultarLoader() {
 }
 
 function pagarConBold() {
- const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
   const nombre = document.getElementById("nombre")?.value.trim();
