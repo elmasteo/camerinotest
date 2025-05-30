@@ -478,8 +478,12 @@ function mostrarLoader() {
 function ocultarLoader() {
   document.getElementById("loader").style.display = "none";
 }
+
 function pagarConBold() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   if (carrito.length === 0) return alert("Tu carrito está vacío.");
+  document.getElementById('productos-seleccionados').value = JSON.stringify(carrito);
+  mostrarModalFormulario();
 
   mostrarLoader(); // <-- Se muestra aquí, antes del fetch
 
@@ -822,9 +826,4 @@ function cerrarModalFormulario() {
   document.getElementById('modal-formulario').classList.add('oculto');
 }
 
-function pagarConBold() {
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-  if (carrito.length === 0) return alert('Tu carrito está vacío');
-  document.getElementById('productos-seleccionados').value = JSON.stringify(carrito);
-  mostrarModalFormulario();
-}
+
