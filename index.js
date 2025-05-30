@@ -512,6 +512,7 @@ function pagarConBold() {
   });
 
   // --- Mostrar loader y continuar con pago en Bold ---
+  cerrarModalFormulario();
   mostrarLoader(); // muestra loader de tu UI
 
   const productosResumen = carrito.map(p => (
@@ -901,4 +902,12 @@ function cerrarModalFormulario() {
 document.getElementById("checkout-form").addEventListener("submit", function(e) {
   e.preventDefault(); // evita el envío tradicional
   pagarConBold();     // ejecuta tu función personalizada
+});
+
+// Oculta el modal si se vuelve desde la página de pago (por ejemplo usando botón "Volver")
+window.addEventListener("pageshow", function(event) {
+  if (event.persisted || performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+    cerrarModalFormulario();
+    ocultarLoader();
+  }
 });
