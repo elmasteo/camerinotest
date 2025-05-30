@@ -483,7 +483,7 @@ function ocultarLoader() {
     function pagarConBold() {
       if (carrito.length === 0) return alert("Tu carrito está vacío.");
 
-      
+      mostrarLoader();
 
       const productosResumen = carrito.map(p => (
         `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
@@ -516,7 +516,7 @@ function ocultarLoader() {
       .then(response => response.json())
       .then(result => {
         if (result.payload && result.payload.url) {
-          mostrarLoader();
+          
           window.location.href = result.payload.url;
         } else {
           console.error('No se recibió un enlace de pago válido.', result);
@@ -535,7 +535,7 @@ function ocultarLoader() {
 }
 
 function obtenerCotizacion(descripcion, imagenUrl) {
-  
+    mostrarLoader();
     const mensaje = `Hola! Realicé el pago exitoso del abono: ${descripcion}`;
     const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
 
@@ -554,7 +554,7 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     .then(response => response.json())
     .then(result => {
         if (result.payload && result.payload.url) {
-          mostrarLoader();
+
             window.location.href = result.payload.url;
         } else {
           ocultarLoader();
