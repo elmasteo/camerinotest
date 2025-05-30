@@ -100,31 +100,6 @@
   </div>
 </div>
 
-<div id="modal-formulario" class="modal oculto">
-  <div class="modal-contenido">
-    <span class="cerrar-modal" onclick="cerrarModalFormulario()">✕</span>
-    <h2>Datos para el envío</h2>
-    <form name="checkout" method="POST" netlify netlify-honeypot="bot-field" id="checkout-form">
-      <input type="hidden" name="bot-field" />
-      <input type="hidden" name="productos" id="productos-seleccionados" />
-
-      <label>Nombre:<input type="text" name="nombre" required /></label>
-      <label>Teléfono:<input type="text" name="telefono" required /></label>
-      <label>Ciudad:<input type="text" name="ciudad" required /></label>
-      <label>Dirección:<input type="text" name="direccion" required /></label>
-
-      <label>
-        <input type="checkbox" required name="autorizacion" />
-        Autorizo el tratamiento de mis datos personales conforme a la
-        <a href="politica-datos.html" target="_blank">política de privacidad</a>.
-      </label>
-
-      <button class="btn" type="submit" id="btn-enviar-formulario">Finalizar compra</button>
-    </form>
-  </div>
-</div>
-
-
 <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
