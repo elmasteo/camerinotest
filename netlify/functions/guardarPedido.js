@@ -11,7 +11,7 @@ exports.handler = async (event) => {
   try {
     const data = JSON.parse(event.body);
     const fecha = new Date().toISOString().replace(/[:.]/g, "-");
-    const archivo = `pedidos/pedido-${fecha}.json`;
+    const archivo = `pedidosform/pedido-${fecha}.json`;
 
     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
     const contenido = Buffer.from(JSON.stringify(data, null, 2)).toString("base64");
