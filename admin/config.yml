@@ -40,7 +40,7 @@ collections:
     folder: "pedidosform"
     label_singular: "pedidosForm"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}{{second}}"
     format: "json"
     extension: "json"
     fields:
