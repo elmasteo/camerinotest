@@ -18,6 +18,7 @@
   "homepage": "https://github.com/elmasteo/camerinotest#readme",
   "description": "",
   "dependencies": {
+    "@octokit/rest": "^22.0.0",
     "nodemailer": "^7.0.3"
   }
 }
