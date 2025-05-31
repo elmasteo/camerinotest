@@ -1,0 +1,22 @@
+{
+  "nombre": "nueva prueba",
+  "telefono": "310000000",
+  "ciudad": "falsa",
+  "direccion": "falsa",
+  "carrito": [
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 359998
+}
