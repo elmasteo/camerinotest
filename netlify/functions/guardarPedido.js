@@ -1,10 +1,12 @@
-const { Octokit } = require("@octokit/rest");
 const nodemailer = require("nodemailer");
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Método no permitido" };
   }
+
+  // Importar Octokit dinámicamente
+  const { Octokit } = await import("@octokit/rest");
 
   try {
     const data = JSON.parse(event.body);
