@@ -35,6 +35,18 @@ collections:
                   - { label: "Impresión 3D", value: "impresion3d" }
                   - { label: "Indumentaria Deportiva", value: "indumentaria" }
                   - { label: "Accesorios", value: "accesorios" }
+  - name: "pedidosform"
+  label: "Pedidosform"
+  folder: "pedidosform"
+  create: true
+  slug: "{{slug}}"
+  fields:
+    - { label: "Nombre", name: "nombre", widget: "string" }
+    - { label: "Teléfono", name: "telefono", widget: "string" }
+    - { label: "Ciudad", name: "ciudad", widget: "string" }
+    - { label: "Dirección", name: "direccion", widget: "string" }
+    - { label: "Productos", name: "carrito", widget: "text" }
+    - { label: "Total", name: "total", widget: "string" }
   - name: "pedidos"
     label: "Pedidos"
     label_singular: "Pedido"

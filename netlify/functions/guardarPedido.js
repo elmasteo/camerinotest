@@ -1,0 +1,73 @@
+const { Octokit } = require("@octokit/rest");
+const nodemailer = require("nodemailer");
+
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Método no permitido" };
+  }
+
+  const data = JSON.parse(event.body);
+  const fecha = new Date().toISOString().replace(/[:.]/g, "-");
+  const archivo = `pedidos/pedido-${fecha}.json`;
+
+  const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+  const contenido = Buffer.from(JSON.stringify(data, null, 2)).toString("base64");
+
+  try {
+    await octokit.repos.createOrUpdateFileContents({
+      owner: process.env.GITHUB_USER,
+      repo: process.env.GITHUB_REPO,
+      path: archivo,
+      message: `Nuevo pedido de ${data.nombre}`,
+      content: contenido,
+      committer: {
+        name: "Pedido Bot",
+        email: "pedidos@netlify.com"
+      },
+      author: {
+        name: "Pedido Bot",
+        email: "pedidos@netlify.com"
+      }
+    });
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Error al guardar pedido", detalle: error.message })
+    };
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"Tienda CamerinoJip" <${process.env.MAIL_USER}>`,
+      to: "sago980302@hotmail.com",
+      subject: `Nuevo pedido de ${data.nombre}`,
+      text: `
+📦 Pedido nuevo:
+
+Nombre: ${data.nombre}
+Teléfono: ${data.telefono}
+Ciudad: ${data.ciudad}
+Dirección: ${data.direccion}
+Total: ${data.total}
+
+Productos:
+${data.carrito.map(p => `- ${p.nombre} x${p.cantidad}`).join("\n")}
+      `
+    });
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Error al enviar correo", detalle: error.message })
+    };
+  }
+
+  return { statusCode: 200, body: JSON.stringify({ mensaje: "Pedido registrado con éxito" }) };
+};
