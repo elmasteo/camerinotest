@@ -50,6 +50,7 @@ collections:
       - { label: "Dirección", name: "direccion", widget: "string" }
       - { label: "Productos", name: "carrito", widget: "text" }
       - { label: "Total", name: "total", widget: "string" }
+      - { label: "Fecha", name: "fecha", widget: "datetime" }
   - name: "pedidos"
     label: "Pedidos"
     label_singular: "Pedido"
