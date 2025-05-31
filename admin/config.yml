@@ -38,8 +38,11 @@ collections:
   - name: "pedidosform"
     label: "Pedidosform"
     folder: "pedidosform"
+    label_singular: "pedidosForm"
     create: true
     slug: "{{slug}}"
+    format: "json"
+    extension: "json"
     fields:
       - { label: "Nombre", name: "nombre", widget: "string" }
       - { label: "Teléfono", name: "telefono", widget: "string" }
