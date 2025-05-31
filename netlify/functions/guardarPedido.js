@@ -6,14 +6,14 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: "Método no permitido" };
   }
 
-  const data = JSON.parse(event.body);
-  const fecha = new Date().toISOString().replace(/[:.]/g, "-");
-  const archivo = `pedidos/pedido-${fecha}.json`;
-
-  const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-  const contenido = Buffer.from(JSON.stringify(data, null, 2)).toString("base64");
-
   try {
+    const data = JSON.parse(event.body);
+    const fecha = new Date().toISOString().replace(/[:.]/g, "-");
+    const archivo = `pedidos/pedido-${fecha}.json`;
+
+    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+    const contenido = Buffer.from(JSON.stringify(data, null, 2)).toString("base64");
+
     await octokit.repos.createOrUpdateFileContents({
       owner: process.env.GITHUB_USER,
       repo: process.env.GITHUB_REPO,
@@ -29,14 +29,11 @@ exports.handler = async (event) => {
         email: "pedidos@netlify.com"
       }
     });
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Error al guardar pedido", detalle: error.message })
-    };
-  }
 
-  try {
+    const carritoTexto = Array.isArray(data.carrito)
+      ? data.carrito.map(p => `- ${p.nombre} x${p.cantidad}`).join("\n")
+      : "No hay productos";
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -59,15 +56,19 @@ Dirección: ${data.direccion}
 Total: ${data.total}
 
 Productos:
-${data.carrito.map(p => `- ${p.nombre} x${p.cantidad}`).join("\n")}
+${carritoTexto}
       `
     });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ mensaje: "Pedido registrado con éxito" })
+    };
+
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Error al enviar correo", detalle: error.message })
+      body: JSON.stringify({ error: "Error interno", detalle: error.message })
     };
   }
-
-  return { statusCode: 200, body: JSON.stringify({ mensaje: "Pedido registrado con éxito" }) };
 };
