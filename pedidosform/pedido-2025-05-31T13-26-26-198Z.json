@@ -1,0 +1,22 @@
+{
+  "nombre": "Santiago",
+  "telefono": "3157862008",
+  "ciudad": "Bogotá",
+  "direccion": "Cra falsa 123",
+  "carrito": [
+    {
+      "id": 5,
+      "nombre": "Pokebola",
+      "precio": 260000,
+      "imagen": "/images/cppokebola.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cppokebola.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "fecha": "2025-05-31T13:26:26.201Z"
+}
