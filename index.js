@@ -487,7 +487,7 @@ async function pagarConBold() {
   const telefono = document.getElementById("telefono")?.value.trim();
   const ciudad = document.getElementById("ciudad")?.value.trim();
   const direccion = document.getElementById("direccion")?.value.trim();
-  const referencia;
+  const referencia = 0;
 
   if (!nombre || !telefono || !ciudad || !direccion) {
     alert("Por favor completa todos los campos del formulario.");
