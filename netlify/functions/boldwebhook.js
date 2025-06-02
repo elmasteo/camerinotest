@@ -67,8 +67,8 @@ Gracias por comprar en *CamerinoJip*!`;
           apikey: `${process.env.EVOLUTION_API_TOKEN}`,
         },
         body: JSON.stringify({
-          phone: `57${telefono}`,
-          message: mensaje,
+          number: `57${telefono}`,
+          text: mensaje,
         }),
       }
     );
