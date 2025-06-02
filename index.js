@@ -481,79 +481,71 @@ function ocultarLoader() {
 }
 
 async function pagarConBold() {
-  if (carrito.length === 0) return alert("Tu carrito está vacío.");
-
-  const nombre = document.getElementById("nombre")?.value.trim();
-  const telefono = document.getElementById("telefono")?.value.trim();
-  const ciudad = document.getElementById("ciudad")?.value.trim();
-  const direccion = document.getElementById("direccion")?.value.trim();
-  const referencia = crypto.randomUUID();
-
-  if (!nombre || !telefono || !ciudad || !direccion) {
-    alert("Por favor completa todos los campos del formulario.");
-    return;
-  }
-
-  const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
-
-  const pedido = {
-    nombre,
-    telefono,
-    ciudad,
-    direccion,
-    referencia,
-    carrito,
-    total
-  };
-
   try {
-    // Enviar datos a función serverless para guardar pedido y enviar correo
-    const response = await fetch("/.netlify/functions/guardarPedido", {
+    mostrarLoader();
+
+    const productosResumen = carrito.map(p => (
+      `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
+    )).join('\n');
+
+    const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
+    const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+    const descripcion = "Pedido Camerino JIP";
+    const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
+
+    // 1. Generar enlace de pago
+    const raw = JSON.stringify({
+      monto: total,
+      descripcion,
+      tipo: "CLOSE",
+      image_url: imagenUrl,
+      callback_url
+    });
+
+    const pagoResponse = await fetch("/.netlify/functions/crearLinkPago", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: raw
+    });
+
+    const pagoResult = await pagoResponse.json();
+
+    if (!pagoResponse.ok || !pagoResult.url || !pagoResult.payment_link) {
+      console.error('No se recibió un enlace de pago válido.', pagoResult);
+      ocultarLoader();
+      return;
+    }
+
+    // 2. Guardar pedido incluyendo el payment_link
+    const pedido = {
+      nombre: document.getElementById("nombre").value,
+      email: document.getElementById("email").value,
+      telefono: document.getElementById("telefono").value,
+      direccion: document.getElementById("direccion").value,
+      carrito,
+      total,
+      payment_link: pagoResult.payment_link
+    };
+
+    const guardarResponse = await fetch("/.netlify/functions/guardarPedido", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(pedido)
     });
 
-    const result = await response.json();
+    const result = await guardarResponse.json();
 
-    if (response.ok) {
-      cerrarModalFormulario();
-      mostrarLoader();
-
-      const productosResumen = carrito.map(p => (
-        `${p.nombre} x${p.cantidad} - $${p.precio.toLocaleString("es-CO")}`
-      )).join('\n');
-
-      const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
-      const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
-      const descripcion = "Pedido Camerino JIP";
-      const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
-
-      const raw = JSON.stringify({
-        monto: total,
-        descripcion,
-        tipo: "CLOSE",
-        image_url: imagenUrl,
-        callback_url
-      });
-
-      const pagoResponse = await fetch("/.netlify/functions/crearLinkPago", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: raw
-      });
-
-      const pagoResult = await pagoResponse.json();
-
-      if (pagoResponse.ok && pagoResult.payload?.url) {
-        window.location.href = pagoResult.payload.url;
-      } else {
-        console.error('No se recibió un enlace de pago válido.', pagoResult);
-        ocultarLoader();
-      }
-    } else {
-      alert("Error al procesar el pedido: " + (result.error || "Intenta de nuevo más tarde."));
+    if (!guardarResponse.ok) {
+      alert("Error al guardar el pedido: " + (result.error || "Intenta de nuevo más tarde."));
+      ocultarLoader();
+      return;
     }
+
+    cerrarModalFormulario();
+
+    // 3. Redirigir al link de pago
+    window.location.href = pagoResult.url;
+
   } catch (error) {
     alert("Error en la conexión: " + error.message);
     ocultarLoader();
