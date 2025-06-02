@@ -5,14 +5,21 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: "Método no permitido" };
   }
 
-  // Importar Octokit dinámicamente
   const { Octokit } = await import("@octokit/rest");
 
   try {
     const data = JSON.parse(event.body);
-    const fecha = new Date().toISOString().replace(/[:.]/g, "-");
+
+    if (!data.referencia) {
+      return {
+        statusCode: 400,
+        body: "Falta el campo 'referencia' en el pedido.",
+      };
+    }
+
+    const referencia = data.referencia;
     const fechaISO = new Date().toISOString();
-    const archivo = `pedidosform/pedido-${fecha}.json`;
+    const archivo = `pedidosform/${referencia}.json`;
 
     data.fecha = fechaISO;
 
@@ -62,12 +69,14 @@ Total: ${data.total}
 
 Productos:
 ${carritoTexto}
+
+Referencia: ${referencia}
       `
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ mensaje: "Pedido registrado con éxito" })
+      body: JSON.stringify({ mensaje: "Pedido registrado con éxito", referencia })
     };
 
   } catch (error) {
