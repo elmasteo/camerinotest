@@ -1,0 +1,23 @@
+{
+  "nombre": "Santiago",
+  "telefono": "3219779439",
+  "ciudad": "Bogotá",
+  "direccion": "Cra falsa 123",
+  "referencia": "8f893415-f32f-46e6-a268-d67134f3c3a2",
+  "carrito": [
+    {
+      "id": 7,
+      "nombre": "One Piece",
+      "precio": 260000,
+      "imagen": "/images/cponepiece.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "fecha": "2025-06-02T02:28:28.154Z"
+}
