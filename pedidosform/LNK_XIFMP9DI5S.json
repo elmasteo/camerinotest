@@ -1,0 +1,25 @@
+{
+  "nombre": "Adriana Rojas Beltran",
+  "telefonoCompleto": "573219779439",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 13,
+      "nombre": "Camiseta",
+      "precio": 70000,
+      "stock": 2,
+      "imagen": "/images/cpblancaroja.webp",
+      "subcategoria": "Millonarios",
+      "categoria": "indumentaria",
+      "imagenes": [
+        "/images/cpmillonariosnegrahombre.webp",
+        "/images/cpmillonariosnegradama.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 70000,
+  "payment_link": "LNK_XIFMP9DI5S",
+  "fecha": "2025-06-02T17:59:19.195Z"
+}
