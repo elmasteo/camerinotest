@@ -1,9 +1,11 @@
 exports.handler = async (event) => {
   try {
-    console.log(event.body);
-    const data = JSON.parse(event.body); 
+    const fullPayload = JSON.parse(event.body);
+    const data = fullPayload?.payload?.body;
 
-    if (data.type !== 'SALE_APPROVED') {
+    console.log('Webhook recibido:', JSON.stringify(data, null, 2));
+
+    if (!data || data.type !== 'SALE_APPROVED') {
       return { statusCode: 200, body: 'Evento ignorado: no es SALE_APPROVED' };
     }
 
