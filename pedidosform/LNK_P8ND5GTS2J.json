@@ -1,0 +1,24 @@
+{
+  "nombre": "Santiago",
+  "telefono": "3219779439",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 6,
+      "nombre": "Sunny - One Piece",
+      "precio": 260000,
+      "imagen": "/images/cpsunny.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpsunny.webp",
+        "/images/cpsunny.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "payment_link": "LNK_P8ND5GTS2J",
+  "fecha": "2025-06-02T16:53:23.246Z"
+}
