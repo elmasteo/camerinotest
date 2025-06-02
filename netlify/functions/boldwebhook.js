@@ -1,25 +1,23 @@
 exports.handler = async (event) => {
   try {
-    console.log(JSON.stringify(event.body));
-    const payload = JSON.parse(event.body);
-    const data = payload.body;
+    console.log(event.body);
+    const data = JSON.parse(event.body); 
 
     if (data.type !== 'SALE_APPROVED') {
       return { statusCode: 200, body: 'Evento ignorado: no es SALE_APPROVED' };
     }
 
-    const referencia = data.data.metadata.reference;
+    const referencia = data.data?.metadata?.reference;
     if (!referencia) {
       return { statusCode: 400, body: 'Referencia (payment_link) no encontrada' };
     }
 
     console.log('Referencia recibida:', referencia);
 
-    // Ruta al archivo del pedido guardado previamente
+    // GitHub info
     const repoOwner = 'elmasteo';
     const repoName = 'camerinotest';
     const filePath = `pedidosform/${referencia}.json`;
-
     const githubApiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
 
     const headers = {
@@ -28,19 +26,28 @@ exports.handler = async (event) => {
     };
 
     const pedidoRes = await fetch(githubApiUrl, { headers });
+
     if (!pedidoRes.ok) {
-      return { statusCode: 404, body: 'No se encontró el archivo del pedido original' };
+      return {
+        statusCode: 404,
+        body: 'No se encontró el archivo del pedido original',
+      };
     }
 
     const pedido = await pedidoRes.json();
-    const telefono = pedido.telefono?.replace(/\D/g, '');
 
+    const telefono = pedido.telefono?.replace(/\D/g, '');
     if (!telefono) {
-      return { statusCode: 400, body: 'Número de teléfono no encontrado en el pedido' };
+      return {
+        statusCode: 400,
+        body: 'Número de teléfono no encontrado en el pedido',
+      };
     }
 
-    // Formatear productos
-    const productosTexto = pedido.carrito.map((p) => `- ${p.nombre} x${p.cantidad}`).join('\n');
+    const productosTexto = pedido.carrito
+      .map((p) => `- ${p.nombre} x${p.cantidad}`)
+      .join('\n');
+
     const mensaje = `Hola ${pedido.nombre}, tu pago fue aprobado ✅
 
 📦 Detalles de tu pedido:
@@ -51,17 +58,20 @@ ${productosTexto}
 Pronto te contactaremos para coordinar el envío.
 Gracias por comprar en *CamerinoJip*!`;
 
-    const evoRes = await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: `${process.env.EVOLUTION_API_TOKEN}`,
-      },
-      body: JSON.stringify({
-        phone: `57${telefono}`,
-        message: mensaje,
-      }),
-    });
+    const evoRes = await fetch(
+      'https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: `${process.env.EVOLUTION_API_TOKEN}`,
+        },
+        body: JSON.stringify({
+          phone: `57${telefono}`,
+          message: mensaje,
+        }),
+      }
+    );
 
     if (!evoRes.ok) {
       const errText = await evoRes.text();
@@ -76,7 +86,7 @@ Gracias por comprar en *CamerinoJip*!`;
     console.error('Error procesando webhook:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message, stack: error.stack })
+      body: JSON.stringify({ error: error.message, stack: error.stack }),
     };
   }
 };
