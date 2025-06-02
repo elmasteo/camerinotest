@@ -1,0 +1,23 @@
+{
+  "nombre": "santiago gomez caicedo",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 360000,
+  "payment_link": "LNK_IUDB88R8PV",
+  "fecha": "2025-06-02T17:51:42.638Z"
+}
