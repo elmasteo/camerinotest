@@ -36,7 +36,7 @@ exports.handler = async (event) => {
 
     const pedido = await pedidoRes.json();
 
-    const telefono = pedido.telefono?.replace(/\D/g, '');
+    const telefono = pedido.telefonoCompleto?.replace(/\D/g, '');
     if (!telefono) {
       return {
         statusCode: 400,
@@ -67,7 +67,7 @@ Gracias por comprar en *CamerinoJip*!`;
           apikey: `${process.env.EVOLUTION_API_TOKEN}`,
         },
         body: JSON.stringify({
-          number: pedido.telefono.startsWith('+') ? pedido.telefono : `+${pedido.telefono}`,
+          number: pedido.telefonoCompleto.startsWith('+') ? pedido.telefonoCompleto : `+${pedido.telefonoCompleto}`,
           text: mensaje,
         }),
       }
