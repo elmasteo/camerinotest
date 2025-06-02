@@ -74,7 +74,7 @@ Gracias por comprar en *CamerinoJip*!`;
     console.error('Error procesando webhook:', error);
     return {
       statusCode: 500,
-      body: 'Error interno',
+      body: JSON.stringify({ error: error.message, stack: error.stack })
     };
   }
 };
