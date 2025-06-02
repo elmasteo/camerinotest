@@ -6,7 +6,7 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: 'Evento ignorado: no es SALE_APPROVED' };
     }
 
-    const referencia = data.data.payment_link;
+    const referencia = data.data.metadata.reference;
     if (!referencia) {
       return { statusCode: 400, body: 'Referencia (payment_link) no encontrada' };
     }
