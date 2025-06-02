@@ -480,6 +480,12 @@ function ocultarLoader() {
   document.getElementById("loader").style.display = "none";
 }
 
+
+document.getElementById("checkout-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  pagarConBold();
+});
+
 async function pagarConBold() {
   try {
     mostrarLoader();
@@ -553,10 +559,6 @@ async function pagarConBold() {
   }
 }
 
-document.getElementById("checkout-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-  pagarConBold();
-});
 
 
 
