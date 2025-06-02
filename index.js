@@ -546,7 +546,6 @@ async function pagarConBold() {
       const pagoResult = await pagoResponse.json();
 
       if (pagoResponse.ok && pagoResult.payload?.url) {
-        referencia = pagoResult.payload.payment_link;
         window.location.href = pagoResult.payload.url;
       } else {
         console.error('No se recibió un enlace de pago válido.', pagoResult);
