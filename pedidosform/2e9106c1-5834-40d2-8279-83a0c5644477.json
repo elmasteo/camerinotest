@@ -1,0 +1,23 @@
+{
+  "nombre": "adriana",
+  "telefono": "3219779439",
+  "ciudad": "bogota",
+  "direccion": "falsa 123",
+  "referencia": "2e9106c1-5834-40d2-8279-83a0c5644477",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 360000,
+  "fecha": "2025-06-02T01:53:05.560Z"
+}
