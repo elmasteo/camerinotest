@@ -1,6 +1,8 @@
 exports.handler = async (event) => {
   try {
-    const data = JSON.parse(event.body);
+    console.log(JSON.stringify(event.body));
+    const payload = JSON.parse(event.body);
+    const data = payload.body;
 
     if (data.type !== 'SALE_APPROVED') {
       return { statusCode: 200, body: 'Evento ignorado: no es SALE_APPROVED' };
