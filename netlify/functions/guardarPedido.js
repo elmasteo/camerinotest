@@ -62,7 +62,7 @@ exports.handler = async (event) => {
 📦 Pedido nuevo:
 
 Nombre: ${data.nombre}
-Teléfono: ${data.telefono}
+Teléfono: ${data.telefonoCompleto}
 Ciudad: ${data.ciudad}
 Dirección: ${data.direccion}
 Total: ${data.total}
