@@ -19,7 +19,7 @@ exports.handler = async (event) => {
 
     const payment_link = data.payment_link;
     const fechaISO = new Date().toISOString();
-    const archivo = `pedidosform/${referencia}.json`;
+    const archivo = `pedidosform/${payment_link}.json`;
 
     data.fecha = fechaISO;
 
