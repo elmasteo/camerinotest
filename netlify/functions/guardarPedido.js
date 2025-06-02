@@ -10,14 +10,14 @@ exports.handler = async (event) => {
   try {
     const data = JSON.parse(event.body);
 
-    if (!data.referencia) {
+    if (!data.payment_link) {
       return {
         statusCode: 400,
         body: "Falta el campo 'referencia' en el pedido.",
       };
     }
 
-    const referencia = data.referencia;
+    const payment_link = data.payment_link;
     const fechaISO = new Date().toISOString();
     const archivo = `pedidosform/${referencia}.json`;
 
@@ -70,13 +70,13 @@ Total: ${data.total}
 Productos:
 ${carritoTexto}
 
-Referencia: ${referencia}
+Referencia: ${payment_link}
       `
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ mensaje: "Pedido registrado con éxito", referencia })
+      body: JSON.stringify({ mensaje: "Pedido registrado con éxito", payment_link })
     };
 
   } catch (error) {
