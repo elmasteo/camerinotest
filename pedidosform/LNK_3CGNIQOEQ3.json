@@ -1,0 +1,23 @@
+{
+  "nombre": "Masteo",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 4,
+      "nombre": "Mario Tortuga",
+      "precio": 260000,
+      "imagen": "/images/cptortuga.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cptortuga.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "payment_link": "LNK_3CGNIQOEQ3",
+  "fecha": "2025-06-02T17:40:19.843Z"
+}
