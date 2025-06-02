@@ -1,7 +1,6 @@
 exports.handler = async (event) => {
   try {
-    const fullPayload = JSON.parse(event.body);
-    const data = fullPayload?.payload?.body;
+    const data = JSON.parse(event.body);
 
     console.log('Webhook recibido:', JSON.stringify(data, null, 2));
 
@@ -16,7 +15,6 @@ exports.handler = async (event) => {
 
     console.log('Referencia recibida:', referencia);
 
-    // GitHub info
     const repoOwner = 'elmasteo';
     const repoName = 'camerinotest';
     const filePath = `pedidosform/${referencia}.json`;
