@@ -1,0 +1,24 @@
+{
+  "nombre": "test",
+  "telefono": "3219779439",
+  "ciudad": "falsa",
+  "direccion": "falsa",
+  "referencia": "679ed64f-163c-4b6a-ae46-68f61c80c9e2",
+  "carrito": [
+    {
+      "id": 3,
+      "nombre": "Deadpool - Wolverine",
+      "precio": 260000,
+      "imagen": "/images/cpdeadpool.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpdeadpool.webp",
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "fecha": "2025-06-02T02:04:01.677Z"
+}
