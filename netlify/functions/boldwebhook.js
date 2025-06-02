@@ -11,7 +11,6 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: 'Referencia no encontrada en metadata' };
     }
 
-    // Ruta al archivo del pedido guardado previamente
     const repoOwner = 'elmasteo';
     const repoName = 'camerinotest';
     const filePath = `pedidosform/${referencia}.json`;
@@ -23,23 +22,29 @@ exports.handler = async (event) => {
       Accept: 'application/vnd.github.v3.raw',
     };
 
-    // Obtener el archivo con los datos del pedido (incluye teléfono)
     const pedidoRes = await fetch(githubApiUrl, { headers });
     if (!pedidoRes.ok) {
       return { statusCode: 404, body: 'No se encontró el archivo del pedido original' };
     }
 
     const pedido = await pedidoRes.json();
-    const telefono = pedido.telefono?.replace(/\D/g, ''); // limpiar
+    const telefono = pedido.telefono?.replace(/\D/g, '');
 
     if (!telefono) {
       return { statusCode: 400, body: 'Número de teléfono no encontrado en el pedido' };
     }
 
-    // Preparar mensaje y enviar por Evolution API
-    const mensaje = `Hola ${pedido.nombre}, tu pago ha sido aprobado. Muy pronto te estaremos contactando para coordinar el envío de tu pedido. ¡Gracias por comprar en CamerinoJip!`;
+    // Formatear productos
+    const productosTexto = pedido.carrito.map((p) => `- ${p.nombre} x${p.cantidad}`).join('\n');
+    const mensaje = `Hola ${pedido.nombre}, tu pago fue aprobado ✅
 
+📦 Detalles de tu pedido:
+${productosTexto}
 
+💰 Total: $${pedido.total.toLocaleString('es-CO')}
+
+Pronto te contactaremos para coordinar el envío.
+Gracias por comprar en *CamerinoJip*!`;
 
     const evoRes = await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
       method: 'POST',
@@ -48,7 +53,7 @@ exports.handler = async (event) => {
         apikey: `${process.env.EVOLUTION_API_TOKEN}`,
       },
       body: JSON.stringify({
-        phone: `57${telefono}`, // Colombia
+        phone: `57${telefono}`,
         message: mensaje,
       }),
     });
