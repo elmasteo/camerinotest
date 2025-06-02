@@ -524,19 +524,29 @@ async function pagarConBold() {
       return;
     }
 
+  document.getElementById('telefono').addEventListener('input', (e) => {
+  e.target.value = e.target.value.replace(/\D/g, '');
+});
+
+
+  const codigoPais = document.getElementById('codigo-pais').value;
+  const telefonoSinCodigo = document.getElementById('telefono').value.replace(/\D/g, '');
+  const telefonoCompleto = `${codigoPais}${telefonoSinCodigo}`;
+
+
   const nombre = document.getElementById("nombre")?.value.trim();
-  const telefono = document.getElementById("telefono")?.value.trim();
+  //const telefono = document.getElementById("telefono")?.value.trim();
   const ciudad = document.getElementById("ciudad")?.value.trim();
   const direccion = document.getElementById("direccion")?.value.trim();
 
-  if (!nombre || !telefono || !ciudad || !direccion) {
+  if (!nombre || !telefonoSinCodigo || !ciudad || !direccion) {
     alert("Por favor completa todos los campos del formulario.");
     return;
   }
 
     const pedido = {
       nombre,
-      telefono,
+      telefonoCompleto,
       direccion,
       ciudad,
       carrito,

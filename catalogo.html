@@ -110,7 +110,28 @@
       <input type="hidden" name="productos" id="productos-seleccionados" />
 
       <label>Nombre:<input type="text" name="nombre" id="nombre" required /></label>
-      <label>Teléfono:<input type="text" name="telefono" id="telefono" required /></label>
+      <label for="codigo-pais">Código de país:</label>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <select id="codigo-pais" name="codigo_pais" required>
+          <option value="57" selected>🇨🇴 +57 Colombia</option>
+          <option value="52">🇲🇽 +52 México</option>
+          <option value="54">🇦🇷 +54 Argentina</option>
+          <option value="56">🇨🇱 +56 Chile</option>
+          <option value="51">🇵🇪 +51 Perú</option>
+          <option value="58">🇻🇪 +58 Venezuela</option>
+          <option value="593">🇪🇨 +593 Ecuador</option>
+          <option value="502">🇬🇹 +502 Guatemala</option>
+          <option value="504">🇭🇳 +504 Honduras</option>
+          <option value="505">🇳🇮 +505 Nicaragua</option>
+          <option value="506">🇨🇷 +506 Costa Rica</option>
+          <option value="507">🇵🇦 +507 Panamá</option>
+          <option value="53">🇨🇺 +53 Cuba</option>
+          <option value="1">🇺🇸 +1 Estados Unidos</option>
+        </select>
+
+        <input type="text" name="telefono" id="telefono" required placeholder="Número sin código" />
+      </div>
+      <!--<label>Teléfono:<input type="text" name="telefono" id="telefono" required /></label>-->
       <label>Ciudad:<input type="text" name="ciudad" id="ciudad" required /></label>
       <label>Dirección:<input type="text" name="direccion" id="direccion" required /></label>
 
