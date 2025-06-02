@@ -6,11 +6,14 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: 'Evento ignorado: no es SALE_APPROVED' };
     }
 
-    const referencia = data.data.metadata?.reference;
+    const referencia = data.data.payment_link;
     if (!referencia) {
-      return { statusCode: 400, body: 'Referencia no encontrada en metadata' };
+      return { statusCode: 400, body: 'Referencia (payment_link) no encontrada' };
     }
 
+    console.log('Referencia recibida:', referencia);
+
+    // Ruta al archivo del pedido guardado previamente
     const repoOwner = 'elmasteo';
     const repoName = 'camerinotest';
     const filePath = `pedidosform/${referencia}.json`;
