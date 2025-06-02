@@ -1,0 +1,23 @@
+{
+  "nombre": "Santiago",
+  "telefono": "3219779439",
+  "ciudad": "Bogotá",
+  "direccion": "Cra falsa 123",
+  "referencia": "d5cce77e-2ef7-465b-9606-c2a75289d297",
+  "carrito": [
+    {
+      "id": 4,
+      "nombre": "Mario Tortuga",
+      "precio": 260000,
+      "imagen": "/images/cptortuga.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cptortuga.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "fecha": "2025-06-02T02:44:56.567Z"
+}
