@@ -1,0 +1,24 @@
+{
+  "nombre": "Santiago",
+  "telefono": "3157862008",
+  "ciudad": "Bogotá",
+  "direccion": "falsa",
+  "referencia": "77470122-9bec-417c-866a-6bab86a6d79a",
+  "carrito": [
+    {
+      "id": 3,
+      "nombre": "Deadpool - Wolverine",
+      "precio": 260000,
+      "imagen": "/images/cpdeadpool.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpdeadpool.webp",
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "fecha": "2025-06-02T01:47:37.725Z"
+}
