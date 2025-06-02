@@ -524,12 +524,22 @@ async function pagarConBold() {
       return;
     }
 
-    // 2. Guardar pedido incluyendo el payment_link
+  const nombre = document.getElementById("nombre")?.value.trim();
+  const telefono = document.getElementById("telefono")?.value.trim();
+  const ciudad = document.getElementById("ciudad")?.value.trim();
+  const direccion = document.getElementById("direccion")?.value.trim();
+
+  if (!nombre || !telefono || !ciudad || !direccion) {
+    alert("Por favor completa todos los campos del formulario.");
+    return;
+  }
+
     const pedido = {
-      nombre: document.getElementById("nombre").value,
-      email: document.getElementById("email").value,
-      telefono: document.getElementById("telefono").value,
-      direccion: document.getElementById("direccion").value,
+      nombre,
+      email,
+      telefono,
+      direccion,
+      ciudad,
       carrito,
       total,
       payment_link: pagoResult.payment_link
