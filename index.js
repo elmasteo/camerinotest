@@ -536,7 +536,6 @@ async function pagarConBold() {
 
     const pedido = {
       nombre,
-      email,
       telefono,
       direccion,
       ciudad,
