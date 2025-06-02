@@ -1,0 +1,23 @@
+{
+  "nombre": "Guanajuato",
+  "telefono": "3219779439",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 5,
+      "nombre": "Pokebola",
+      "precio": 260000,
+      "imagen": "/images/cppokebola.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cppokebola.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "payment_link": "LNK_2KF68X1REA",
+  "fecha": "2025-06-02T17:16:33.740Z"
+}
