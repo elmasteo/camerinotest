@@ -1,0 +1,23 @@
+{
+  "nombre": "juanchito",
+  "telefono": "3219779439",
+  "direccion": "falsa",
+  "ciudad": "falsa",
+  "carrito": [
+    {
+      "id": 7,
+      "nombre": "One Piece",
+      "precio": 260000,
+      "imagen": "/images/cponepiece.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "payment_link": "LNK_WVJFQOJL8H",
+  "fecha": "2025-06-02T16:58:20.707Z"
+}
