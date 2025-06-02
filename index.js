@@ -501,7 +501,6 @@ async function pagarConBold() {
     telefono,
     ciudad,
     direccion,
-    referencia,
     carrito,
     total
   };
