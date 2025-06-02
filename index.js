@@ -492,6 +492,7 @@ async function pagarConBold() {
     const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
     const descripcion = "Pedido Camerino JIP";
     const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
+    const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
 
     // 1. Generar enlace de pago
     const raw = JSON.stringify({
