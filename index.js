@@ -487,7 +487,7 @@ async function pagarConBold() {
   const telefono = document.getElementById("telefono")?.value.trim();
   const ciudad = document.getElementById("ciudad")?.value.trim();
   const direccion = document.getElementById("direccion")?.value.trim();
-  const referencia = crypto.randomUUID();
+  const referencia;
 
   if (!nombre || !telefono || !ciudad || !direccion) {
     alert("Por favor completa todos los campos del formulario.");
@@ -546,6 +546,7 @@ async function pagarConBold() {
       const pagoResult = await pagoResponse.json();
 
       if (pagoResponse.ok && pagoResult.payload?.url) {
+        referencia = pagoResult.payload.payment_link;
         window.location.href = pagoResult.payload.url;
       } else {
         console.error('No se recibió un enlace de pago válido.', pagoResult);
