@@ -78,6 +78,33 @@ Gracias por comprar en *CamerinoJip*!`;
       throw new Error(`Error en Evolution API: ${errText}`);
     }
 
+    const mensajeAdmin = `
+    ✅ PAGO APROBADO
+
+    👤 ${pedido.nombre}
+    📞 ${pedido.telefonoCompleto}
+    🏙️ ${pedido.ciudad}
+    📍 ${pedido.direccion}
+    💰 Total: $${pedido.total.toLocaleString('es-CO')}
+
+    🧾 Productos:
+    ${productosTexto}
+
+    Referencia: ${referencia}
+    `;
+
+    await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: `${process.env.EVOLUTION_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        number: '573177657335',
+        text: mensajeAdmin,
+      }),
+    });
+
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Mensaje de WhatsApp enviado correctamente' }),

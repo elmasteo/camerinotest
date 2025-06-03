@@ -74,6 +74,34 @@ Referencia: ${payment_link}
       `
     });
 
+    const mensajeAdmin = `
+📢 Nueva intención de pago recibida
+
+👤 ${data.nombre}
+📞 ${data.telefonoCompleto}
+🏙️ ${data.ciudad}
+📍 ${data.direccion}
+💰 Total: $${data.total.toLocaleString("es-CO")}
+
+🧾 Productos:
+${carritoTexto}
+
+Referencia: ${payment_link}
+`;
+
+await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    apikey: `${process.env.EVOLUTION_API_TOKEN}`,
+  },
+  body: JSON.stringify({
+    number: '+573177657335',
+    text: mensajeAdmin,
+  }),
+});
+
+
     return {
       statusCode: 200,
       body: JSON.stringify({ mensaje: "Pedido registrado con éxito", payment_link })

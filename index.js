@@ -497,7 +497,7 @@ async function pagarConBold() {
     )).join('\n');
 
     const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
-    const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
+    const callback_url = `https://camerinojip.com/pago-exitoso.html?ref=${referencia}`;
     const descripcion = "Pedido Camerino JIP";
     const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
 
@@ -936,3 +936,45 @@ window.addEventListener("pageshow", function(event) {
     ocultarLoader();
   }
 });
+
+ const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+
+    const contenedor = document.getElementById("pedido-info");
+
+    if (!ref) {
+      contenedor.innerHTML = "<p>No se encontró la referencia del pedido.</p>";
+    } else {
+      const url = `https://raw.githubusercontent.com/elmasteo/camerinotest/main/pedidos/${ref}.json`;
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error("No encontrado");
+          return res.json();
+        })
+        .then(data => {
+          const productosHtml = data.carrito.map(p => `
+            <div class="producto">
+              <img src="${p.imagen}" alt="${p.nombre}">
+              <div class="producto-info">
+                <p class="font-medium">${p.nombre} ×${p.cantidad}</p>
+                <p class="text-gray-600">$${p.precio.toLocaleString("es-CO")}</p>
+              </div>
+            </div>
+          `).join("");
+
+          contenedor.innerHTML = `
+            <p><strong>Nombre:</strong> ${data.nombre}</p>
+            <p><strong>Teléfono:</strong> ${data.telefonoCompleto}</p>
+            <p><strong>Ciudad:</strong> ${data.ciudad}</p>
+            <p><strong>Dirección:</strong> ${data.direccion}</p>
+            <p><strong>Referencia de pago:</strong> ${ref}</p>
+            <hr>
+            <div>${productosHtml}</div>
+            <p class="text-right font-bold text-lg mt-4">Total: $${data.total.toLocaleString("es-CO")}</p>
+          `;
+        })
+        .catch(err => {
+          contenedor.innerHTML = "<p>Hubo un error al cargar los datos del pedido. Verifica tu conexión o la referencia ingresada.</p>";
+        });
+    }
