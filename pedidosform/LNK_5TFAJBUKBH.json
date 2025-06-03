@@ -1,0 +1,24 @@
+{
+  "nombre": "Juan Perron",
+  "telefonoCompleto": "573157862008",
+  "direccion": "falsa",
+  "ciudad": "bogtoa",
+  "carrito": [
+    {
+      "id": 3,
+      "nombre": "Deadpool - Wolverine",
+      "precio": 260000,
+      "imagen": "/images/cpdeadpool.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpdeadpool.webp",
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "payment_link": "LNK_5TFAJBUKBH",
+  "fecha": "2025-06-03T16:38:43.034Z"
+}
