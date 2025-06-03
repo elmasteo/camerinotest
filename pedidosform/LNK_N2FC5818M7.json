@@ -1,0 +1,24 @@
+{
+  "nombre": "Adriana Rojas Beltran",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 359998,
+  "payment_link": "LNK_N2FC5818M7",
+  "fecha": "2025-06-03T21:10:29.419Z"
+}
