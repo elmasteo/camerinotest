@@ -1,0 +1,23 @@
+{
+  "nombre": "Santiago",
+  "telefonoCompleto": "573219779439",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 360000,
+  "payment_link": "LNK_J13QWWKKQG",
+  "fecha": "2025-06-03T21:07:47.783Z"
+}
