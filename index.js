@@ -939,9 +939,9 @@ window.addEventListener("pageshow", function(event) {
   }
 });
 
-    const pedido = JSON.parse(localStorage.getItem("pedido_exitoso"));
+    const pedido1 = JSON.parse(localStorage.getItem("pedido_exitoso"));
 
-    if (pedido) {
+    if (pedido1) {
       document.getElementById("nombre").textContent = pedido.nombre;
       document.getElementById("telefono").textContent = pedido.telefono;
       document.getElementById("direccion").textContent = pedido.direccion;
@@ -964,7 +964,7 @@ window.addEventListener("pageshow", function(event) {
       });
 
       // Puedes eliminarlo después de mostrarlo, si quieres
-      // localStorage.removeItem("pedido_exitoso");
+    localStorage.removeItem("pedido_exitoso");
     } else {
       document.body.innerHTML = "<p>No se encontró ningún pedido reciente.</p>";
     }
