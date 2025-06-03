@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pago exitoso</title>
-  <link rel="stylesheet" href="catalogo.css" />
+  <title>Pago Exitoso</title>
+  <link rel="stylesheet" type="text/css" href="catalogo.css">
 </head>
-<body class="bg-[#f5f5f5] text-[#111] font-sans">
-  <main class="container">
-    <h1 class="text-2xl font-bold mb-4 text-center">✅ ¡Pago exitoso!</h1>
-    <div id="pedido-info" class="text-sm sm:text-base space-y-3"></div>
-    <div class="text-center mt-6">
-      <a href="/" class="btn-volver">Volver al inicio</a>
-    </div>
-  </main>
+<body>
+  <div class="card">
+    <h1>¡Pago exitoso!</h1>
+    <p>Gracias por tu compra, <strong id="nombre"></strong>.</p>
+    <p>Teléfono: <strong id="telefono"></strong></p>
+    <p>Dirección: <strong id="direccion"></strong>, <span id="ciudad"></span></p>
+
+    <h2>Resumen del pedido</h2>
+    <div id="lista-productos"></div>
+    <p><strong>Total pagado:</strong> $<span id="total"></span> COP</p>
+    <a class="boton-volver" href="https://camerinojipsandbox.netlify.app/">Volver al inicio</a>
+  </div>
+
 <script src="index.js"></script>
 </body>
 </html>

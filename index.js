@@ -497,7 +497,7 @@ async function pagarConBold() {
     )).join('\n');
 
     const mensaje = `🧾 *Resumen de tu pedido:*\n\n${productosResumen}\n\n💰 *Total:* $${total.toLocaleString("es-CO")}\n\nGracias por tu compra en Camerino JIP 🎉`;
-    const callback_url = `https://camerinojip.com/pago-exitoso.html?ref=${referencia}`;
+    const callback_url = "https://camerinojipsandbox.netlify.app/pago-exitoso";
     const descripcion = "Pedido Camerino JIP";
     const imagenUrl = obtenerUrlAbsoluta(carrito[0].imagen);
 
@@ -569,6 +569,8 @@ async function pagarConBold() {
     }
 
     cerrarModalFormulario();
+
+    localStorage.setItem("pedido_exitoso", JSON.stringify(pedido));
 
     // 3. Redirigir al link de pago
     window.location.href = pagoResult.url;
@@ -937,44 +939,32 @@ window.addEventListener("pageshow", function(event) {
   }
 });
 
- const params = new URLSearchParams(window.location.search);
-    const ref = params.get("ref");
+    const pedido = JSON.parse(localStorage.getItem("pedido_exitoso"));
 
-    const contenedor = document.getElementById("pedido-info");
+    if (pedido) {
+      document.getElementById("nombre").textContent = pedido.nombre;
+      document.getElementById("telefono").textContent = pedido.telefono;
+      document.getElementById("direccion").textContent = pedido.direccion;
+      document.getElementById("ciudad").textContent = pedido.ciudad;
+      document.getElementById("total").textContent = pedido.total.toLocaleString();
 
-    if (!ref) {
-      contenedor.innerHTML = "<p>No se encontró la referencia del pedido.</p>";
+      const lista = document.getElementById("lista-productos");
+
+      pedido.carrito.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "producto";
+        div.innerHTML = `
+          <img src="${item.imagen}" alt="${item.nombre}">
+          <div class="producto-info">
+            <strong>${item.nombre}</strong><br>
+            Cantidad: ${item.cantidad} – Precio: $${item.precio.toLocaleString()}
+          </div>
+        `;
+        lista.appendChild(div);
+      });
+
+      // Puedes eliminarlo después de mostrarlo, si quieres
+      // localStorage.removeItem("pedido_exitoso");
     } else {
-      const url = `https://raw.githubusercontent.com/elmasteo/camerinotest/main/pedidos/${ref}.json`;
-
-      fetch(url)
-        .then(res => {
-          if (!res.ok) throw new Error("No encontrado");
-          return res.json();
-        })
-        .then(data => {
-          const productosHtml = data.carrito.map(p => `
-            <div class="producto">
-              <img src="${p.imagen}" alt="${p.nombre}">
-              <div class="producto-info">
-                <p class="font-medium">${p.nombre} ×${p.cantidad}</p>
-                <p class="text-gray-600">$${p.precio.toLocaleString("es-CO")}</p>
-              </div>
-            </div>
-          `).join("");
-
-          contenedor.innerHTML = `
-            <p><strong>Nombre:</strong> ${data.nombre}</p>
-            <p><strong>Teléfono:</strong> ${data.telefonoCompleto}</p>
-            <p><strong>Ciudad:</strong> ${data.ciudad}</p>
-            <p><strong>Dirección:</strong> ${data.direccion}</p>
-            <p><strong>Referencia de pago:</strong> ${ref}</p>
-            <hr>
-            <div>${productosHtml}</div>
-            <p class="text-right font-bold text-lg mt-4">Total: $${data.total.toLocaleString("es-CO")}</p>
-          `;
-        })
-        .catch(err => {
-          contenedor.innerHTML = "<p>Hubo un error al cargar los datos del pedido. Verifica tu conexión o la referencia ingresada.</p>";
-        });
+      document.body.innerHTML = "<p>No se encontró ningún pedido reciente.</p>";
     }
