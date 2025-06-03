@@ -19,6 +19,36 @@
     <a class="boton-volver" href="https://camerinojipsandbox.netlify.app/">Volver al inicio</a>
   </div>
 
-<script src="index.js"></script>
+<script>
+      const pedido = JSON.parse(localStorage.getItem("pedido_exitoso"));
+
+    if (pedido) {
+      document.getElementById("nombre").textContent = pedido.nombre;
+      document.getElementById("telefono").textContent = pedido.telefono;
+      document.getElementById("direccion").textContent = pedido.direccion;
+      document.getElementById("ciudad").textContent = pedido.ciudad;
+      document.getElementById("total").textContent = pedido.total.toLocaleString();
+
+      const lista = document.getElementById("lista-productos");
+
+      pedido.carrito.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "producto";
+        div.innerHTML = `
+          <img src="${item.imagen}" alt="${item.nombre}">
+          <div class="producto-info">
+            <strong>${item.nombre}</strong><br>
+            Cantidad: ${item.cantidad} – Precio: $${item.precio.toLocaleString()}
+          </div>
+        `;
+        lista.appendChild(div);
+      });
+
+      // Puedes eliminarlo después de mostrarlo, si quieres
+    localStorage.removeItem("pedido_exitoso");
+    } else {
+      document.body.innerHTML = "<p>No se encontró ningún pedido reciente.</p>";
+    }
+</script>
 </body>
 </html>
