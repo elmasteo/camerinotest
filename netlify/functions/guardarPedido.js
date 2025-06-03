@@ -96,7 +96,7 @@ await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
     apikey: `${process.env.EVOLUTION_API_TOKEN}`,
   },
   body: JSON.stringify({
-    number: '+573177657335',
+    number: '573157862008',
     text: mensajeAdmin,
   }),
 });
