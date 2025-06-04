@@ -732,24 +732,19 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     callback_url: callback_url
   });
 
-  fetch("/.netlify/functions/crearLinkPago", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: raw
-  })
-  .then(response => response.json())
-  .then(result => {
-    if (result.payload && result.payload.url) {
-      window.location.href = result.payload.url;
-    } else {
-      console.error('Error: No se recibió un enlace de pago válido.', result);
+    const pagoResponse = await fetch("/.netlify/functions/crearLinkPago", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: raw
+    });
+
+    const pagoResult = await pagoResponse.json();
+
+    if (!pagoResponse.ok || !pagoResult.url || !pagoResult.payment_link) {
+      console.error('No se recibió un enlace de pago válido.', pagoResult);
       ocultarLoader();
+      return;
     }
-  })
-  .catch(error => {
-    console.log('error', error);
-    ocultarLoader();
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
