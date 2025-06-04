@@ -1,0 +1,47 @@
+{
+  "nombre": "Jhon patiño",
+  "telefonoCompleto": "573177657335",
+  "direccion": "San fernando",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 4,
+      "nombre": "Mario Tortuga",
+      "precio": 260000,
+      "imagen": "/images/cptortuga.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cptortuga.webp"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 7,
+      "nombre": "One Piece",
+      "precio": 260000,
+      "imagen": "/images/cponepiece.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 5,
+      "nombre": "Pokebola",
+      "precio": 260000,
+      "imagen": "/images/cppokebola.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cppokebola.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 780000,
+  "payment_link": "LNK_C3BFUJLUDO",
+  "fecha": "2025-06-04T23:48:53.404Z"
+}
