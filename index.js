@@ -544,6 +544,32 @@ async function pagarConBold() {
     return;
   }
 
+    // Validación por país
+  const reglasValidacion = {
+    "57": /^[3][0-9]{9}$/,        // Colombia
+    "52": /^[1-9][0-9]{9}$/,      // México
+    "54": /^[1-9][0-9]{9}$/,      // Argentina
+    "56": /^[2-9][0-9]{8}$/,      // Chile
+    "51": /^[1-9][0-9]{8}$/,      // Perú
+    "58": /^[4]{1}[0-9]{9}$/,     // Venezuela
+    "593": /^[2-9][0-9]{7,8}$/,   // Ecuador
+    "502": /^[2-7][0-9]{7}$/,     // Guatemala
+    "504": /^[2-9][0-9]{7}$/,     // Honduras
+    "505": /^[5-8][0-9]{7}$/,     // Nicaragua
+    "506": /^[2-8][0-9]{7}$/,     // Costa Rica
+    "507": /^[1-9][0-9]{6,7}$/,   // Panamá
+    "53": /^[5-9][0-9]{7}$/,      // Cuba
+    "1": /^[2-9][0-9]{9}$/        // EE.UU. / Canadá
+  };
+
+  const regex = reglasValidacion[codigoPais];
+  if (!regex || !regex.test(telefonoSinCodigo)) {
+    alert("Por favor ingresa un número de teléfono válido.");
+    ocultarLoader();
+    return;
+  }
+
+
     const pedido = {
       nombre,
       telefonoCompleto,
