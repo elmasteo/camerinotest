@@ -486,6 +486,13 @@ document.getElementById("checkout-form").addEventListener("submit", function(e) 
   pagarConBold();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('telefono').addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '');
+  });
+});
+
+
 async function pagarConBold() {
   try {
     mostrarLoader();
@@ -533,10 +540,6 @@ async function pagarConBold() {
   //const telefono = document.getElementById("telefono")?.value.trim();
   const ciudad = document.getElementById("ciudad")?.value.trim();
   const direccion = document.getElementById("direccion")?.value.trim();
-
-   document.getElementById('telefono').addEventListener('input', (e) => {
-  e.target.value = e.target.value.replace(/\D/g, '');
-});
 
   if (!nombre || !telefonoSinCodigo || !ciudad || !direccion) {
     alert("Por favor completa todos los campos del formulario.");
