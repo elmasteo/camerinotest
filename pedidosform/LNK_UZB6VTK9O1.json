@@ -1,0 +1,36 @@
+{
+  "nombre": "Santiago",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 719998,
+  "payment_link": "LNK_UZB6VTK9O1",
+  "fecha": "2025-06-04T03:09:17.428Z"
+}
