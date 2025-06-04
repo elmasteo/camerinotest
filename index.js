@@ -719,8 +719,10 @@ function obtenerCotizacion(descripcion, imagenUrl) {
     ocultarLoader();
 }
 */
-function obtenerCotizacion(descripcion, imagenUrl) {
-  mostrarLoader();
+async function obtenerCotizacion(descripcion, imagenUrl) {
+
+  try{
+      mostrarLoader();
 
   const mensaje = `Hola! Realicé el pago exitoso del abono: ${descripcion}`;
   const callback_url = `https://wa.me/+573177657335?text=${encodeURIComponent(mensaje)}`;
@@ -745,6 +747,13 @@ function obtenerCotizacion(descripcion, imagenUrl) {
       ocultarLoader();
       return;
     }
+
+    window.location.href = pagoResult.url;
+
+  }catch (error) {
+    alert("Error en la conexión: " + error.message);
+    ocultarLoader();
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
