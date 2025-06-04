@@ -487,8 +487,39 @@ document.getElementById("checkout-form").addEventListener("submit", function(e) 
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById('telefono').addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/\D/g, '');
+  const telefonoInput = document.getElementById('telefono');
+  const codigoPaisSelect = document.getElementById('codigo-pais');
+
+  const longitudesMaximas = {
+    "57": 10,  // Colombia
+    "52": 10,  // México
+    "54": 10,  // Argentina
+    "56": 9,   // Chile
+    "51": 9,   // Perú
+    "58": 10,  // Venezuela
+    "593": 9,  // Ecuador
+    "502": 8,  // Guatemala
+    "504": 8,  // Honduras
+    "505": 8,  // Nicaragua
+    "506": 8,  // Costa Rica
+    "507": 8,  // Panamá
+    "53": 8,   // Cuba
+    "1": 10    // EE.UU. / Canadá
+  };
+
+  telefonoInput.addEventListener('input', (e) => {
+    const codigo = codigoPaisSelect.value;
+    const maxLength = longitudesMaximas[codigo] || 10;
+
+    // Eliminar caracteres no numéricos
+    let soloNumeros = e.target.value.replace(/\D/g, '');
+
+    // Limitar a la longitud permitida
+    if (soloNumeros.length > maxLength) {
+      soloNumeros = soloNumeros.slice(0, maxLength);
+    }
+
+    e.target.value = soloNumeros;
   });
 });
 
