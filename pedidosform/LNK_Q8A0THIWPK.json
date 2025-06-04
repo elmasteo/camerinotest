@@ -1,0 +1,37 @@
+{
+  "nombre": "Santiago",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 2
+    },
+    {
+      "id": 6,
+      "nombre": "Sunny - One Piece",
+      "precio": 260000,
+      "imagen": "/images/cpsunny.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpsunny.webp",
+        "/images/cpsunny.webp"
+      ],
+      "cantidad": 2
+    }
+  ],
+  "total": 1239996,
+  "payment_link": "LNK_Q8A0THIWPK",
+  "fecha": "2025-06-04T03:10:44.823Z"
+}
