@@ -1,0 +1,24 @@
+{
+  "nombre": "SANTIAGO GOMEZ",
+  "telefonoCompleto": "573177657335",
+  "direccion": "CALLE 76 60-35",
+  "ciudad": "BOGOTA",
+  "carrito": [
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 359998,
+  "payment_link": "LNK_ET37A1P8P7",
+  "fecha": "2025-06-04T23:54:15.281Z"
+}
