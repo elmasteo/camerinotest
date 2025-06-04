@@ -1,0 +1,48 @@
+{
+  "nombre": "Adriana Rojas Beltran",
+  "telefonoCompleto": "57321977943",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 2
+    },
+    {
+      "id": 16,
+      "nombre": "cellwebp",
+      "precio": 50000,
+      "stock": 12,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 4
+    }
+  ],
+  "total": 1279998,
+  "payment_link": "LNK_U1ZKZJXJNV",
+  "fecha": "2025-06-04T00:41:11.477Z"
+}
