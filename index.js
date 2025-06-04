@@ -755,6 +755,7 @@ async function obtenerCotizacion(descripcion, imagenUrl) {
     ocultarLoader();
 
 }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarCatalogo();
