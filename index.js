@@ -526,7 +526,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function pagarConBold() {
   try {
-    mostrarLoader();
+    
 
     const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0); // <- Aquí primero
 
@@ -601,6 +601,8 @@ async function pagarConBold() {
     ocultarLoader();
     return;
   }
+
+  mostrarLoader();
 
 
     const pedido = {
