@@ -89,18 +89,23 @@ ${carritoTexto}
 Referencia: ${payment_link}
 `;
 
-await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    apikey: `${process.env.EVOLUTION_API_TOKEN}`,
-  },
-  body: JSON.stringify({
-    number: '573157862008',
-    text: mensajeAdmin,
-  }),
-});
-
+    // Envío por WhatsApp con manejo de errores
+    try {
+      await fetch('https://ubuntu.taile4b68d.ts.net/message/sendText/CamerinoJIP', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: `${process.env.EVOLUTION_API_TOKEN}`,
+        },
+        body: JSON.stringify({
+          number: '573157862008',
+          text: mensajeAdmin,
+        }),
+      });
+    } catch (e) {
+      console.error("Error enviando mensaje por WhatsApp:", e.message);
+      // No se lanza error para continuar flujo
+    }
 
     return {
       statusCode: 200,
