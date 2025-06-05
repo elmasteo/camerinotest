@@ -1,0 +1,23 @@
+{
+  "nombre": "Santiago gomez",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 5,
+      "nombre": "Pokebola",
+      "precio": 260000,
+      "imagen": "/images/cppokebola.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cppokebola.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 260000,
+  "payment_link": "LNK_CNOCQJ4D9S",
+  "fecha": "2025-06-05T22:06:32.844Z"
+}
