@@ -1,0 +1,49 @@
+{
+  "nombre": "Mateo Gomez",
+  "telefonoCompleto": "573178632828",
+  "direccion": "Cll17C #135-51",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 1,
+      "nombre": "Kid Boo",
+      "precio": 359998,
+      "imagen": "/images/cpmajinboo.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpmajinboo.webp",
+        "/images/majinboo.jpeg"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Deadpool - Wolverine",
+      "precio": 260000,
+      "imagen": "/images/cpdeadpool.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpdeadpool.webp",
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 979998,
+  "payment_link": "LNK_6Z6MKESMLP",
+  "fecha": "2025-06-09T23:00:03.238Z"
+}
