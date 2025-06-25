@@ -1,0 +1,36 @@
+{
+  "nombre": "Santiago gomez",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Deadpool - Wolverine",
+      "precio": 260000,
+      "imagen": "/images/cpdeadpool.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpdeadpool.webp",
+        "/images/cponepiece.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 620000,
+  "payment_link": "LNK_0BXSFWREM0",
+  "fecha": "2025-06-25T20:12:23.524Z"
+}
