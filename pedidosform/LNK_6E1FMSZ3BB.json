@@ -1,0 +1,23 @@
+{
+  "nombre": "santiago gomez",
+  "telefonoCompleto": "573157862008",
+  "direccion": "Cra falsa 123",
+  "ciudad": "Bogotá",
+  "carrito": [
+    {
+      "id": 2,
+      "nombre": "Cell",
+      "precio": 360000,
+      "imagen": "/images/cpcell.webp",
+      "categoria": "tapetes",
+      "stock": 2,
+      "imagenes": [
+        "/images/cpcell.webp"
+      ],
+      "cantidad": 1
+    }
+  ],
+  "total": 360000,
+  "payment_link": "LNK_6E1FMSZ3BB",
+  "fecha": "2025-07-10T22:10:59.420Z"
+}
